@@ -35,7 +35,7 @@ export default class Header extends Component {
             <div className="col-xs-12">
               <Logo src={logo} alt="Aviasales" />
               <h1>Поиск дешевых авиабилетов</h1>
-              <DepartureCity />
+              <DepartureCity DepartureCityName="london" />
               <ArrivalCity />
               <FlightDates />
               <PassangersOpt />

@@ -16,11 +16,13 @@ const StyledDiv = styled.div`
   border-top-right-radius: 5px;
 `;
 
+const DepartureCityName = "Moscow1";
+
 export default class DepartureCity extends Component {
   render() {
     return (
       <StyledDiv>
-        <div>Moscow</div>
+        <div>{this.props.DepartureCityName}</div>
         <div>MOW</div>
         <img src={arrowsIcon} alt="Arrows" />
       </StyledDiv>

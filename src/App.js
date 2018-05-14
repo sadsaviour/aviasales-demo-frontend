@@ -1,21 +1,34 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "./normalize.css";
 import "./flexboxgrid2.css";
 
 import "./App.css";
 
-import Header from "./Header/index.js";
-import Main from "./Main/index.js";
-import Footer from "./Footer/index.js";
+import Header from "./Header/index";
+import Main from "./Main/index";
+import Footer from "./Footer/index";
+import SearchHeader from "./Search/Header/index";
+import SearchMain from "./Search/Main/index";
+
+function Hello({ match }) {
+  return <h1>HEllo</h1>;
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Main />
-        <Footer />
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact={true} path="/" component={Header} />
+          <Route path="/search" component={SearchHeader} />
+
+          <Route exact={true} path="/" component={Main} />
+          <Route path="/search" component={SearchMain} />
+
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }

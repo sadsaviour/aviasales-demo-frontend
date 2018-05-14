@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -19,9 +20,11 @@ export default class FindTicketsButton extends Component {
   render() {
     return (
       <Container>
-        <Button name="Find Tickets" type="submit">
-          Find Tickets
-        </Button>
+        <Link to="/search">
+          <Button name="Find Tickets" type="submit">
+            Find Tickets
+          </Button>
+        </Link>
       </Container>
     );
   }

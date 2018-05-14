@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import Calendar from "./img/calendar.svg";
+import CalendarIcon from "./img/calendar.svg";
 
 const StyledDiv = styled.div`
   height: 56px;
@@ -29,19 +29,40 @@ const StyledRetTime = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
+
+  background: gray;
+
+  ${props =>
+    props.enabled &&
+    css`
+      background: white;
+    `};
 `;
 
 export default class FlightDates extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { enabled: true };
+  }
+
+  toggleEnable() {
+    return this.setState({ enabled: !this.state.enabled });
+  }
+
   render() {
     return (
       <StyledDiv>
         <StyledDepTime>
           <p>Depart</p>
-          <img src={Calendar} alt="Calendar" />
+          <img src={CalendarIcon} alt="Calendar" />
         </StyledDepTime>
-        <StyledRetTime>
+        <StyledRetTime enabled={this.state.enabled}>
           <p>Return</p>
-          <img src={Calendar} alt="Calendar" />
+          <img
+            src={CalendarIcon}
+            alt="Calendar"
+            onClick={() => this.toggleEnable()}
+          />
         </StyledRetTime>
       </StyledDiv>
     );
