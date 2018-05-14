@@ -11,26 +11,18 @@ import Footer from "./Home/Footer/index";
 import SearchHeader from "./Search/Header/index";
 import SearchMain from "./Search/Main/index";
 
-function Hello({ match }) {
-  return <h1>HEllo</h1>;
+export default function App(props) {
+  return (
+    <Router>
+      <div className="App">
+        <Route exact={true} path="/" component={Header} />
+        <Route path="/search" component={SearchHeader} />
+
+        <Route exact={true} path="/" component={Main} />
+        <Route path="/search" component={SearchMain} />
+
+        <Footer />
+      </div>
+    </Router>
+  );
 }
-
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <Route exact={true} path="/" component={Header} />
-          <Route path="/search" component={SearchHeader} />
-
-          <Route exact={true} path="/" component={Main} />
-          <Route path="/search" component={SearchMain} />
-
-          <Footer />
-        </div>
-      </Router>
-    );
-  }
-}
-
-export default App;

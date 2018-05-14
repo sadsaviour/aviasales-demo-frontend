@@ -26,24 +26,22 @@ const Logo = styled.img`
   display: flex;
 `;
 
-export default class Header extends Component {
-  render() {
-    return (
-      <StyledHeader>
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12">
-              <Logo src={logo} alt="Aviasales" />
-              <h1>Поиск дешевых авиабилетов</h1>
-              <DepartureCity DepartureCityName="london" />
-              <ArrivalCity />
-              <FlightDates />
-              <PassangersOpt />
-              <FindTicketsButton />
-            </div>
+export default function Header(props) {
+  return (
+    <StyledHeader>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12">
+            <Logo src={logo} alt="Aviasales" />
+            <h1>Поиск дешевых авиабилетов</h1>
+            <DepartureCity DepartureCityName="london" />
+            <ArrivalCity />
+            <FlightDates />
+            <PassangersOpt />
+            <FindTicketsButton />
           </div>
         </div>
-      </StyledHeader>
-    );
-  }
+      </div>
+    </StyledHeader>
+  );
 }
