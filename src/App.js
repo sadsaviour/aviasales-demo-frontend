@@ -5,9 +5,9 @@ import "./flexboxgrid2.css";
 
 import "./App.css";
 
-import Header from "./Header/index";
-import Main from "./Main/index";
-import Footer from "./Footer/index";
+import Header from "./Home/Header/index";
+import Main from "./Home/Main/index";
+import Footer from "./Home/Footer/index";
 import SearchHeader from "./Search/Header/index";
 import SearchMain from "./Search/Main/index";
 
