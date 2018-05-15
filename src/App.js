@@ -11,18 +11,37 @@ import Footer from "./Home/Footer/index";
 import SearchHeader from "./Search/Header/index";
 import SearchMain from "./Search/Main/index";
 
-export default function App(props) {
-  return (
-    <Router>
-      <div className="App">
-        <Route exact={true} path="/" component={Header} />
-        <Route path="/search" component={SearchHeader} />
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { city: "Moscow" };
+  }
 
-        <Route exact={true} path="/" component={Main} />
-        <Route path="/search" component={SearchMain} />
+  updateCity = value => {
+    this.setState({ city: value });
+    console.log(this.state);
+  };
 
-        <Footer />
-      </div>
-    </Router>
-  );
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Route
+            exact={true}
+            path="/"
+            render={() => (
+              <Header city={this.state.city} updateCity={this.updateCity} />
+            )}
+            city={this.state.city}
+          />
+          <Route path="/search" component={SearchHeader} />
+
+          <Route exact={true} path="/" component={Main} />
+          <Route path="/search" component={SearchMain} />
+
+          <Footer />
+        </div>
+      </Router>
+    );
+  }
 }
