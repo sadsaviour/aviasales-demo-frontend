@@ -5,16 +5,6 @@ const StyledMain = styled.main`
   height: 400px;
 `;
 
-//export default class Main extends Component {
-//  render() {
-//    return (
-//      <StyledMain>
-//        <div className="container">Main</div>
-//      </StyledMain>
-//    );
-//  }
-//}
-
 export default function Main(props) {
   return (
     <StyledMain>
