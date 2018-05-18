@@ -1,4 +1,4 @@
-const filters = {
+export const filters = {
   changes: [
     {
       option: "Без пересадок",
@@ -17,22 +17,20 @@ const filters = {
       price: "23 986 ₽"
     }
   ],
-  departureTime: [
-    {
-      direction: "direct",
+  departureTime: {
+    direct: {
       departureTimeFrom: "c 00:05, 24 фев",
       departureTimeTo: "до 23:45, 24 фев",
       arrivalTimeFrom: "c 03:05, 24 фев",
       arrivalTimeTo: "до 13:50, 26 фев"
     },
-    {
-      direction: "back",
+    back: {
       departureTimeFrom: "c 06:00, 3 мар",
       departureTimeTo: "до 23:45, 3 мар",
       arrivalTimeFrom: "c 15:00, 3 мар",
       arrivalTimeTo: "до 09:55, 5 мар"
     }
-  ],
+  },
   duration: [],
   carriers: {
     carriersNumber: 43,

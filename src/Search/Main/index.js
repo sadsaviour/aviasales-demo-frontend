@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import flightsData from "./data.js";
+import flightsData, { filters } from "./data.js";
 
 import arrivalIcon from "./img/arrival-icon_mobile.svg";
 import departureIcon from "./img/departure-icon_mobile.svg";
@@ -9,6 +9,10 @@ import Logo from "./img/Rossya.png";
 
 const StyledMain = styled.main`
   background: #eaeaea;
+`;
+
+const StyledFiltersPane = styled.div`
+  background-color: #ffffff;
 `;
 
 const StyledFCard = styled.div`
@@ -36,6 +40,69 @@ const StyledPrice = styled.div`
 
   color: #ff9241;
 `;
+
+function FiltersPane(props) {
+  const changes = props.filters.changes;
+  const departureTime = props.filters.departureTime;
+  const carriers = props.filters.carriers;
+
+  const changesList = changes.map(f => (
+    <div className="row between-lg">
+      <input type="checkbox" />
+      <div>{f.option}</div>
+      <div>{f.price}</div>
+    </div>
+  ));
+
+  const directDepartureTime = (
+    <div className="row">
+      <div>{departureTime.direct.departureTimeFrom}</div>
+      <div>{departureTime.direct.departureTimeTo}</div>
+      <div>{departureTime.direct.arrivalTimeFrom}</div>
+      <div>{departureTime.direct.arrivalTimeTo}</div>
+    </div>
+  );
+
+  const backDepartureTime = (
+    <div className="row">
+      <div>{departureTime.back.departureTimeFrom}</div>
+      <div>{departureTime.back.departureTimeTo}</div>
+      <div>{departureTime.back.arrivalTimeFrom}</div>
+      <div>{departureTime.back.arrivalTimeTo}</div>
+    </div>
+  );
+
+  const alliansesList = carriers.alliances.map(a => (
+    <div className="row between-xs">
+      <input type="checkbox" />
+      <div>{a.name}</div>
+      <div>{a.price}</div>
+    </div>
+  ));
+
+  const carriersList = carriers.carriers.map(c => (
+    <div className="row between-xs">
+      <input type="checkbox" />
+      <div>{c.name}</div>
+      <div>{c.price}</div>
+    </div>
+  ));
+
+  return (
+    <StyledFiltersPane>
+      <div className="container">
+        {changesList}
+        {directDepartureTime}
+        {backDepartureTime}
+        <div>Luggage</div>
+        <div>Allianses</div>
+        {alliansesList}
+        <div>Companies</div>
+        {carriersList}
+      </div>
+    </StyledFiltersPane>
+  );
+}
 
 function FlightsList(props) {
   const flights = props.flights;
@@ -100,8 +167,19 @@ export default class Main extends Component {
   render() {
     return (
       <StyledMain>
-        <FlightsList flights={flightsData} />
-        <button>Filter</button>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 hidden-xs">
+              <FiltersPane filters={filters} />
+              <p>test</p>
+            </div>
+            <div className="col-lg-7 col-xs-12">
+              <FlightsList flights={flightsData} />
+              <button>Filter</button>
+            </div>
+            <div className="col-lg-offset-2" />
+          </div>
+        </div>
       </StyledMain>
     );
   }
