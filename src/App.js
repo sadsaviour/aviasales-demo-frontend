@@ -26,6 +26,10 @@ export default class App extends Component {
     return (
       <Router>
         <div className="App">
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto"
+            rel="stylesheet"
+          />
           <Route
             exact={true}
             path="/"
