@@ -13,7 +13,10 @@ import SearchMain from "./Search/Main/index";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { city: "Moscow" };
+    this.state = {
+      city: "Moscow",
+      searchPerformed: true
+    };
   }
 
   updateCity = value => {
@@ -30,9 +33,25 @@ export default class App extends Component {
             rel="stylesheet"
           />
           <Route
+            exact
             path="/"
             render={() => (
-              <Header city={this.state.city} updateCity={this.updateCity} />
+              <Header
+                city={this.state.city}
+                updateCity={this.updateCity}
+                searchPerformed={false}
+              />
+            )}
+            city={this.state.city}
+          />
+          <Route
+            path="/search"
+            render={() => (
+              <Header
+                city={this.state.city}
+                updateCity={this.updateCity}
+                searchPerformed={true}
+              />
             )}
             city={this.state.city}
           />

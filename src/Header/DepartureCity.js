@@ -5,6 +5,7 @@ import arrowsIcon from "./img/arrows.svg";
 
 const StyledDiv = styled.div`
   height: 56px;
+  width: 100%;
 
   display: flex;
   flex-flow: row nowrap;
@@ -39,13 +40,7 @@ export default class DepartureCity extends Component {
     return (
       <StyledDiv>
         <form>
-          <input
-            type="text"
-            name="Departure City"
-            value={this.state.city}
-            onChange={this.handleChange}
-          />
-          <input type="submit" value="Submit" onClick={this.handleSubmit} />
+          <input type="text" name="Departure City" value={this.state.city} />
         </form>
         <div>MOW</div>
         <img src={arrowsIcon} alt="Arrows" />

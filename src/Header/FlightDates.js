@@ -5,6 +5,7 @@ import CalendarIcon from "./img/calendar.svg";
 
 const StyledDiv = styled.div`
   height: 56px;
+  width: 100%;
 
   display: flex;
   flex-flow: row nowrap;

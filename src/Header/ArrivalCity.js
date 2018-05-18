@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
   height: 56px;
+  width: 100%;
 
   display: flex;
   flex-flow: row nowrap;
