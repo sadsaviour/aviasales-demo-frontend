@@ -5,10 +5,9 @@ import "./flexboxgrid2.css";
 
 import "./App.css";
 
-import Header from "./Home/Header/index";
+import Header from "./Header/index";
 import Main from "./Home/Main/index";
 import Footer from "./Home/Footer/index";
-import SearchHeader from "./Search/Header/index";
 import SearchMain from "./Search/Main/index";
 
 export default class App extends Component {
@@ -31,14 +30,12 @@ export default class App extends Component {
             rel="stylesheet"
           />
           <Route
-            exact={true}
             path="/"
             render={() => (
               <Header city={this.state.city} updateCity={this.updateCity} />
             )}
             city={this.state.city}
           />
-          <Route path="/search" component={SearchHeader} />
 
           <Route exact={true} path="/" component={Main} />
           <Route path="/search" component={SearchMain} />
