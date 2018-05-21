@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-//import ReactionsComponent from "@reactions/component";
+import onClickOutside from "react-onclickoutside";
 
 import arrowsIcon from "./img/arrows.svg";
 
@@ -45,7 +45,7 @@ const AutocompleteAirportCode = styled.div`
   z-index: 26;
 `;
 
-export default class DepartureCity extends Component {
+class DepartureCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,7 +71,6 @@ export default class DepartureCity extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
-    //   this.handleBlur = this.handleBlur.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -83,14 +82,14 @@ export default class DepartureCity extends Component {
     this.setState({ suggestion: true });
   }
 
-  //handleBlur(event) {
-  //  this.setState({ suggestion: false });
-  //}
-
   handleClick(event) {
-    console.log("sdfasd");
     this.setState({ city: event.name });
+    this.setState({ suggestion: false });
   }
+
+  handleClickOutside = evt => {
+    this.setState({ suggestion: false });
+  };
 
   Suggest(props) {
     return (
@@ -120,7 +119,6 @@ export default class DepartureCity extends Component {
             spellCheck="off"
             onFocus={this.handleFocus}
             onChange={this.handleChange}
-            onBlur={this.handleBlur}
           />
           {this.state.suggestion && (
             <AutocompleteDropdown>
@@ -134,3 +132,5 @@ export default class DepartureCity extends Component {
     );
   }
 }
+
+export default onClickOutside(DepartureCity);
