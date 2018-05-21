@@ -106,8 +106,6 @@ export default class DepartureCity extends Component {
         onClick={() => this.handleClick(a)}
       >
         {a.name}
-        {a.country}
-        {a.iataCode}
       </div>
     ));
     return (
@@ -129,7 +127,7 @@ export default class DepartureCity extends Component {
               {airportSuggestionsList}
             </AutocompleteDropdown>
           )}
-          <AutocompleteAirportCode>MOW</AutocompleteAirportCode>
+          <AutocompleteAirportCode />
         </AutocompleteBlock>
         <img src={arrowsIcon} alt="Arrows" />
       </SearchFormOrigin>
