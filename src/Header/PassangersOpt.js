@@ -118,7 +118,7 @@ class PassangersOpt extends Component {
   render() {
     return (
       <StyledDiv onClick={this.handleClick}>
-        <span>1 Passanger,</span>
+        <span>{this.state.adults} Passanger,</span>
         <span>economy</span>
         <img src={DropdownIcon} alt="dropdown-arrow" />
 
