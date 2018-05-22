@@ -37,7 +37,7 @@ function Counter(props) {
   return (
     <div style={{ display: "flex", "flex-flow": "row nowrap" }}>
       {" "}
-      {state[base] > 0 ? (
+      {state[base] > 0 && (base === "adults" && state[base] > 1) ? (
         <button value="decrement" onClick={props.decCallback}>
           −
         </button>
