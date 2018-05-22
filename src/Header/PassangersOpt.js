@@ -37,9 +37,13 @@ function Counter(props) {
   return (
     <div style={{ display: "flex", "flex-flow": "row nowrap" }}>
       {" "}
-      <button value="decrement" onClick={props.decCallback}>
-        −
-      </button>
+      {state[base] > 0 ? (
+        <button value="decrement" onClick={props.decCallback}>
+          −
+        </button>
+      ) : (
+        <button disabled={true}>−</button>
+      )}
       <p>{state[base]}</p>
       <button value="increment" onClick={props.incCallback}>
         +
@@ -56,7 +60,7 @@ class PassangersOpt extends Component {
       kids: 0,
       infants: 0,
       businessClass: false,
-      dropdown: true
+      dropdown: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -80,19 +84,25 @@ class PassangersOpt extends Component {
     this.hideDropdown();
   };
 
-  incPassangerQuote(passangerType) {
-    this.setState(
-      (prevState, props) => (prevState[props.base] = 10)
-      //    { adults: passangerType }
-      //      function(prevState, props: passangerType) {
-      //      const newValue = prevState[passangerType] + 1;
-      //      let newState = Object.create(prevState);
-      //      newState[passangerType] = newValue;
-      //      return {
-      //        newState
-      //      };
-      //    }
-    );
+  incAdultsQuote() {
+    this.setState((prevState, props) => ({ adults: prevState.adults + 1 }));
+  }
+  decAdultsQuote() {
+    this.setState((prevState, props) => ({ adults: prevState.adults - 1 }));
+  }
+
+  incKidsQuote() {
+    this.setState((prevState, props) => ({ kids: prevState.kids + 1 }));
+  }
+  decKidsQuote() {
+    this.setState((prevState, props) => ({ kids: prevState.kids - 1 }));
+  }
+
+  incInfantsQuote() {
+    this.setState((prevState, props) => ({ infants: prevState.infants + 1 }));
+  }
+  decInfantsQuote() {
+    this.setState((prevState, props) => ({ infants: prevState.infants - 1 }));
   }
 
   render() {
@@ -108,14 +118,27 @@ class PassangersOpt extends Component {
             <Counter
               base="adults"
               state={this.state}
-              incCallback={() => this.incPassangerQuote("adults")}
+              incCallback={() => this.incAdultsQuote()}
+              decCallback={() => this.decAdultsQuote()}
             />
           </div>
           <div>
-            <p>Kids</p>{" "}
+            <p>Kids</p>
+            <Counter
+              base="kids"
+              state={this.state}
+              incCallback={() => this.incKidsQuote()}
+              decCallback={() => this.decKidsQuote()}
+            />
           </div>
           <div>
-            <p>Infants</p>{" "}
+            <p>Infants</p>
+            <Counter
+              base="infants"
+              state={this.state}
+              incCallback={() => this.incInfantsQuote()}
+              decCallback={() => this.decInfantsQuote()}
+            />
           </div>
           <div>
             <label>
