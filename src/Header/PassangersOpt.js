@@ -64,6 +64,9 @@ class PassangersOpt extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleBusinessClassCheckboxChange = this.handleBusinessClassCheckboxChange.bind(
+      this
+    );
   }
 
   showDropdown() {
@@ -105,6 +108,13 @@ class PassangersOpt extends Component {
     this.setState((prevState, props) => ({ infants: prevState.infants - 1 }));
   }
 
+  handleBusinessClassCheckboxChange() {
+    this.setState(prevState => ({
+      businessClass: !prevState.businessClass
+    }));
+    //    console.log(this.state.businessClass);
+  }
+
   render() {
     return (
       <StyledDiv onClick={this.handleClick}>
@@ -142,7 +152,10 @@ class PassangersOpt extends Component {
           </div>
           <div>
             <label>
-              <input type="checkbox" />Business Class
+              <input
+                type="checkbox"
+                onChange={this.handleBusinessClassCheckboxChange}
+              />Business Class
             </label>{" "}
           </div>
         </StyledDropdown>
