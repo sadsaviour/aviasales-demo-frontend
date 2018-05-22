@@ -33,8 +33,8 @@ const AutocompleteDropdown = styled.div`
   position: absolute;
   top: 56px;
   left: 0;
-  z-index:
-  width: 10
+  z-index: 20;
+  width: 100%;
   background: pink;
 `;
 
