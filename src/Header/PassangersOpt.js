@@ -4,6 +4,13 @@ import onClickOutside from "react-onclickoutside";
 
 import DropdownIcon from "./img/dropdown-arrow.svg";
 
+const temp = {
+  eventTypes: ["mousedown", "touchstart"],
+  outsideClickIgnoreClass: "ignore-react-onclickoutside",
+  preventDefault: false,
+  stopPropagation: false
+};
+
 const StyledDiv = styled.div`
   position: relative;
 
@@ -60,7 +67,7 @@ class PassangersOpt extends Component {
       kids: 0,
       infants: 0,
       businessClass: false,
-      dropdown: false
+      dropdown: true
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -89,7 +96,12 @@ class PassangersOpt extends Component {
   };
 
   incAdultsQuote(props) {
+<<<<<<< HEAD
     this.setState(prevState => ({ adults: prevState.adults + 1 }));
+=======
+    console.log(JSON.stringify(props));
+    this.setState((prevState, props) => ({ adults: JSON.stringify(props) }));
+>>>>>>> c044ea37e2b9c6deebd0257b0c464259d40a3d40
   }
   decAdultsQuote() {
     this.setState(prevState => ({ adults: prevState.adults - 1 }));
@@ -146,6 +158,7 @@ class PassangersOpt extends Component {
             <Counter
               base="infants"
               state={this.state}
+              test="test"
               incCallback={() => this.incInfantsQuote()}
               decCallback={() => this.decInfantsQuote()}
             />
