@@ -4,6 +4,13 @@ import onClickOutside from "react-onclickoutside";
 
 import DropdownIcon from "./img/dropdown-arrow.svg";
 
+const temp = {
+  eventTypes: ["mousedown", "touchstart"],
+  outsideClickIgnoreClass: "ignore-react-onclickoutside",
+  preventDefault: false,
+  stopPropagation: false
+};
+
 const StyledDiv = styled.div`
   position: relative;
 
@@ -60,13 +67,14 @@ class PassangersOpt extends Component {
       kids: 0,
       infants: 0,
       businessClass: false,
-      dropdown: false
+      dropdown: true
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleBusinessClassCheckboxChange = this.handleBusinessClassCheckboxChange.bind(
       this
     );
+    this.incAdultsQuote = this.incAdultsQuote.bind(this);
   }
 
   showDropdown() {
@@ -87,25 +95,26 @@ class PassangersOpt extends Component {
     this.hideDropdown();
   };
 
-  incAdultsQuote() {
-    this.setState((prevState, props) => ({ adults: prevState.adults + 1 }));
+  incAdultsQuote(props) {
+    console.log(JSON.stringify(props));
+    this.setState((prevState, props) => ({ adults: JSON.stringify(props) }));
   }
   decAdultsQuote() {
-    this.setState((prevState, props) => ({ adults: prevState.adults - 1 }));
+    this.setState(prevState => ({ adults: prevState.adults - 1 }));
   }
 
   incKidsQuote() {
-    this.setState((prevState, props) => ({ kids: prevState.kids + 1 }));
+    this.setState(prevState => ({ kids: prevState.kids + 1 }));
   }
   decKidsQuote() {
-    this.setState((prevState, props) => ({ kids: prevState.kids - 1 }));
+    this.setState(prevState => ({ kids: prevState.kids - 1 }));
   }
 
   incInfantsQuote() {
-    this.setState((prevState, props) => ({ infants: prevState.infants + 1 }));
+    this.setState(prevState => ({ infants: prevState.infants + 1 }));
   }
   decInfantsQuote() {
-    this.setState((prevState, props) => ({ infants: prevState.infants - 1 }));
+    this.setState(prevState => ({ infants: prevState.infants - 1 }));
   }
 
   handleBusinessClassCheckboxChange() {
@@ -128,7 +137,7 @@ class PassangersOpt extends Component {
             <Counter
               base="adults"
               state={this.state}
-              incCallback={() => this.incAdultsQuote()}
+              incCallback={() => this.incAdultsQuote("adults")}
               decCallback={() => this.decAdultsQuote()}
             />
           </div>
@@ -146,6 +155,7 @@ class PassangersOpt extends Component {
             <Counter
               base="infants"
               state={this.state}
+              test="test"
               incCallback={() => this.incInfantsQuote()}
               decCallback={() => this.decInfantsQuote()}
             />
