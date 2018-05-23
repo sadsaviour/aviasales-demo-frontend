@@ -4,13 +4,6 @@ import onClickOutside from "react-onclickoutside";
 
 import DropdownIcon from "./img/dropdown-arrow.svg";
 
-const temp = {
-  eventTypes: ["mousedown", "touchstart"],
-  outsideClickIgnoreClass: "ignore-react-onclickoutside",
-  preventDefault: false,
-  stopPropagation: false
-};
-
 const StyledDiv = styled.div`
   position: relative;
 
