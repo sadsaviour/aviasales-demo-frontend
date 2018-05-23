@@ -67,7 +67,7 @@ class PassangersOpt extends Component {
       kids: 0,
       infants: 0,
       businessClass: false,
-      dropdown: true
+      dropdown: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -96,12 +96,7 @@ class PassangersOpt extends Component {
   };
 
   incAdultsQuote(props) {
-<<<<<<< HEAD
     this.setState(prevState => ({ adults: prevState.adults + 1 }));
-=======
-    console.log(JSON.stringify(props));
-    this.setState((prevState, props) => ({ adults: JSON.stringify(props) }));
->>>>>>> c044ea37e2b9c6deebd0257b0c464259d40a3d40
   }
   decAdultsQuote() {
     this.setState(prevState => ({ adults: prevState.adults - 1 }));
