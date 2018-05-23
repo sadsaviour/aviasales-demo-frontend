@@ -1,22 +1,21 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const StyledDiv = styled.div`
+import CalendarIcon from "./img/calendar.svg";
+
+const StyledDepTime = styled.div`
   flex-grow: 1;
 
   height: 56px;
-  /* width: 20%; */
+
   @media (max-width: 992px) {
     width: 50%;
   }
 
-  margin-right: 2px;
-
   padding-left: 16px;
+  padding-right: 16px;
 
-  @media (max-width: 992px) {
-    margin-right: 0;
-  }
+  margin-right: 2px;
 
   display: flex;
   flex-flow: row nowrap;
@@ -25,21 +24,21 @@ const StyledDiv = styled.div`
 
   background-color: #fff;
 
-  @media (max-width: 992px) {
-    border-top-right-radius: 5px;
-  }
-
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   line-height: 20px;
   font-size: 16px;
-
   color: #4a4a4a;
 `;
 
-export default class ArrivalCity extends Component {
+export default class DepartureDate extends Component {
   render() {
-    return <StyledDiv>Arrival City</StyledDiv>;
+    return (
+      <StyledDepTime style={{ "margin-right": "2px" }}>
+        <p>Depart</p>
+        <img src={CalendarIcon} alt="Calendar" />
+      </StyledDepTime>
+    );
   }
 }

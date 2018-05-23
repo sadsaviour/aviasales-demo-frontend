@@ -5,12 +5,14 @@ import logo from "./img/logo.svg";
 
 import ArrivalCity from "./ArrivalCity";
 import DepartureCity from "./DepartureCity";
-import FlightDates from "./FlightDates";
+import DepartureDate from "./DepartureDate";
+import ReturnDate from "./ReturnDate";
 import FindTicketsButton from "./FindTicketsButton";
 import PassangersOpt from "./PassangersOpt";
 
 const StyledHeader = styled.header`
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 32px;
 
   background: linear-gradient(
     148.48deg,
@@ -23,10 +25,36 @@ const StyledHeader = styled.header`
   );
 `;
 
-const Logo = styled.img`
-  width: 40px;
-  display: flex;
+const LogoText = styled.p`
+  margin-left: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 25px;
+  font-size: 20px;
+
+  color: #ffffff;
 `;
+
+function Logo() {
+  return (
+    <div
+      style={{
+        "padding-top": "2px",
+        "padding-bottom": "8px",
+        display: "flex",
+        flexflow: "row nowrap",
+        "align-items": "center"
+      }}
+    >
+      <img src={logo} alt="Aviasales" />
+      <LogoText>aviasales</LogoText>
+    </div>
+  );
+}
 
 export default function Header(props) {
   const search = props.searchPerformed;
@@ -35,21 +63,27 @@ export default function Header(props) {
       {search ? (
         <div className="container">
           <div className="row between-lg">
-            <Logo src={logo} alt="Aviasales" />
+            <div>
+              <Logo />
+            </div>
           </div>
-          <div className="row between-lg">
+          <div className="row middle-xl">
             <div className="col-lg-10">
-              <div className="row between-lg nowrap">
+              <div className="row">
                 <DepartureCity
                   city={props.city}
                   updateCity={props.updateCity}
                 />
                 <ArrivalCity />
-                <FlightDates />
+                <DepartureDate />
+                <ReturnDate />
                 <PassangersOpt />
+                <div className="hidden-lg hidden-xl" style={{ width: "25%" }}>
+                  <FindTicketsButton />
+                </div>
               </div>
             </div>
-            <div className="col-lg-2">
+            <div className="col-lg-2 hidden-md hidden-sm hidden-xs">
               <FindTicketsButton />
             </div>
           </div>
@@ -62,7 +96,8 @@ export default function Header(props) {
               <h1>Поиск дешевых авиабилетов</h1>
               <DepartureCity city={props.city} updateCity={props.updateCity} />
               <ArrivalCity />
-              <FlightDates />
+              <DepartureDate />
+              <ReturnDate />
               <PassangersOpt />
               <FindTicketsButton />
             </div>

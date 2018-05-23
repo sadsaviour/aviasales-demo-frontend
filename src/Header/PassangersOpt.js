@@ -5,9 +5,19 @@ import onClickOutside from "react-onclickoutside";
 import DropdownIcon from "./img/dropdown-arrow.svg";
 
 const StyledDiv = styled.div`
+  flex-grow: 0;
+
   position: relative;
 
   height: 56px;
+  /* width: 20%; */
+
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @media (max-width: 992px) {
+    width: 25%;
+  }
 
   display: flex;
   flex-flow: row nowrap;
@@ -17,8 +27,25 @@ const StyledDiv = styled.div`
   cursor: pointer;
 
   background-color: #fff;
-  border-bottom-left-radius: 5px;
+
+  border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+
+  @media (max-width: 992px) {
+    border-top-right-radius: 0px;
+  }
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  font-size: 16px;
+
+  color: #4a4a4a;
+`;
+
+const StyledDropdownIcon = styled.img`
+  margin-left: 10px;
 `;
 
 const StyledDropdown = styled.div`
@@ -118,9 +145,8 @@ class PassangersOpt extends Component {
   render() {
     return (
       <StyledDiv onClick={this.handleClick}>
-        <span>{this.state.adults} Passanger,</span>
-        <span>economy</span>
-        <img src={DropdownIcon} alt="dropdown-arrow" />
+        <span>{this.state.adults} Passanger, economy</span>
+        <StyledDropdownIcon src={DropdownIcon} alt="dropdown-arrow" />
 
         <StyledDropdown show={this.state.dropdown}>
           <div style={{ display: "flex", "flex-flow": "row nowrap" }}>

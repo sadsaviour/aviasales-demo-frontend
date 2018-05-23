@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "./normalize.css";
 import "./flexboxgrid2.css";
 
-import "./App.css";
+import "./app.css";
 
 import Header from "./Header/index";
 import Main from "./Home/Main/index";

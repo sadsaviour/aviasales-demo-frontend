@@ -5,14 +5,30 @@ import onClickOutside from "react-onclickoutside";
 import arrowsIcon from "./img/arrows.svg";
 
 const SearchFormOrigin = styled.div`
+  flex-grow: 0;
+
+  padding-left: 18px;
+  padding-top: 18px;
+
   position: relative;
+  box-sizing: border-box;
+  margin-right: 2px;
 
   height: 56px;
-  width: 100%;
+  /* width: 20%; */
+
+  @media (max-width: 992px) {
+    width: 50%;
+  }
 
   background-color: #fff;
+
   border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  @media (max-width: 992px) {
+    border-bottom-left-radius: 0px;
+  }
 `;
 
 const AutocompleteBlock = styled.div`
@@ -20,12 +36,15 @@ const AutocompleteBlock = styled.div`
 `;
 
 const AutocompleteInput = styled.input`
-  box-sizing: border-box;
+  width: 50%;
 
-  padding: 9px 18px;
-  width: 100%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  font-size: 16px;
+  color: #4a4a4a;
 
-  line-height: 36px;
   border: 0;
 `;
 
@@ -43,6 +62,18 @@ const AutocompleteAirportCode = styled.div`
   right: 56px;
   top: 21px;
   z-index: 26;
+`;
+
+const SwapCitiesButton = styled.button`
+  position: absolute;
+  right: 16px;
+  top: 21px;
+  z-index: 26;
+
+  border: 0;
+  padding: 0;
+
+  background: #fff;
 `;
 
 class DepartureCity extends Component {
@@ -127,7 +158,9 @@ class DepartureCity extends Component {
           )}
           <AutocompleteAirportCode />
         </AutocompleteBlock>
-        <img src={arrowsIcon} alt="Arrows" />
+        <SwapCitiesButton>
+          <img src={arrowsIcon} alt="Arrows" />
+        </SwapCitiesButton>
       </SearchFormOrigin>
     );
   }
