@@ -9,6 +9,7 @@ import Header from "./Header/index";
 import Main from "./Home/Main/index";
 import Footer from "./Home/Footer/index";
 import SearchMain from "./Search/Main/index";
+import SetStateDemo from "./Header/seState-demo";
 
 export default class App extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ export default class App extends Component {
             )}
             city={this.state.city}
           />
+          <Route exact path="/setStateDemo" render={() => <SetStateDemo />} />
           <Route
             path="/search"
             render={() => (
@@ -55,11 +57,8 @@ export default class App extends Component {
             )}
             city={this.state.city}
           />
-
           <Route exact={true} path="/" component={Main} />
           <Route path="/search" component={SearchMain} />
-
-          <Footer />
         </div>
       </Router>
     );
