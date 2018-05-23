@@ -67,6 +67,7 @@ class PassangersOpt extends Component {
     this.handleBusinessClassCheckboxChange = this.handleBusinessClassCheckboxChange.bind(
       this
     );
+    this.incAdultsQuote = this.incAdultsQuote.bind(this);
   }
 
   showDropdown() {
@@ -87,32 +88,31 @@ class PassangersOpt extends Component {
     this.hideDropdown();
   };
 
-  incAdultsQuote() {
-    this.setState((prevState, props) => ({ adults: prevState.adults + 1 }));
+  incAdultsQuote(props) {
+    this.setState(prevState => ({ adults: prevState.adults + 1 }));
   }
   decAdultsQuote() {
-    this.setState((prevState, props) => ({ adults: prevState.adults - 1 }));
+    this.setState(prevState => ({ adults: prevState.adults - 1 }));
   }
 
   incKidsQuote() {
-    this.setState((prevState, props) => ({ kids: prevState.kids + 1 }));
+    this.setState(prevState => ({ kids: prevState.kids + 1 }));
   }
   decKidsQuote() {
-    this.setState((prevState, props) => ({ kids: prevState.kids - 1 }));
+    this.setState(prevState => ({ kids: prevState.kids - 1 }));
   }
 
   incInfantsQuote() {
-    this.setState((prevState, props) => ({ infants: prevState.infants + 1 }));
+    this.setState(prevState => ({ infants: prevState.infants + 1 }));
   }
   decInfantsQuote() {
-    this.setState((prevState, props) => ({ infants: prevState.infants - 1 }));
+    this.setState(prevState => ({ infants: prevState.infants - 1 }));
   }
 
   handleBusinessClassCheckboxChange() {
     this.setState(prevState => ({
       businessClass: !prevState.businessClass
     }));
-    //    console.log(this.state.businessClass);
   }
 
   render() {
@@ -128,7 +128,7 @@ class PassangersOpt extends Component {
             <Counter
               base="adults"
               state={this.state}
-              incCallback={() => this.incAdultsQuote()}
+              incCallback={() => this.incAdultsQuote("adults")}
               decCallback={() => this.decAdultsQuote()}
             />
           </div>
