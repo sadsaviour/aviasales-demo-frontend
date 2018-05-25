@@ -5,17 +5,27 @@ import CalendarIcon from "./img/calendar.svg";
 
 const StyledDepTime = styled.div`
   flex-grow: 1;
+  flex-basis: 20%;
+  flex-shrink: 1;
 
   height: 56px;
 
-  @media (max-width: 992px) {
-    width: 50%;
+  @media only screen and (min-width: 768px) {
+    flex-grow: 1;
+    flex-basis: 20%;
   }
 
   padding-left: 16px;
   padding-right: 16px;
 
-  margin-right: 2px;
+  margin-bottom: 2px;
+  @media only screen and (min-width: 992px) {
+    margin-bottom: 0;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 992px) {
+    border-bottom-left-radius: 5px;
+  }
 
   display: flex;
   flex-flow: row nowrap;
@@ -35,7 +45,7 @@ const StyledDepTime = styled.div`
 export default class DepartureDate extends Component {
   render() {
     return (
-      <StyledDepTime style={{ "margin-right": "2px" }}>
+      <StyledDepTime>
         <p>Depart</p>
         <img src={CalendarIcon} alt="Calendar" />
       </StyledDepTime>

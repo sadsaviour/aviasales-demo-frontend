@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "./normalize.css";
 import "./flexboxgrid2.css";
 
-import "./app.css";
+import "./App.css";
 
 import Header from "./Header/index";
 import Main from "./Home/Main/index";
@@ -14,14 +14,31 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: "Moscow",
-      searchPerformed: true
+      origin: "Moscow",
+      destination: "Barcelona",
+      departureDate: "24 feb",
+      arrivalDate: "3 mar",
+      passengersN: 1,
+      searchPerformed: true,
+      width: window.innerWidth
     };
   }
 
   updateCity = value => {
     this.setState({ city: value });
     console.log(this.state);
+  };
+
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
   };
 
   render() {
@@ -37,9 +54,10 @@ export default class App extends Component {
             path="/"
             render={() => (
               <Header
-                city={this.state.city}
+                origin={this.state.origin}
                 updateCity={this.updateCity}
                 searchPerformed={false}
+                width={this.state.width}
               />
             )}
             city={this.state.city}
@@ -48,9 +66,14 @@ export default class App extends Component {
             path="/search"
             render={() => (
               <Header
-                city={this.state.city}
+                origin={this.state.origin}
+                destination={this.state.destination}
+                departureDate={this.state.departureDate}
+                arrivalDate={this.state.arrivalDate}
+                passengersN={this.state.passengersN}
                 updateCity={this.updateCity}
                 searchPerformed={true}
+                width={this.state.width}
               />
             )}
             city={this.state.city}

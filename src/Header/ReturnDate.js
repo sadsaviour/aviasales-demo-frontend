@@ -5,17 +5,23 @@ import CalendarIcon from "./img/calendar.svg";
 
 const StyledRetTime = styled.div`
   flex-grow: 1;
+  flex-basis: 20%;
+  flex-shrink: 1;
 
   height: 56px;
 
-  @media (max-width: 992px) {
-    width: 50%;
+  @media only screen and (min-width: 768px) {
+    flex-grow: 1;
+    flex-basis: 20%;
   }
-
-  margin-right: 2px;
 
   padding-left: 16px;
   padding-right: 16px;
+
+  margin-bottom: 2px;
+  @media only screen and (min-width: 992px) {
+    margin-bottom: 0;
+  }
 
   display: flex;
   flex-flow: row nowrap;

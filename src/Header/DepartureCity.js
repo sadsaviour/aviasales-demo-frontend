@@ -5,29 +5,46 @@ import onClickOutside from "react-onclickoutside";
 import arrowsIcon from "./img/arrows.svg";
 
 const SearchFormOrigin = styled.div`
-  flex-grow: 0;
+  flex-grow: 1;
+  flex-basis: 100%;
+
+  @media only screen and (min-width: 576px) {
+    flex-grow: 1;
+    flex-basis: 100%;
+  }
+  @media only screen and (min-width: 768px) {
+    flex-grow: 1;
+    flex-basis: 40%;
+  }
+  @media only screen and (min-width: 992px) {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 20%;
+  }
+
+  position: relative;
+  box-sizing: border-box;
+
+  height: 56px;
 
   padding-left: 18px;
   padding-top: 18px;
 
-  position: relative;
-  box-sizing: border-box;
-  margin-right: 2px;
-
-  height: 56px;
-  /* width: 20%; */
-
-  @media (max-width: 992px) {
-    width: 50%;
+  margin-bottom: 2px;
+  @media only screen and (min-width: 992px) {
+    margin-bottom: 0;
   }
 
   background-color: #fff;
 
   border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
 
-  @media (max-width: 992px) {
-    border-bottom-left-radius: 0px;
+  @media only screen and (min-width: 768px) {
+    border-top-right-radius: 0;
+  }
+  @media only screen and (min-width: 992px) {
+    border-bottom-left-radius: 5px;
   }
 `;
 
@@ -46,6 +63,8 @@ const AutocompleteInput = styled.input`
   color: #4a4a4a;
 
   border: 0;
+
+  text-overflow: ellipsis;
 `;
 
 const AutocompleteDropdown = styled.div`

@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import logo from "./img/logo.svg";
+import backIcon from "./img/back-icon.svg";
 
 import ArrivalCity from "./ArrivalCity";
 import DepartureCity from "./DepartureCity";
@@ -12,7 +13,11 @@ import PassangersOpt from "./PassangersOpt";
 
 const StyledHeader = styled.header`
   padding-top: 10px;
-  padding-bottom: 32px;
+  padding-bottom: 10px;
+
+  @media only screen and (min-width: 768px) {
+    padding-bottom: 32px;
+  }
 
   background: linear-gradient(
     148.48deg,
@@ -39,12 +44,66 @@ const LogoText = styled.p`
   color: #ffffff;
 `;
 
-function Logo() {
-  return (
+const Delimener = styled.div`
+  min-width: ${props => (props.width ? props.width : "2px")};
+  max-width: ${props => (props.width ? props.width : "2px")};
+`;
+
+const SearchRow = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+
+  @media only screen and (min-width: 576px) {
+    flex-flow: row wrap;
+  }
+  @media only screen and (min-width: 768px) {
+    flex-flow: row wrap;
+  }
+  @media only screen and (min-width: 992px) {
+    flex-flow: row nowrap;
+  }
+`;
+
+const CurrencyButton = styled.div`
+  box-sizing: border-box;
+  width: 56px;
+  height: 28px;
+
+  @media only screen and (min-width: 768px) {
+    width: 72px;
+    height: 36px;
+  }
+
+  background: rgba(0, 0, 0, 0.0001);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+
+  padding-top: 6px;
+  @media only screen and (min-width: 768px) {
+    padding-top: 8px;
+  }
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  font-size: 14px;
+  @media only screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+  text-align: center;
+
+  color: #ffffff;
+`;
+
+function Logo(props) {
+  const windowSize = props.width;
+  return windowSize < 768 ? (
+    <img src={backIcon} alt="back" />
+  ) : (
     <div
       style={{
-        "padding-top": "2px",
-        "padding-bottom": "8px",
         display: "flex",
         flexflow: "row nowrap",
         "align-items": "center"
@@ -56,34 +115,99 @@ function Logo() {
   );
 }
 
+function ShortSearchQuery(props) {
+  const Cities = styled.div`
+    margin-left: 26px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 16px;
+
+    color: #ffffff;
+  `;
+  const DatesAndPassangers = styled.div`
+  margin-left: 26px
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    font-size: 12px;
+
+    color: #ffffff;
+  `;
+  const windowSize = props.width;
+  return (
+    windowSize < 768 && (
+      <div style={{ "flex-grow": "2" }}>
+        <Cities>
+          {props.origin} — {props.destination}
+        </Cities>
+        <DatesAndPassangers>
+          {props.departureDate} — {props.arrivalDate}, {props.passengersN}{" "}
+          passengers
+        </DatesAndPassangers>
+      </div>
+    )
+  );
+}
+
 export default function Header(props) {
   const search = props.searchPerformed;
   return (
     <StyledHeader>
       {search ? (
         <div className="container">
-          <div className="row between-lg">
-            <div>
-              <Logo />
+          <div
+            className="container "
+            style={
+              props.width > 768
+                ? { "margin-bottom": "38px" }
+                : { "margin-bottom": "0" }
+            }
+          >
+            <div
+              className="row middle-xs middle-sm"
+              style={{
+                "justify-content": "space-between"
+              }}
+            >
+              <Logo width={props.width} />
+              <ShortSearchQuery
+                width={props.width}
+                origin={props.origin}
+                destination={props.destination}
+                departureDate={props.departureDate}
+                arrivalDate={props.arrivalDate}
+                passengersN={props.passengersN}
+              />
+
+              <CurrencyButton>RUB</CurrencyButton>
             </div>
           </div>
-          <div className="row middle-xl">
-            <div className="col-lg-10">
-              <div className="row">
+          <div
+            className="row middle-xl middle-lg hidden-xs hidden-sm"
+            style={{ "margin-bottom": "38px" }}
+          >
+            <div className="col-lg-10 col-xl-10">
+              <SearchRow>
                 <DepartureCity
-                  city={props.city}
+                  city={props.origin}
                   updateCity={props.updateCity}
                 />
-                <ArrivalCity />
+                <Delimener className="hidden-xs hidden-sm" />
+                <ArrivalCity city="Barcelona" />
+                <Delimener className="hidden-xs hidden-sm hidden-md" />
                 <DepartureDate />
+                <Delimener />
                 <ReturnDate />
+                <Delimener className="hidden-xs hidden-sm" />
                 <PassangersOpt />
-                <div className="hidden-lg hidden-xl" style={{ width: "25%" }}>
-                  <FindTicketsButton />
-                </div>
-              </div>
+                <Delimener className="hidden-lg hidden-xl hidden-xs hidden-sm" />
+                <FindTicketsButton className="hidden-lg hidden-xl" />
+              </SearchRow>
             </div>
-            <div className="col-lg-2 hidden-md hidden-sm hidden-xs">
+            <div className="col-xl-2 col-lg-2 hidden-xs hidden-sm hidden-md">
               <FindTicketsButton />
             </div>
           </div>

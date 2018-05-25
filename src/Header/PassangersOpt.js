@@ -5,18 +5,23 @@ import onClickOutside from "react-onclickoutside";
 import DropdownIcon from "./img/dropdown-arrow.svg";
 
 const StyledDiv = styled.div`
-  flex-grow: 0;
+  flex-grow: 1;
+  flex-basis: 100%;
+  @media only screen and (min-width: 768px) {
+    flex-grow: 1;
+    flex-basis: 20%;
+  }
 
   position: relative;
 
   height: 56px;
-  /* width: 20%; */
 
   padding-left: 16px;
   padding-right: 16px;
 
-  @media (max-width: 992px) {
-    width: 25%;
+  margin-bottom: 16px;
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 0;
   }
 
   display: flex;
@@ -28,11 +33,16 @@ const StyledDiv = styled.div`
 
   background-color: #fff;
 
-  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 
-  @media (max-width: 992px) {
-    border-top-right-radius: 0px;
+  @media only screen and (min-width: 768px) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  @media only screen and (min-width: 992px) {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 
   font-family: Roboto;
@@ -145,7 +155,7 @@ class PassangersOpt extends Component {
   render() {
     return (
       <StyledDiv onClick={this.handleClick}>
-        <span>{this.state.adults} Passanger, economy</span>
+        <span>{this.state.adults} пассажир, эконом</span>
         <StyledDropdownIcon src={DropdownIcon} alt="dropdown-arrow" />
 
         <StyledDropdown show={this.state.dropdown}>
