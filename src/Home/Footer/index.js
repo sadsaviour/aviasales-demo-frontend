@@ -108,13 +108,17 @@ const FooterBlockAll = styled.p`
 
 const StyledHr = styled.hr`
   box-sizing: border-box;
+
+  margin-top: 12px;
+  margin-bottom: 12px;
+
   size: 1px;
   color: #e0e6e8;
 `;
 
 const StyledInfoLink = styled.p`
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin-top: 0;
+  margin-bottom: 8px;
   margin-right: 12px;
 
   display: inline-block;
@@ -157,9 +161,12 @@ const HotelLookLink = styled.p`
   font-weight: normal;
   line-height: 16px;
   font-size: 12px;
-  text-align: center;
 
   color: #5b5b5c;
+`;
+
+const AppLink = styled.img`
+  margin-right: 10px;
 `;
 
 const Copyright = styled.p`
@@ -181,86 +188,143 @@ export default function Footer(props) {
     <StyledFooter>
       <div className="container">
         <div className="row">
-          <div className="col-xs-6">
+          <div className="col-xs-6 col-md-3 col-lg-2">
             <nav>
               <FooterBlockHeader>СТРАНЫ</FooterBlockHeader>
               <List list={States} />
               <FooterBlockAll>Все страны →</FooterBlockAll>
             </nav>
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>ГОРОДА</FooterBlockHeader>
             <List list={Cities} />
             <FooterBlockAll>Все аэропорты →</FooterBlockAll>
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>АВИАКОМПАНИИ</FooterBlockHeader>
             <List list={Carriers} />
             <FooterBlockAll>Все авиакомпании →</FooterBlockAll>
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>АЭРОПОРТЫ</FooterBlockHeader>
             <List list={Airports} />
             <FooterBlockAll>Все аэропорты →</FooterBlockAll>
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>НАПРАВЛЕНИЯ</FooterBlockHeader>
             <List list={Destinations} />
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>СЕРВИСЫ</FooterBlockHeader>
             <List list={Services} />
           </div>
         </div>
       </div>
       <StyledHr />
-      <div className="container">
-        <nav>
-          <StyledInfoLink>О компании</StyledInfoLink>
-          <StyledInfoLink>Партнёрская программа</StyledInfoLink>
-          <StyledInfoLink>Реклама</StyledInfoLink>
-          <StyledInfoLink>Вакансии</StyledInfoLink>
-          <StyledInfoLink>Помощь</StyledInfoLink>
-          <StyledInfoLink>Правила</StyledInfoLink>
-          <StyledInfoLink>White Label авиабилеты</StyledInfoLink>
-        </nav>
-        <nav>
-          <SocialIconBlock>
-            <img src={vk} alt="VK" />
-            <SocialIconCapture>Вконтакте</SocialIconCapture>
-          </SocialIconBlock>
-          <SocialIconBlock>
-            <img src={facebook} alt="Facebook" />
-            <SocialIconCapture>Фейсбук</SocialIconCapture>
-          </SocialIconBlock>
-          <SocialIconBlock>
-            <img src={instagram} alt="Instagram" />
-            <SocialIconCapture>Инстаграм</SocialIconCapture>
-          </SocialIconBlock>
-          <SocialIconBlock>
-            <img src={twitter} alt="Twitter" />
-            <SocialIconCapture>Твиттер</SocialIconCapture>
-          </SocialIconBlock>
-          <SocialIconBlock>
-            <img src={viber} alt="Viber" />
-            <SocialIconCapture>Вайбер</SocialIconCapture>
-          </SocialIconBlock>
-        </nav>
+      {window.innerWidth <= 992 ? (
+        <div className="container">
+          <nav>
+            <StyledInfoLink>О компании</StyledInfoLink>
+            <StyledInfoLink>Партнёрская программа</StyledInfoLink>
+            <StyledInfoLink>Реклама</StyledInfoLink>
+            <StyledInfoLink>Вакансии</StyledInfoLink>
+            <StyledInfoLink>Помощь</StyledInfoLink>
+            <StyledInfoLink>Правила</StyledInfoLink>
+            <StyledInfoLink>White Label авиабилеты</StyledInfoLink>
+          </nav>
+          <nav>
+            <SocialIconBlock>
+              <img src={vk} alt="VK" />
+              <SocialIconCapture>Вконтакте</SocialIconCapture>
+            </SocialIconBlock>
+            <SocialIconBlock>
+              <img src={facebook} alt="Facebook" />
+              <SocialIconCapture>Фейсбук</SocialIconCapture>
+            </SocialIconBlock>
+            <SocialIconBlock>
+              <img src={instagram} alt="Instagram" />
+              <SocialIconCapture>Инстаграм</SocialIconCapture>
+            </SocialIconBlock>
+            <SocialIconBlock>
+              <img src={twitter} alt="Twitter" />
+              <SocialIconCapture>Твиттер</SocialIconCapture>
+            </SocialIconBlock>
+            <SocialIconBlock>
+              <img src={viber} alt="Viber" />
+              <SocialIconCapture>Вайбер</SocialIconCapture>
+            </SocialIconBlock>
+          </nav>
 
-        <div className="row">
-          <div className="col-xs-12 col-lg-6">
-            <HotelLookLink>Поиск и бронирование отелей</HotelLookLink>
+          <div className="row center-xs start-md ">
+            <div className="col-xs-8 col-md-3">
+              <HotelLookLink>Поиск и бронирование отелей</HotelLookLink>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-offset-3 col-xs-6 center-xs col-md-offset-0 col-md-12 start-md">
+              <AppLink src={apple} alt="App Store" />
+              <AppLink src={google} alt="Google Play Store" />
+              <AppLink src={microsoft} alt="Windows Phone" />
+            </div>
+          </div>
+          <Copyright className="center-xs">
+            © 2007–2018, Aviasales — дешевые авиабилеты
+          </Copyright>
+        </div>
+      ) : (
+        <div className="container" style={{ "margin-top": "26px" }}>
+          <div className="row">
+            <div className="col-lg-8">
+              <nav>
+                <StyledInfoLink>О компании</StyledInfoLink>
+                <StyledInfoLink>Партнёрская программа</StyledInfoLink>
+                <StyledInfoLink>Реклама</StyledInfoLink>
+                <StyledInfoLink>Вакансии</StyledInfoLink>
+                <StyledInfoLink>Помощь</StyledInfoLink>
+                <StyledInfoLink>Правила</StyledInfoLink>
+                <StyledInfoLink>White Label авиабилеты</StyledInfoLink>
+              </nav>
+              <nav>
+                <SocialIconBlock>
+                  <img src={vk} alt="VK" />
+                  <SocialIconCapture>Вконтакте</SocialIconCapture>
+                </SocialIconBlock>
+                <SocialIconBlock>
+                  <img src={facebook} alt="Facebook" />
+                  <SocialIconCapture>Фейсбук</SocialIconCapture>
+                </SocialIconBlock>
+                <SocialIconBlock>
+                  <img src={instagram} alt="Instagram" />
+                  <SocialIconCapture>Инстаграм</SocialIconCapture>
+                </SocialIconBlock>
+                <SocialIconBlock>
+                  <img src={twitter} alt="Twitter" />
+                  <SocialIconCapture>Твиттер</SocialIconCapture>
+                </SocialIconBlock>
+                <SocialIconBlock>
+                  <img src={viber} alt="Viber" />
+                  <SocialIconCapture>Вайбер</SocialIconCapture>
+                </SocialIconBlock>
+              </nav>
+              <HotelLookLink>Поиск и бронирование отелей</HotelLookLink>
+            </div>
+            <div className="col-lg-4">
+              <div className="row end-lg">
+                <AppLink src={apple} alt="App Store" />
+                <AppLink src={google} alt="Google Play Store" />
+                <AppLink
+                  src={microsoft}
+                  alt="Windows Phone"
+                  style={{ "margin-right": "8px" }}
+                />
+              </div>
+              <Copyright className="end-lg" style={{ "margin-top": "32px" }}>
+                © 2007–2018, Aviasales — дешевые авиабилеты
+              </Copyright>
+            </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-xs-offset-3 col-xs-6 center-xs">
-            <img src={apple} alt="App Store" />
-            <img src={google} alt="Google Play Store" />
-            <img src={microsoft} alt="Windows Phone" />
-          </div>
-        </div>
-        <Copyright>© 2007–2018, Aviasales — дешевые авиабилеты</Copyright>
-      </div>
+      )}
     </StyledFooter>
   );
 }
