@@ -46,7 +46,7 @@ export default class App extends Component {
       <Router>
         <div className="App">
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto"
+            href="https://fonts.googleapis.com/css?family=Roboto:400,500"
             rel="stylesheet"
           />
           <Route
@@ -78,7 +78,11 @@ export default class App extends Component {
             )}
             city={this.state.city}
           />
-          <Route exact={true} path="/" component={Main} />
+          <Route
+            exact={true}
+            path="/"
+            render={() => <Main width={this.state.width} />}
+          />
           <Route path="/search" component={SearchMain} />
           <Footer />
         </div>

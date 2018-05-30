@@ -105,6 +105,7 @@ const flightsData = [
     carrier: "Rossya",
     charter: true,
     direct: true,
+    specialMark: "Chipest",
     offers: {
       best: {
         price: "7 712 ₽",
@@ -155,6 +156,7 @@ const flightsData = [
     carrier: "Nordwind",
     charter: false,
     direct: true,
+    specialMark: "Fastest",
     offers: {
       best: {
         price: "8 029 ₽",
@@ -201,9 +203,10 @@ const flightsData = [
   },
   {
     id: "3",
-    carrier: "Nordwind",
+    carrier: "NordwindCharter",
     charter: true,
     direct: true,
+    specialMark: "TheBest",
     offers: {
       best: {
         price: "8 164 ₽",
@@ -217,7 +220,8 @@ const flightsData = [
         carryOnLimit: 5
       },
       extra: {
-        extraLuggageOffer: true,
+        includeLuggage: true,
+        includeCarryOn: true,
         carryOnLimit: 5,
         luggageLimit: 12,
         fee: "- 136 ₽"
@@ -261,8 +265,8 @@ const flightsData = [
     direct: true,
     offers: {
       best: {
-        price: "9 108 ₽",
-        source: "на Clickavia"
+        price: "8 240 ₽",
+        source: "на Билетик Аэро"
       },
       extra: {
         toShow: [
@@ -286,7 +290,8 @@ const flightsData = [
         carryOnLimit: 10
       },
       extra: {
-        extraLuggageOffer: true,
+        includeLuggage: true,
+        includeCarryOn: true,
         carryOnLimit: 10,
         luggageLimit: 20,
         fee: "- 267 ₽"
