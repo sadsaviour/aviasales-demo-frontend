@@ -1,6 +1,9 @@
 export const filters = {
   changes: [
     {
+      option: "Все"
+    },
+    {
       option: "Без пересадок",
       price: "7 712 ₽"
     },

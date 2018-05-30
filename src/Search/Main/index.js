@@ -7,6 +7,8 @@ import FiltersPane from "./FiltersPane";
 import TabletFlightsList from "./TabletFlightsList";
 
 const StyledMain = styled.main`
+  padding-top: 56px;
+  padding-bottom: 40px;
   background: #eaeaea;
 `;
 
@@ -28,7 +30,7 @@ export default class Main extends Component {
 
         <div className="container hidden-xs">
           <div className="row">
-            <div className="col-md-12 col-lg-3 col-xl-3">
+            <div className="col-md-12 col-lg-3 col-xl-3 hidden-md ">
               {this.state.filtersCollapsed ? (
                 <button>Filters</button>
               ) : (
