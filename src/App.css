@@ -20,6 +20,7 @@
 }
 
 input[type=checkbox] {
+  box-sizing: border-box;
   appearance: none;
   position: relative;
   width: 18px;

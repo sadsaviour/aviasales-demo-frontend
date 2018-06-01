@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
-import DropdownIcon from "./img/dropdown-arrow.svg";
+import dropdown_icon from "./img/dropdown-arrow.svg";
 
-const StyledDiv = styled.div`
+import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
+
+const PassengersSelector = styled.div`
   flex-grow: 1;
   flex-basis: 100%;
   @media only screen and (min-width: 768px) {
@@ -54,40 +56,48 @@ const StyledDiv = styled.div`
   color: #4a4a4a;
 `;
 
-const StyledDropdownIcon = styled.img`
+const DropdownIcon = styled.img`
   margin-left: 10px;
 `;
 
-const StyledDropdown = styled.div`
+const Dropdown = styled.div`
   display: ${props => (props.show ? "block" : "none")};
+
+  box-sizing: border-box;
   position: absolute;
-  top: 56px;
+  top: 58px;
   left: 0;
   z-index: 20;
+
   width: 100%;
-  background: pink;
+
+  padding: 16px;
+
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(74, 74, 74, 0.2),
+    0px 2px 4px rgba(74, 74, 74, 0.2);
+  border-radius: 2px;
 `;
 
-function Counter(props) {
-  const state = props.state;
-  const base = props.base;
-  return (
-    <div style={{ display: "flex", "flex-flow": "row nowrap" }}>
-      {" "}
-      {state[base] > 0 && (base === "adults" && state[base] > 1) ? (
-        <button value="decrement" onClick={props.decCallback}>
-          −
-        </button>
-      ) : (
-        <button disabled={true}>−</button>
-      )}
-      <p>{state[base]}</p>
-      <button value="increment" onClick={props.incCallback}>
-        +
-      </button>
-    </div>
-  );
-}
+const PassangerOptionsDelimener = styled.div`
+  height: 1px;
+
+  margin-bottom: 16px;
+
+  background: #dbdbdb;
+`;
+
+const BussinesClassLabel = styled.span`
+  margin-left: 6px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 18px;
+  font-size: 12px;
+
+  color: #4a4a4a;
+`;
 
 class PassangersOpt extends Component {
   constructor(props) {
@@ -97,14 +107,13 @@ class PassangersOpt extends Component {
       kids: 0,
       infants: 0,
       businessClass: false,
-      dropdown: false
+      dropdown: true
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleBusinessClassCheckboxChange = this.handleBusinessClassCheckboxChange.bind(
       this
     );
-    this.incAdultsQuote = this.incAdultsQuote.bind(this);
   }
 
   showDropdown() {
@@ -125,78 +134,48 @@ class PassangersOpt extends Component {
     this.hideDropdown();
   };
 
-  incAdultsQuote(props) {
-    this.setState(prevState => ({ adults: prevState.adults + 1 }));
-  }
-  decAdultsQuote() {
-    this.setState(prevState => ({ adults: prevState.adults - 1 }));
-  }
+  changeState = f => this.setState(f);
 
-  incKidsQuote() {
-    this.setState(prevState => ({ kids: prevState.kids + 1 }));
-  }
-  decKidsQuote() {
-    this.setState(prevState => ({ kids: prevState.kids - 1 }));
-  }
-
-  incInfantsQuote() {
-    this.setState(prevState => ({ infants: prevState.infants + 1 }));
-  }
-  decInfantsQuote() {
-    this.setState(prevState => ({ infants: prevState.infants - 1 }));
-  }
-
-  handleBusinessClassCheckboxChange() {
+  handleBusinessClassCheckboxChange = () => {
     this.setState(prevState => ({
       businessClass: !prevState.businessClass
     }));
-  }
+  };
 
   render() {
+    const totalPassangers =
+      this.state.adults + this.state.kids + this.state.infants;
     return (
-      <StyledDiv onClick={this.handleClick}>
-        <span>{this.state.adults} пассажир, эконом</span>
-        <StyledDropdownIcon src={DropdownIcon} alt="dropdown-arrow" />
-
-        <StyledDropdown show={this.state.dropdown}>
-          <div style={{ display: "flex", "flex-flow": "row nowrap" }}>
-            <p>Adults</p>
-            <Counter
-              base="adults"
-              state={this.state}
-              incCallback={() => this.incAdultsQuote("adults")}
-              decCallback={() => this.decAdultsQuote()}
+      <PassengersSelector onClick={this.handleClick}>
+        {totalPassangers} пассажир,{" "}
+        <span style={{ color: "#A0B0B9" }}>
+          {this.state.businessClass ? "бизнес" : "эконом"}
+        </span>
+        <DropdownIcon src={dropdown_icon} alt="dropdown-arrow" />
+        <Dropdown show={this.state.dropdown}>
+          <AdultsCounter
+            adults={this.state.adults}
+            changeCallback={f => this.changeState(f)}
+          />
+          <KidsCounter
+            kids={this.state.kids}
+            changeCallback={f => this.changeState(f)}
+          />
+          <InfantsCounter
+            infants={this.state.infants}
+            changeCallback={f => this.changeState(f)}
+          />
+          <PassangerOptionsDelimener />
+          <label>
+            <input
+              type="checkbox"
+              onClick={this.handleBusinessClassCheckboxChange}
+              style={{ "vertical-align": "middle" }}
             />
-          </div>
-          <div>
-            <p>Kids</p>
-            <Counter
-              base="kids"
-              state={this.state}
-              incCallback={() => this.incKidsQuote()}
-              decCallback={() => this.decKidsQuote()}
-            />
-          </div>
-          <div>
-            <p>Infants</p>
-            <Counter
-              base="infants"
-              state={this.state}
-              test="test"
-              incCallback={() => this.incInfantsQuote()}
-              decCallback={() => this.decInfantsQuote()}
-            />
-          </div>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                onChange={this.handleBusinessClassCheckboxChange}
-              />Business Class
-            </label>{" "}
-          </div>
-        </StyledDropdown>
-      </StyledDiv>
+            <BussinesClassLabel>Бизнес-класс</BussinesClassLabel>
+          </label>
+        </Dropdown>
+      </PassengersSelector>
     );
   }
 }
