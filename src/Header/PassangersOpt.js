@@ -107,7 +107,7 @@ class PassangersOpt extends Component {
       kids: 0,
       infants: 0,
       businessClass: false,
-      dropdown: true
+      dropdown: false
     };
 
     this.handleClick = this.handleClick.bind(this);

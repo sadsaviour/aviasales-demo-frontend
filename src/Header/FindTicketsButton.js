@@ -54,7 +54,7 @@ export default class FindTicketsButton extends Component {
         className={this.props.className}
       >
         <Link style={{ "text-decoration": "none" }} to="/search">
-          <StyledButtonText>Find Tickets</StyledButtonText>
+          <StyledButtonText>Найти билеты</StyledButtonText>
         </Link>
       </Button>
     );
