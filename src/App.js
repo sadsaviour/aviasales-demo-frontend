@@ -26,7 +26,12 @@ export default class App extends Component {
 
   updateCity = value => {
     this.setState({ city: value });
-    console.log(this.state);
+  };
+
+  swapCities = () => {
+    this.setState(prevState => {
+      return { origin: prevState.destination, destination: prevState.origin };
+    });
   };
 
   componentWillMount() {
@@ -55,9 +60,11 @@ export default class App extends Component {
             render={() => (
               <Header
                 origin={this.state.origin}
+                destination={""}
                 updateCity={this.updateCity}
                 searchPerformed={false}
                 width={this.state.width}
+                swapCitiesCallback={this.swapCities}
               />
             )}
             city={this.state.city}
@@ -74,6 +81,7 @@ export default class App extends Component {
                 updateCity={this.updateCity}
                 searchPerformed={true}
                 width={this.state.width}
+                swapCitiesCallback={this.swapCities}
               />
             )}
             city={this.state.city}

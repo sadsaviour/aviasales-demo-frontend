@@ -242,9 +242,10 @@ export default function Header(props) {
                 <DepartureCity
                   city={props.origin}
                   updateCity={props.updateCity}
+                  swapCitiesCallback={props.swapCitiesCallback}
                 />
                 <Delimener className="hidden-xs hidden-sm" />
-                <ArrivalCity city="Barcelona" />
+                <ArrivalCity city={props.destination} />
                 <Delimener className="hidden-xs hidden-sm hidden-md" />
                 <DepartureDate />
                 <Delimener />
@@ -267,7 +268,7 @@ export default function Header(props) {
               <Logo width={props.width} />
               <h1>Поиск дешевых авиабилетов</h1>
               <DepartureCity city={props.city} updateCity={props.updateCity} />
-              <ArrivalCity />
+              <ArrivalCity city={props.destination} />
               <DepartureDate />
               <ReturnDate />
               <PassangersOpt />

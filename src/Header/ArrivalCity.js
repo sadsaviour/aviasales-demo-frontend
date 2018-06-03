@@ -137,7 +137,7 @@ class ArrivalCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: "Барселона",
+      city: this.props.city,
       iataCode: "BCN",
       dropdownVisible: false,
 
@@ -208,7 +208,6 @@ class ArrivalCity extends Component {
           </AutocompleteDropdown>
         </AutocompleteBlock>
         <AutocompleteAirportCode>{this.state.iataCode}</AutocompleteAirportCode>
-        <AutocompleteAirportCode />
       </SearchFormOrigin>
     );
   }

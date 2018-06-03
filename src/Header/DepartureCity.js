@@ -161,7 +161,7 @@ class DepartureCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: "Moscow",
+      city: this.props.city,
       iataCode: "MOW",
       dropdownVisible: false,
 
@@ -239,7 +239,7 @@ class DepartureCity extends Component {
           </AutocompleteDropdown>
         </AutocompleteBlock>
         <AutocompleteAirportCode>{this.state.iataCode}</AutocompleteAirportCode>
-        <SwapCitiesButton>
+        <SwapCitiesButton onClick={this.props.swapCitiesCallback}>
           <img src={arrowsIcon} alt="Arrows" />
         </SwapCitiesButton>
       </SearchFormOrigin>
