@@ -15,16 +15,14 @@ const SearchFormOrigin = styled.div`
     flex-shrink: 1;
     flex-basis: 20%;
   }
-  padding-left: 18px;
-  padding-top: 18px;
 
   margin-bottom: 2px;
   @media only screen and (min-width: 992px) {
     margin-bottom: 0;
   }
 
-  position: relative;
   box-sizing: border-box;
+  position: relative;
 
   height: 56px;
 
@@ -37,6 +35,11 @@ const SearchFormOrigin = styled.div`
 
 const AutocompleteBlock = styled.div`
   position: relative;
+
+  box-sizing: border-box;
+
+  padding-left: 18px;
+  padding-top: 18px;
 `;
 
 const AutocompleteInput = styled.input`
@@ -55,27 +58,88 @@ const AutocompleteInput = styled.input`
 `;
 
 const AutocompleteDropdown = styled.div`
+  display: ${props => (props.visible ? "flex" : "none")};
+  flex-flow: column;
+
+  box-sizing: border-box;
   position: absolute;
-  top: 56px;
+  top: 58px;
   left: 0;
   z-index: 20;
+
   width: 100%;
-  background: pink;
+
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(74, 74, 74, 0.2),
+    0px 2px 4px rgba(74, 74, 74, 0.2);
+  border-radius: 2px;
 `;
 
 const AutocompleteAirportCode = styled.div`
   position: absolute;
-  right: 56px;
-  top: 21px;
+  right: 16px;
+  top: 19px;
   z-index: 26;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  font-size: 16px;
+  text-align: center;
+
+  color: #a0b0b9;
+`;
+
+const Suggestion = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 16px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 18px;
+  font-size: 14px;
+
+  color: #4a4a4a;
+
+  :hover {
+    background: #f4f4f4;
+  }
+`;
+
+const SuggestionCity = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const SuggestionCountry = styled.div`
+  flex-grow: 2;
+
+  margin-left: 2px;
+
+  font-weight: normal;
+  color: #a0b0b9;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const SuggestionIATACode = styled.div`
+  flex-shrink: 0;
+  flex-basis: 23px;
+  font-weight: normal;
+  color: #a0b0b9;
 `;
 
 class ArrivalCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: props.city,
-      suggestion: false,
+      city: "Барселона",
+      iataCode: "BCN",
+      dropdownVisible: false,
 
       airports: [
         { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
@@ -94,43 +158,37 @@ class ArrivalCity extends Component {
       ]
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ city: event.target.value });
-  }
-
   handleFocus(event) {
-    this.setState({ suggestion: true });
+    this.setState({ dropdownVisible: true });
   }
 
   handleClick(event) {
-    this.setState({ city: event.name });
-    this.setState({ suggestion: false });
+    this.setState({
+      city: event.name,
+      iataCode: event.iataCode,
+      dropdownVisible: false
+    });
   }
 
   handleClickOutside = evt => {
     this.setState({ suggestion: false });
   };
 
-  Suggest(props) {
-    return (
-      <AutocompleteDropdown>{this.airportSuggestionsList}</AutocompleteDropdown>
-    );
-  }
-
   render() {
     const airportSuggestionsList = this.state.airports.map(a => (
-      <div
+      <Suggestion
         key={a.name}
         style={{ cursor: "pointer" }}
         onClick={() => this.handleClick(a)}
       >
-        {a.name}
-      </div>
+        <SuggestionCity>{a.name}, </SuggestionCity>
+        <SuggestionCountry>{a.country}</SuggestionCountry>
+        <SuggestionIATACode>{a.iataCode}</SuggestionIATACode>
+      </Suggestion>
     ));
     return (
       <SearchFormOrigin>
@@ -145,13 +203,12 @@ class ArrivalCity extends Component {
             onFocus={this.handleFocus}
             onChange={this.handleChange}
           />
-          {this.state.suggestion && (
-            <AutocompleteDropdown>
-              {airportSuggestionsList}
-            </AutocompleteDropdown>
-          )}
-          <AutocompleteAirportCode />
+          <AutocompleteDropdown visible={this.state.dropdownVisible}>
+            {airportSuggestionsList}
+          </AutocompleteDropdown>
         </AutocompleteBlock>
+        <AutocompleteAirportCode>{this.state.iataCode}</AutocompleteAirportCode>
+        <AutocompleteAirportCode />
       </SearchFormOrigin>
     );
   }
