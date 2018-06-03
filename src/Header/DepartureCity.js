@@ -89,9 +89,18 @@ const AutocompleteDropdown = styled.div`
 
 const AutocompleteAirportCode = styled.div`
   position: absolute;
-  right: 56px;
-  top: 21px;
+  right: 43px;
+  top: 19px;
   z-index: 26;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  font-size: 16px;
+  text-align: center;
+
+  color: #a0b0b9;
 `;
 
 const Suggestion = styled.div`
@@ -152,7 +161,8 @@ class DepartureCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: props.city,
+      city: "Moscow",
+      iataCode: "MOW",
       dropdownVisible: false,
 
       airports: [
@@ -186,8 +196,12 @@ class DepartureCity extends Component {
   }
 
   handleClick(event) {
-    this.setState({ city: event.name });
-    this.setState({ dropdownVisible: true });
+    this.setState({
+      city: event.name,
+      iataCode: event.iataCode,
+      dropdownVisible: false
+    });
+    this.setState({ dropdownVisible: false });
   }
 
   handleClickOutside = evt => {
@@ -223,9 +237,8 @@ class DepartureCity extends Component {
           <AutocompleteDropdown visible={this.state.dropdownVisible}>
             {airportSuggestionsList}
           </AutocompleteDropdown>
-
-          <AutocompleteAirportCode />
         </AutocompleteBlock>
+        <AutocompleteAirportCode>{this.state.iataCode}</AutocompleteAirportCode>
         <SwapCitiesButton>
           <img src={arrowsIcon} alt="Arrows" />
         </SwapCitiesButton>
