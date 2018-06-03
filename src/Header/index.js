@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import logo from "./img/logo.svg";
 import backIcon from "./img/back-icon.svg";
@@ -97,11 +98,43 @@ const CurrencyButton = styled.div`
   color: #ffffff;
 `;
 
-function Logo(props) {
-  const windowSize = props.width;
-  return windowSize < 768 ? (
+const BackLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const MobileLogo = () => (
+  <div
+    style={{
+      display: "flex",
+      flexflow: "row nowrap",
+      "align-items": "center"
+    }}
+  >
+    <img src={logo} alt="Aviasales" />
+  </div>
+);
+
+const MobileLogoActive = () => (
+  <BackLink to="/">
     <img src={backIcon} alt="back" />
-  ) : (
+  </BackLink>
+);
+
+const TabletLogo = () => (
+  <div
+    style={{
+      display: "flex",
+      flexflow: "row nowrap",
+      "align-items": "center"
+    }}
+  >
+    <img src={logo} alt="Aviasales" />
+    <LogoText>aviasales</LogoText>
+  </div>
+);
+
+const TabletLogoActive = () => (
+  <BackLink to="/">
     <div
       style={{
         display: "flex",
@@ -111,6 +144,21 @@ function Logo(props) {
     >
       <img src={logo} alt="Aviasales" />
       <LogoText>aviasales</LogoText>
+    </div>
+  </BackLink>
+);
+
+function Logo(props) {
+  const windowSize = props.width;
+  return windowSize < 768 ? (
+    <div>
+      <Route exact path="/" component={MobileLogo} />
+      <Route path="/search" component={MobileLogoActive} />
+    </div>
+  ) : (
+    <div>
+      <Route exact path="/" component={TabletLogo} />
+      <Route path="/search" component={TabletLogoActive} />{" "}
     </div>
   );
 }
@@ -216,7 +264,7 @@ export default function Header(props) {
         <div className="container">
           <div className="row">
             <div className="col-xs-12">
-              <Logo src={logo} alt="Aviasales" />
+              <Logo width={props.width} />
               <h1>Поиск дешевых авиабилетов</h1>
               <DepartureCity city={props.city} updateCity={props.updateCity} />
               <ArrivalCity />
