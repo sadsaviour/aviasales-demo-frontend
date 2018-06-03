@@ -9,9 +9,11 @@ import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
 const PassengersSelector = styled.div`
   flex-grow: 1;
   flex-basis: 100%;
+
   @media only screen and (min-width: 768px) {
-    flex-grow: 1;
-    flex-basis: 20%;
+    flex-basis: auto;
+    flex-grow: auto;
+    width: 21%;
   }
 
   position: relative;
@@ -54,6 +56,11 @@ const PassengersSelector = styled.div`
   font-size: 16px;
 
   color: #4a4a4a;
+`;
+
+const PassangersNumberLabel = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const DropdownIcon = styled.img`
@@ -147,10 +154,13 @@ class PassangersOpt extends Component {
       this.state.adults + this.state.kids + this.state.infants;
     return (
       <PassengersSelector onClick={this.handleClick}>
-        {totalPassangers} пассажир,{" "}
-        <span style={{ color: "#A0B0B9" }}>
+        <PassangersNumberLabel>
+          {totalPassangers} пассажир,{" "}
+        </PassangersNumberLabel>
+        <div style={{ color: "#A0B0B9" }}>
           {this.state.businessClass ? "бизнес" : "эконом"}
-        </span>
+        </div>
+
         <DropdownIcon src={dropdown_icon} alt="dropdown-arrow" />
         <Dropdown show={this.state.dropdown}>
           <AdultsCounter

@@ -4,15 +4,10 @@ import styled, { css } from "styled-components";
 import CalendarIcon from "./img/calendar.svg";
 
 const StyledDepTime = styled.div`
-  flex-grow: 1;
-  flex-basis: 20%;
-  flex-shrink: 1;
-
   height: 56px;
 
   @media only screen and (min-width: 768px) {
-    flex-grow: 1;
-    flex-basis: 20%;
+    width: 20%;
   }
 
   padding-left: 16px;
