@@ -50,7 +50,7 @@ const AutocompleteBlock = styled.div`
 
   box-sizing: border-box;
 
-  padding-left: 18px;
+  padding-left: 16px;
   padding-top: 18px;
 `;
 
@@ -155,14 +155,16 @@ const SwapCitiesButton = styled.button`
   padding: 0;
 
   background: #fff;
+
+  cursor: pointer;
 `;
 
 class DepartureCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: this.props.city,
-      iataCode: "MOW",
+      city: this.props.origin.city,
+      iataCode: this.props.origin.iataCode,
       dropdownVisible: false,
 
       airports: [
@@ -188,7 +190,7 @@ class DepartureCity extends Component {
   }
 
   handleChange(event) {
-    this.setState({ city: event.target.value });
+    this.props.updateOrigin(event.target.value);
   }
 
   handleFocus(event) {
@@ -196,11 +198,7 @@ class DepartureCity extends Component {
   }
 
   handleClick(event) {
-    this.setState({
-      city: event.name,
-      iataCode: event.iataCode,
-      dropdownVisible: false
-    });
+    this.props.updateOrigin(event.name, event.iataCode);
     this.setState({ dropdownVisible: false });
   }
 
@@ -226,7 +224,8 @@ class DepartureCity extends Component {
           <AutocompleteInput
             type="text"
             name="Departure City"
-            value={this.state.city}
+            value={this.props.origin.city}
+            placeholder="Город отправления"
             autoComplete="off"
             autoCorrect="off"
             spellCheck="off"
@@ -238,7 +237,9 @@ class DepartureCity extends Component {
             {airportSuggestionsList}
           </AutocompleteDropdown>
         </AutocompleteBlock>
-        <AutocompleteAirportCode>{this.state.iataCode}</AutocompleteAirportCode>
+        <AutocompleteAirportCode>
+          {this.props.origin.iataCode}
+        </AutocompleteAirportCode>
         <SwapCitiesButton onClick={this.props.swapCitiesCallback}>
           <img src={arrowsIcon} alt="Arrows" />
         </SwapCitiesButton>

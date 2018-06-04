@@ -263,12 +263,23 @@ export default function Header(props) {
         </div>
       ) : (
         <div className="container">
-          <div className="row">
-            <div className="col-xs-12">
+          <div className="col-xs-12">
+            <div className="row">
               <Logo width={props.width} />
+            </div>
+            <div className="row">
               <h1>Поиск дешевых авиабилетов</h1>
-              <DepartureCity city={props.city} updateCity={props.updateCity} />
-              <ArrivalCity city={props.destination} />
+            </div>
+            <div className="row">
+              <DepartureCity
+                origin={props.origin}
+                updateOrigin={props.updateOrigin}
+                swapCitiesCallback={props.swapCitiesCallback}
+              />
+              <ArrivalCity
+                destination={props.destination}
+                updateDestination={props.updateDestination}
+              />
               <DepartureDate />
               <ReturnDate />
               <PassangersOpt />

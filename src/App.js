@@ -14,18 +14,57 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      origin: "Moscow",
-      destination: "Barcelona",
+      origin: { city: "Москва", iataCode: "VKO" },
+      destination: { city: "", iataCode: "" },
       departureDate: "24 feb",
       arrivalDate: "3 mar",
-      passengersN: 1,
+      passengersNumber: 1,
+
       searchPerformed: true,
-      width: window.innerWidth
+
+      width: window.innerWidth,
+
+      airports: [
+        { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
+        { name: "Барселона", country: "Испания", iataCode: "BCN" },
+        { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
+        { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
+        { name: "Батуми", country: "Грузия", iataCode: "CMB" },
+        { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
+        { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
+        { name: "Манила", country: "Филипинны", iataCode: "MNL" },
+        { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
+        { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
+        { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
+        { name: "Мальта", country: "Мальта", iataCode: "MLA" },
+        { name: "Москва", country: "Россия", iataCode: "VKO" }
+      ]
     };
   }
 
-  updateCity = value => {
-    this.setState({ city: value });
+  findIataCode(city) {
+    if (city !== "") {
+      const iataCode = this.state.airports.find(a => a.name === "Бангкок")
+        .iataCode;
+      if (iataCode !== undefined) {
+        return iataCode;
+      } else {
+        return "";
+      }
+    } else {
+      return "";
+    }
+  }
+
+  updateOrigin = (city, iataCode) => {
+    this.setState({
+      origin: { city: city, iataCode: iataCode }
+    });
+  };
+  updateDestination = (city, iataCode) => {
+    this.setState({
+      destination: { city: city, iataCode: iataCode }
+    });
   };
 
   swapCities = () => {
@@ -60,8 +99,9 @@ export default class App extends Component {
             render={() => (
               <Header
                 origin={this.state.origin}
-                destination={""}
-                updateCity={this.updateCity}
+                destination={this.state.destination}
+                updateOrigin={this.updateOrigin}
+                updateDestination={this.updateDestination}
                 searchPerformed={false}
                 width={this.state.width}
                 swapCitiesCallback={this.swapCities}
@@ -77,8 +117,8 @@ export default class App extends Component {
                 destination={this.state.destination}
                 departureDate={this.state.departureDate}
                 arrivalDate={this.state.arrivalDate}
-                passengersN={this.state.passengersN}
-                updateCity={this.updateCity}
+                updateOrigin={this.updateOrigin}
+                updateDestination={this.updateDestination}
                 searchPerformed={true}
                 width={this.state.width}
                 swapCitiesCallback={this.swapCities}

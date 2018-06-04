@@ -5,8 +5,10 @@ import CalendarIcon from "./img/calendar.svg";
 
 const StyledRetTime = styled.div`
   height: 56px;
+  flex-grow: 1;
 
   @media only screen and (min-width: 768px) {
+    flex-grow: auto;
     width: 21%;
   }
 

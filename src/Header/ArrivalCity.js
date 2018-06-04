@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
-const SearchFormOrigin = styled.div`
+const SearchFormDestination = styled.div`
   flex-grow: 1;
   flex-basis: 100%;
 
@@ -38,7 +38,7 @@ const AutocompleteBlock = styled.div`
 
   box-sizing: border-box;
 
-  padding-left: 18px;
+  padding-left: 16px;
   padding-top: 18px;
 `;
 
@@ -137,8 +137,8 @@ class ArrivalCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: this.props.city,
-      iataCode: "BCN",
+      city: this.props.destination.city,
+      iataCode: this.props.destination.iataCode,
       dropdownVisible: false,
 
       airports: [
@@ -167,11 +167,8 @@ class ArrivalCity extends Component {
   }
 
   handleClick(event) {
-    this.setState({
-      city: event.name,
-      iataCode: event.iataCode,
-      dropdownVisible: false
-    });
+    this.props.updateDestination(event.name, event.iataCode);
+    this.setState({ dropdownVisible: false });
   }
 
   handleClickOutside = evt => {
@@ -191,12 +188,13 @@ class ArrivalCity extends Component {
       </Suggestion>
     ));
     return (
-      <SearchFormOrigin>
+      <SearchFormDestination>
         <AutocompleteBlock>
           <AutocompleteInput
             type="text"
             name="Departure City"
-            value={this.state.city}
+            value={this.props.destination.city}
+            placeholder="Город прибытия"
             autoComplete="off"
             autoCorrect="off"
             spellCheck="off"
@@ -207,8 +205,12 @@ class ArrivalCity extends Component {
             {airportSuggestionsList}
           </AutocompleteDropdown>
         </AutocompleteBlock>
-        <AutocompleteAirportCode>{this.state.iataCode}</AutocompleteAirportCode>
-      </SearchFormOrigin>
+        {this.props.destination.city && (
+          <AutocompleteAirportCode>
+            {this.props.destination.iataCode}
+          </AutocompleteAirportCode>
+        )}
+      </SearchFormDestination>
     );
   }
 }

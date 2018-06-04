@@ -5,10 +5,15 @@ import CalendarIcon from "./img/calendar.svg";
 
 const StyledDepTime = styled.div`
   height: 56px;
+  flex-grow: 1;
 
   @media only screen and (min-width: 768px) {
     width: 20%;
+    flex-grow: auto;
+    margin-right: 2px;
   }
+
+  margin-right: 2px;
 
   padding-left: 16px;
   padding-right: 16px;
