@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 import logo from "./img/logo.svg";
 import backIcon from "./img/back-icon.svg";
@@ -107,7 +107,7 @@ const MobileLogo = () => (
     style={{
       display: "flex",
       flexflow: "row nowrap",
-      "align-items": "center"
+      alignItems: "center"
     }}
   >
     <img src={logo} alt="Aviasales" />
@@ -125,7 +125,7 @@ const TabletLogo = () => (
     style={{
       display: "flex",
       flexflow: "row nowrap",
-      "align-items": "center"
+      alignItems: "center"
     }}
   >
     <img src={logo} alt="Aviasales" />
@@ -139,7 +139,7 @@ const TabletLogoActive = () => (
       style={{
         display: "flex",
         flexflow: "row nowrap",
-        "align-items": "center"
+        alignItems: "center"
       }}
     >
       <img src={logo} alt="Aviasales" />

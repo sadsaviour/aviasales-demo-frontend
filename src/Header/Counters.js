@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 function incrementAdults(state, props) {
@@ -144,7 +144,7 @@ export function InfantsCounter(props) {
     <CounterRow>
       <CounterLabel>
         Дети до 2 лет <br />{" "}
-        <span style={{ "font-size": "12px", color: "#A0B0B9" }}>Без места</span>
+        <span style={{ fontSize: "12px", color: "#A0B0B9" }}>Без места</span>
       </CounterLabel>
       <CounterControls>
         <CounterButton onClick={handleDecrement}>−</CounterButton>

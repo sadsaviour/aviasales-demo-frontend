@@ -106,6 +106,10 @@ const BussinesClassLabel = styled.span`
   color: #4a4a4a;
 `;
 
+const BussinesClassCheckbox = styled.input`
+  vertical-align: middle;
+`;
+
 class PassangersOpt extends Component {
   constructor(props) {
     super(props);
@@ -177,10 +181,9 @@ class PassangersOpt extends Component {
           />
           <PassangerOptionsDelimener />
           <label>
-            <input
+            <BussinesClassCheckbox
               type="checkbox"
               onClick={this.handleBusinessClassCheckboxChange}
-              style={{ "vertical-align": "middle" }}
             />
             <BussinesClassLabel>Бизнес-класс</BussinesClassLabel>
           </label>

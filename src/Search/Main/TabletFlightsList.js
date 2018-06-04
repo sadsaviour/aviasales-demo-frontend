@@ -7,7 +7,6 @@ import ExtraOffers from "./ExtraOffers";
 import FlightRow from "./FlightRow";
 
 import shareIcon from "./img/share-icon.svg";
-import pinIcon from "./img/pin-icon.svg";
 import dropdownIcon from "./img/dropdown-icon.svg";
 
 import Logotypes from "./Logotypes/logos";
