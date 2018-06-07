@@ -163,8 +163,6 @@ class DepartureCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: this.props.origin.city,
-      iataCode: this.props.origin.iataCode,
       dropdownVisible: false,
 
       airports: [

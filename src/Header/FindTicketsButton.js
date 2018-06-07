@@ -3,18 +3,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Button = styled.button`
-  @media only screen and (min-width: 768px) and (max-width: 992px) {
-    width: 24%;
-  }
-
   height: 56px;
-  width: 100%;
-
   @media only screen and (min-width: 992px) {
     height: 58px;
   }
 
-  box-sizing: border-box;
+  width: 100%;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
     padding-left: 18px;
@@ -31,12 +25,6 @@ const Button = styled.button`
     border-top-right-radius: 0;
     border-bottom-right-radius: 5px;
   }
-
-  cursor: pointer;
-`;
-
-const RouterLink = styled(Link)`
-  text-decoration: none;
 
   font-family: Roboto;
   font-style: normal;
@@ -55,10 +43,26 @@ const RouterLink = styled(Link)`
   cursor: pointer;
 `;
 
+const RouterLink = styled(Link)`
+  display: block;
+  @media only screen and (min-width: 768px) and (max-width: 992px) {
+    width: 24%;
+  }
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  text-decoration: none;
+  cursor: pointer;
+`;
+
 export default function FindTicketsButton(props) {
   return (
-    <Button name="Find Tickets" type="submit" className={props.className}>
-      <RouterLink to="/search">Найти билеты</RouterLink>
-    </Button>
+    <RouterLink to="/search">
+      <Button name="Find Tickets" type="submit" className={props.className}>
+        Найти билеты
+      </Button>
+    </RouterLink>
   );
 }
