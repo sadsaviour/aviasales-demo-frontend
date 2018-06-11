@@ -3,28 +3,7 @@ import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
 const SearchFormDestination = styled.div`
-  flex-grow: 1;
-  flex-basis: 100%;
-
-  @media only screen and (min-width: 768px) {
-    flex-grow: 1;
-    flex-basis: 40%;
-  }
-  @media only screen and (min-width: 992px) {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 20%;
-  }
-
-  margin-bottom: 2px;
-  @media only screen and (min-width: 992px) {
-    margin-bottom: 0;
-  }
-
-  box-sizing: border-box;
   position: relative;
-
-  height: 56px;
 
   background-color: #fff;
 
@@ -43,7 +22,7 @@ const AutocompleteBlock = styled.div`
 `;
 
 const AutocompleteInput = styled.input`
-  width: 50%;
+  width: 70%;
 
   font-family: Roboto;
   font-style: normal;

@@ -7,15 +7,6 @@ import dropdown_icon from "./img/dropdown-arrow.svg";
 import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
 
 const PassengersSelector = styled.div`
-  flex-grow: 1;
-  flex-basis: 100%;
-
-  @media only screen and (min-width: 768px) {
-    flex-basis: auto;
-    flex-grow: auto;
-    width: 21%;
-  }
-
   position: relative;
 
   height: 56px;
@@ -42,11 +33,9 @@ const PassengersSelector = styled.div`
 
   @media only screen and (min-width: 768px) {
     border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
   }
   @media only screen and (min-width: 992px) {
     border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
   }
 
   font-family: Roboto;

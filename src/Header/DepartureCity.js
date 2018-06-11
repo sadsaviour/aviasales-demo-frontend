@@ -5,32 +5,7 @@ import onClickOutside from "react-onclickoutside";
 import arrowsIcon from "./img/arrows.svg";
 
 const SearchFormOrigin = styled.div`
-  flex-grow: 1;
-  flex-basis: 100%;
-
-  @media only screen and (min-width: 576px) {
-    flex-grow: 1;
-    flex-basis: 100%;
-  }
-  @media only screen and (min-width: 768px) {
-    flex-grow: 1;
-    flex-basis: 40%;
-  }
-  @media only screen and (min-width: 992px) {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 20%;
-  }
-
-  box-sizing: border-box;
-
   position: relative;
-  height: 56px;
-
-  margin-bottom: 2px;
-  @media only screen and (min-width: 992px) {
-    margin-bottom: 0;
-  }
 
   background-color: #fff;
 

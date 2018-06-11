@@ -209,6 +209,30 @@ const LandingSubHeader = styled.h2`
   color: #ffffff;
 `;
 
+const SearchContainer = styled.div`
+  display: grid;
+  grid-template-columns: none;
+  grid-template-rows: 56px 56px 56px 56px;
+
+  grid-row-gap: 2px;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 56px 56px;
+
+    grid-column-gap: 2px;
+  }
+
+  @media only screen and (min-width: 992px) {
+    grid-template-columns: auto auto 360px auto;
+    grid-template-rows: 56px;
+
+    grid-column-gap: 2px;
+  }
+
+  width: 100%;
+`;
+
 function Logo(props) {
   const windowSize = props.width;
   return windowSize < 768 ? (
@@ -334,17 +358,19 @@ export default function Header(props) {
               </LandingSubHeader>
             </div>
             <div className="row">
-              <DepartureCity
-                origin={props.origin}
-                updateOrigin={props.updateOrigin}
-                swapCitiesCallback={props.swapCitiesCallback}
-              />
-              <ArrivalCity
-                destination={props.destination}
-                updateDestination={props.updateDestination}
-              />
-              <FlightDates />
-              <PassangersOpt />
+              <SearchContainer>
+                <DepartureCity
+                  origin={props.origin}
+                  updateOrigin={props.updateOrigin}
+                  swapCitiesCallback={props.swapCitiesCallback}
+                />
+                <ArrivalCity
+                  destination={props.destination}
+                  updateDestination={props.updateDestination}
+                />
+                <FlightDates />
+                <PassangersOpt />
+              </SearchContainer>
             </div>
             <div className="row center-xs">
               <FindTicketsButton searchPerformed={props.searchPerformed} />

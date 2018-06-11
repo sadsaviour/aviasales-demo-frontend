@@ -9,36 +9,17 @@ import CalendarIcon from "./img/calendar.svg";
 const FlightDates = styled.div`
   display: flex;
   flex-flow: row nowrap;
-
-  flex-basis: 100%;
-
-  @media only screen and (min-width: 768px) {
-    width: 20%;
-    flex-grow: auto;
-  }
 `;
 
 const DepartureDate = styled.div`
   position: relative;
 
-  height: 56px;
   width: 50%;
-
-  width: @media only screen and (min-width: 768px) {
-    width: 20%;
-    flex-grow: auto;
-    margin-right: 2px;
-  }
 
   margin-right: 1px;
 
   padding-left: 16px;
   padding-right: 16px;
-
-  margin-bottom: 2px;
-  @media only screen and (min-width: 992px) {
-    margin-bottom: 0;
-  }
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
     border-bottom-left-radius: 5px;
@@ -64,11 +45,6 @@ const ReturnDate = styled.div`
 
   height: 56px;
   width: 50%;
-
-  @media only screen and (min-width: 768px) {
-    flex-grow: auto;
-    width: 21%;
-  }
 
   margin-left: 1px;
 
