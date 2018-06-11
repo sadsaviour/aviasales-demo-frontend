@@ -6,8 +6,8 @@ import "./flexboxgrid2.css";
 import "./App.css";
 
 import Header from "./Header/index";
-import Main from "./Home/Main/index";
-import Footer from "./Home/Footer/index";
+import Main from "./Landing/index";
+import Footer from "./Footer/index";
 import SearchMain from "./Search/Main/index";
 
 export default class App extends Component {
