@@ -22,15 +22,15 @@ const DepartureDate = styled.div`
   position: relative;
 
   height: 56px;
-  flex-grow: 1;
+  width: 50%;
 
-  @media only screen and (min-width: 768px) {
+  width: @media only screen and (min-width: 768px) {
     width: 20%;
     flex-grow: auto;
     margin-right: 2px;
   }
 
-  margin-right: 2px;
+  margin-right: 1px;
 
   padding-left: 16px;
   padding-right: 16px;
@@ -63,12 +63,14 @@ const ReturnDate = styled.div`
   position: relative;
 
   height: 56px;
-  flex-grow: 1;
+  width: 50%;
 
   @media only screen and (min-width: 768px) {
     flex-grow: auto;
     width: 21%;
   }
+
+  margin-left: 1px;
 
   padding-left: 16px;
   padding-right: 16px;

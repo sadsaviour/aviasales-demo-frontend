@@ -13,11 +13,13 @@ import PassangersOpt from "./PassangersOpt";
 
 const StyledHeader = styled.header`
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 88px;
 
   @media only screen and (min-width: 768px) {
-    padding-bottom: 32px;
-  }
+    padding-bottom: ${props => (props.searchPerformed ? "32px" : "122px")}}
+
+  @media only screen and (min-width: 992px) {
+    padding-bottom: ${props => (props.searchPerformed ? "32px" : "254px")}}
 
   background: linear-gradient(
     148.48deg,
@@ -147,6 +149,66 @@ const TabletLogoActive = () => (
   </BackLink>
 );
 
+const LandingHeader = styled.h1`
+  margin-top: 47px;
+
+  @media only screen and (min-width: 768px) {
+    margin-top: 80px;
+    margin-bottom: 8px;
+  }
+
+  @media only screen and (min-width: 992px) {
+    margin-top: 216px;
+    margin-bottom: 8px;
+  }
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+
+  line-height: normal;
+  font-size: 20px;
+
+  @media only screen and (min-width: 768px) {
+    line-height: 48px;
+    font-size: 32px;
+  }
+
+  @media only screen and (min-width: 992px) {
+    font-size: 40px;
+  }
+
+  text-align: center;
+
+  color: #ffffff;
+
+  line-height: 48px;
+`;
+
+const LandingSubHeader = styled.h2`
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+
+  margin-top: 0;
+  margin-bottom: 40px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
+
+  font-size: 20px;
+
+  @media only screen and (min-width: 992px) {
+    font-size: 24px;
+  }
+
+  text-align: center;
+
+  color: #ffffff;
+`;
+
 function Logo(props) {
   const windowSize = props.width;
   return windowSize < 768 ? (
@@ -200,10 +262,9 @@ function ShortSearchQuery(props) {
 }
 
 export default function Header(props) {
-  const search = props.searchPerformed;
   return (
     <StyledHeader>
-      {search ? (
+      {props.searchPerformed ? (
         <div className="container">
           <div
             className="container "
@@ -264,8 +325,13 @@ export default function Header(props) {
             <div className="row">
               <Logo width={props.width} />
             </div>
-            <div className="row">
-              <h1>Поиск дешевых авиабилетов</h1>
+            <div className="row center-xs">
+              <LandingHeader>Поиск дешевых авиабилетов</LandingHeader>
+            </div>
+            <div className="row center-xs">
+              <LandingSubHeader>
+                Лучший способ купить авиабилеты дешево
+              </LandingSubHeader>
             </div>
             <div className="row">
               <DepartureCity
@@ -279,7 +345,9 @@ export default function Header(props) {
               />
               <FlightDates />
               <PassangersOpt />
-              <FindTicketsButton />
+            </div>
+            <div className="row center-xs">
+              <FindTicketsButton searchPerformed={props.searchPerformed} />
             </div>
           </div>
         </div>
