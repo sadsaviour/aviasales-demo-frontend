@@ -7,8 +7,7 @@ import backIcon from "./img/back-icon.svg";
 
 import ArrivalCity from "./ArrivalCity";
 import DepartureCity from "./DepartureCity";
-import DepartureDate from "./DepartureDate";
-import ReturnDate from "./ReturnDate";
+import FlightDates from "./FlightDates";
 import FindTicketsButton from "./FindTicketsButton";
 import PassangersOpt from "./PassangersOpt";
 
@@ -247,9 +246,7 @@ export default function Header(props) {
                 <Delimener className="hidden-xs hidden-sm" />
                 <ArrivalCity city={props.destination} />
                 <Delimener className="hidden-xs hidden-sm hidden-md" />
-                <DepartureDate />
-                <Delimener />
-                <ReturnDate />
+                <FlightDates />
                 <Delimener className="hidden-xs hidden-sm" />
                 <PassangersOpt />
                 <Delimener className="hidden-lg hidden-xl hidden-xs hidden-sm" />
@@ -280,8 +277,7 @@ export default function Header(props) {
                 destination={props.destination}
                 updateDestination={props.updateDestination}
               />
-              <DepartureDate />
-              <ReturnDate />
+              <FlightDates />
               <PassangersOpt />
               <FindTicketsButton />
             </div>
