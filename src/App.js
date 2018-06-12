@@ -20,7 +20,7 @@ export default class App extends Component {
       arrivalDate: "3 mar",
       passengersNumber: 1,
 
-      searchPerformed: true,
+      searchPerformed: false,
 
       width: window.innerWidth,
 

@@ -324,12 +324,12 @@ export default function Header(props) {
             <div className="col-lg-10 col-xl-10">
               <SearchRow>
                 <DepartureCity
-                  city={props.origin}
+                  origin={props.origin}
                   updateCity={props.updateCity}
                   swapCitiesCallback={props.swapCitiesCallback}
                 />
                 <Delimener className="hidden-xs hidden-sm" />
-                <ArrivalCity city={props.destination} />
+                <ArrivalCity destination={props.destination} />
                 <Delimener className="hidden-xs hidden-sm hidden-md" />
                 <FlightDates />
                 <Delimener className="hidden-xs hidden-sm" />
