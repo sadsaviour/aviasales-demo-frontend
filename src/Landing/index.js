@@ -9,6 +9,7 @@ import {
 } from "./bestPrices";
 
 import { AppAd } from "./AppAd";
+import { Tips } from "./Tips";
 
 import compassIcon from "./Assets/compasIcon.svg";
 import editIcon from "./Assets/editIcon.svg";
@@ -417,59 +418,6 @@ const SpecialOffersListFooter = styled.div`
   color: #ffffff;
 `;
 
-const TipsHeader = styled.h2`
-  margin-top: 22px;
-  margin-left: 6px;
-  margin-right: 6px;
-  margin-bottom: 20px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 18px;
-  font-size: 13px;
-
-  color: #4a4a4a;
-`;
-const TipsIcon = styled.img`
-  margin-right: 10px;
-`;
-const TipsText = styled.div`
-  margin-left: 6px;
-  margin-right: 6px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 20px;
-  font-size: 14px;
-
-  color: #4a4a4a;
-`;
-const TipsShowMore = styled.span`
-  margin-left: 10px;
-  color: #00ace2;
-`;
-
-const Tips = () => {
-  return (
-    <div>
-      {tipsText.map(t => (
-        <section>
-          <TipsHeader>
-            <TipsIcon src={t.icon} alt={"icon"} />
-            {t.heading}
-          </TipsHeader>
-          <TipsText>
-            {t.text}
-            <TipsShowMore>Подробнее</TipsShowMore>
-          </TipsText>
-        </section>
-      ))}
-    </div>
-  );
-};
-
 const SpecialOffersList = () => {
   return (
     <SpecialOffersListContainer>
@@ -551,7 +499,7 @@ const BestPricesLastMonth = () => {
 export default function Main(props) {
   return (
     <StyledMain>
-      <div className="container">
+      <div>
         <div className="row center-xs">
           <CompassIcon />
         </div>
