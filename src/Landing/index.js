@@ -6,7 +6,9 @@ import {
   bestPricesLastMonth,
   specialOffers,
   tipsText
-} from "./bestPrices.js";
+} from "./bestPrices";
+
+import { AppAd } from "./AppAd";
 
 import compassIcon from "./Assets/compasIcon.svg";
 import editIcon from "./Assets/editIcon.svg";
@@ -16,12 +18,6 @@ import kidsIcon from "./Assets/destination__kids.svg";
 import nightlifeIcon from "./Assets/destination__nightlife.svg";
 import shoppingIcon from "./Assets/destination__shopping.svg";
 import sunIcon from "./Assets/destination__sun.svg";
-
-import appDemo from "./Assets/ios-app-demo.png";
-import rating from "./Assets/rating.svg";
-import apple from "./Assets/apple.svg";
-import android from "./Assets/android.svg";
-import wf from "./Assets/wf.svg";
 
 import bestPricesCalendarIcon from "./Assets/bestPricesCalendarIcon.svg";
 
@@ -454,101 +450,6 @@ const TipsShowMore = styled.span`
   margin-left: 10px;
   color: #00ace2;
 `;
-
-const AppAdContainer = styled.div`
-  position: relative;
-
-  margin-top: 24px;
-
-  padding-top: 24px;
-
-  height: 348px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 24px;
-  font-size: 14px;
-
-  color: #ffffff;
-
-  background: linear-gradient(137.4deg, #00b0de 4.18%, #196ebd 104.18%);
-`;
-
-const AppAdHeader = styled.h2`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  font-size: 24px;
-  text-align: center;
-
-  color: #ffffff;
-`;
-
-const AppAdRow = styled.div`
-  text-align: center;
-`;
-
-const AppAdLinksContainer = styled.div`
-  position: absolute;
-
-  bottom: 37px;
-  right: 20px;
-
-  display: inline-block;
-
-  vertical-align: top;
-`;
-
-const AppAdLink = styled.div`
-  margin-bottom: 20px;
-
-  text-align: left;
-`;
-
-const AppAdImage = styled.img`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-`;
-
-const AppAdStoreIcon = styled.img`
-  display: inline-block;
-
-  margin-right: 8px;
-
-  vertical-align: top;
-`;
-
-const AppAd = () => (
-  <AppAdContainer>
-    <AppAdHeader>Скачай мобильное приложение Aviasales.ru</AppAdHeader>
-    <AppAdRow>
-      <img
-        src={rating}
-        alt="rating"
-        style={{ display: "inline-block", marginRight: "12px" }}
-      />
-      <span>Более 103 000 оценок</span>
-    </AppAdRow>
-    <div>
-      <AppAdImage src={appDemo} alt="app screenshot" />
-      <AppAdLinksContainer>
-        <AppAdLink>
-          <AppAdStoreIcon src={apple} alt="App Store" />
-          iPhone или iPad
-        </AppAdLink>
-        <AppAdLink>
-          <AppAdStoreIcon src={android} alt="Google Play Store" />Android
-        </AppAdLink>
-        <AppAdLink>
-          <AppAdStoreIcon src={wf} alt="Windows Phone" />Windows Phone
-        </AppAdLink>
-      </AppAdLinksContainer>
-    </div>
-  </AppAdContainer>
-);
 
 const Tips = () => {
   return (
