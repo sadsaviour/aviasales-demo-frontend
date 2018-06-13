@@ -11,6 +11,11 @@ import {
 import { AppAd } from "./AppAd";
 import { Tips } from "./Tips";
 import { SpecialOffersList } from "./SpecialOffersList";
+import {
+  BestPricesLastMonth,
+  BestPricesCalendarIcon,
+  BestPricesCalendarHeader
+} from "./BestPricesLastMonth";
 
 import compassIcon from "./Assets/compasIcon.svg";
 import editIcon from "./Assets/editIcon.svg";
@@ -20,8 +25,6 @@ import kidsIcon from "./Assets/destination__kids.svg";
 import nightlifeIcon from "./Assets/destination__nightlife.svg";
 import shoppingIcon from "./Assets/destination__shopping.svg";
 import sunIcon from "./Assets/destination__sun.svg";
-
-import bestPricesCalendarIcon from "./Assets/bestPricesCalendarIcon.svg";
 
 const StyledMain = styled.main`
   padding-top: 40px;
@@ -188,138 +191,6 @@ const PopularDestinationsCities = () => {
   );
 };
 
-const BestPricesCalendarIcon = ({ className }) => {
-  return (
-    <img className={className} src={bestPricesCalendarIcon} alt={"calendar"} />
-  );
-};
-
-const BestPricesCalendarHeader = styled.div`
-  margin-top: 24px;
-
-  text-align: center;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-  font-size: 18px;
-  text-align: center;
-
-  color: #4a4a4a;
-`;
-
-const BestPricesContainer = styled.div`
-  padding-top: 24px;
-  padding-bottom: 8px;
-
-  font-family: Roboto;
-  font-style: normal;
-
-  border-bottom: 0.4px dashed #afbec6;
-`;
-
-const BestPricesCity = styled.div`
-  font-weight: bold;
-  line-height: 32px;
-  font-size: 22px;
-
-  color: #5b5b5c;
-`;
-const BestPricesCountry = styled.div`
-  font-weight: 500;
-  line-height: 20px;
-  font-size: 12px;
-
-  color: #a0b0b9;
-`;
-const BestPricesOrigin = styled.div`
-  margin-bottom: 16px;
-
-  font-weight: normal;
-  line-height: 20px;
-  font-size: 16px;
-
-  color: #4a4a4a;
-`;
-const BestPricesPrice = styled.div`
-  font-weight: normal;
-  line-height: 20px;
-  font-size: 16px;
-
-  color: #00bae8;
-`;
-
-const BestPricesCityContainer = styled.div`
-  display: inline-block;
-  margin-bottom: 24px;
-`;
-
-const BestPricesFlag = styled.img`
-  display: inline-block;
-`;
-
-const BestPricesCapture = styled.div`
-  margin-top: 32px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 24px;
-  font-size: 16px;
-  text-align: center;
-
-  color: #4a4a4a;
-`;
-
-const BestPricesDisclaimer = styled.div`
-  margin-top: 24px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 20px;
-  font-size: 14px;
-  text-align: center;
-
-  color: #a0b0b9;
-`;
-
-const BestPricesLastMonth = () => {
-  return (
-    <div className="container">
-      {bestPricesLastMonth.map(c => (
-        <BestPricesContainer key={c.city}>
-          <BestPricesFlag src={c.flag} alt={c.country} />
-          <BestPricesCityContainer>
-            <BestPricesCity>{c.city}</BestPricesCity>
-            <BestPricesCountry>{c.country}</BestPricesCountry>
-          </BestPricesCityContainer>
-          <div className="col-xs-12">
-            {c.prices.map(p => (
-              <div key={p.origin} className="row between-xs">
-                <BestPricesOrigin>{p.origin}</BestPricesOrigin>
-                <BestPricesPrice>{p.price}</BestPricesPrice>
-              </div>
-            ))}
-          </div>
-        </BestPricesContainer>
-      ))}
-      <div className="row center-xs">
-        <BestPricesCapture>
-          Мы знаем, где купить авиабилеты дешево. Билеты на самолет в 220 стран
-          мира. Поиск и сравнение цен на авиабилеты среди 100 агентств и 728
-          авиакомпаний.
-        </BestPricesCapture>
-        <BestPricesDisclaimer>
-          Цены, найденные пользователями за последние 48 часов, не являются
-          офертой.
-        </BestPricesDisclaimer>
-      </div>
-    </div>
-  );
-};
-
 export default function Main(props) {
   return (
     <StyledMain>
@@ -337,12 +208,7 @@ export default function Main(props) {
           <DestinationsList />
         </div>
         <PopularDestinationsCities />
-        <div className="row center-xs">
-          <BestPricesCalendarIcon />
-        </div>
-        <BestPricesCalendarHeader>
-          Лучшие цены на авиабилеты за последний месяц
-        </BestPricesCalendarHeader>
+
         <BestPricesLastMonth />
         <SpecialOffersList />
         <Tips />
