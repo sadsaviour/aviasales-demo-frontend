@@ -7,6 +7,7 @@ import { BestPricesLastMonth } from "./BestPricesLastMonth";
 import { PopularDestinationsCities } from "./PopularDestinationsCities";
 import { DestinationTypesList } from "./DestinationTypesList";
 import { AdsCarousel } from "./AdsCarousel";
+import { SubscribeBlock } from "./SubscribeBlock";
 
 export default function Main(props) {
   return (
@@ -19,6 +20,7 @@ export default function Main(props) {
       <div className="hidden-xs">
         <AdsCarousel />
       </div>
+      <SubscribeBlock />
       <SpecialOffersList />
       <Tips />
       <AppAd />
