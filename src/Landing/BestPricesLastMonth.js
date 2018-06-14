@@ -10,7 +10,11 @@ export const BestPricesCalendarIcon = ({ className }) => {
   );
 };
 
-export const BestPricesCalendarHeader = styled.div`
+const BestPricesLastMonthContainer = styled.div`
+  padding-top: 32px;
+`;
+
+const BestPricesCalendarHeader = styled.div`
   margin-top: 24px;
 
   text-align: center;
@@ -170,46 +174,48 @@ const BestPricesDisclaimer = styled.div`
 
 export const BestPricesLastMonth = () => {
   return (
-    <div className="col-xs-12 col-md-10 col-md-offset-1">
-      <div className="row center-xs">
-        <BestPricesCalendarIcon />
-      </div>
-      <BestPricesCalendarHeader>
-        Лучшие цены на авиабилеты за последний месяц
-      </BestPricesCalendarHeader>
-      <div className="row between-lg">
-        {bestPricesLastMonth.map(c => (
-          <BestPricesContainer key={c.city}>
-            <div className="col-lg-12">
-              <BestPricesHeader>
-                <BestPricesFlag src={c.flag} alt={c.country} />
-                <BestPricesCityContainer>
-                  <BestPricesCity>{c.city}</BestPricesCity>
-                  <BestPricesCountry>{c.country}</BestPricesCountry>
-                </BestPricesCityContainer>
-              </BestPricesHeader>
+    <BestPricesLastMonthContainer>
+      <div className="col-xs-12 col-md-10 col-md-offset-1">
+        <div className="row center-xs">
+          <BestPricesCalendarIcon />
+        </div>
+        <BestPricesCalendarHeader>
+          Лучшие цены на авиабилеты за последний месяц
+        </BestPricesCalendarHeader>
+        <div className="row between-lg">
+          {bestPricesLastMonth.map(c => (
+            <BestPricesContainer key={c.city}>
+              <div className="col-lg-12">
+                <BestPricesHeader>
+                  <BestPricesFlag src={c.flag} alt={c.country} />
+                  <BestPricesCityContainer>
+                    <BestPricesCity>{c.city}</BestPricesCity>
+                    <BestPricesCountry>{c.country}</BestPricesCountry>
+                  </BestPricesCityContainer>
+                </BestPricesHeader>
 
-              {c.prices.map(p => (
-                <BestPriceContainer key={p.origin}>
-                  <BestPricesOrigin>{p.origin}</BestPricesOrigin>
-                  <BestPricesPrice>{p.price}</BestPricesPrice>
-                </BestPriceContainer>
-              ))}
-            </div>
-          </BestPricesContainer>
-        ))}
+                {c.prices.map(p => (
+                  <BestPriceContainer key={p.origin}>
+                    <BestPricesOrigin>{p.origin}</BestPricesOrigin>
+                    <BestPricesPrice>{p.price}</BestPricesPrice>
+                  </BestPriceContainer>
+                ))}
+              </div>
+            </BestPricesContainer>
+          ))}
+        </div>
+        <div className="row center-xs">
+          <BestPricesCapture>
+            Мы знаем, где купить авиабилеты дешево. Билеты на самолет в 220
+            стран мира. Поиск и сравнение цен на авиабилеты среди 100 агентств и
+            728 авиакомпаний.
+          </BestPricesCapture>
+          <BestPricesDisclaimer>
+            Цены, найденные пользователями за последние 48 часов, не являются
+            офертой.
+          </BestPricesDisclaimer>
+        </div>
       </div>
-      <div className="row center-xs">
-        <BestPricesCapture>
-          Мы знаем, где купить авиабилеты дешево. Билеты на самолет в 220 стран
-          мира. Поиск и сравнение цен на авиабилеты среди 100 агентств и 728
-          авиакомпаний.
-        </BestPricesCapture>
-        <BestPricesDisclaimer>
-          Цены, найденные пользователями за последние 48 часов, не являются
-          офертой.
-        </BestPricesDisclaimer>
-      </div>
-    </div>
+    </BestPricesLastMonthContainer>
   );
 };
