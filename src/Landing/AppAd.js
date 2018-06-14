@@ -8,12 +8,28 @@ import android from "./Assets/android.svg";
 import wf from "./Assets/wf.svg";
 
 const AppAdContainer = styled.div`
+  box-sizing: border-box;
   position: relative;
+
+  height: 348px;
+
+  @media only screen and (min-width: 758px) {
+    height: 281px;
+  }
 
   margin-top: 24px;
 
   @media only screen and (min-width: 768px) {
     margin-top: 48px;
+  }
+
+  padding-top: 24px;
+
+  @media only screen and (min-width: 768px) {
+    padding-top: 46px;
+  }
+  @media only screen and (min-width: 992px) {
+    padding-top: 66px;
   }
 
   width: 100%;
@@ -35,6 +51,9 @@ const AppAdContainer = styled.div`
 `;
 
 const AppAdHeader = styled.h2`
+  margin-top: 0;
+  margin-bottom: 19px;
+
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
@@ -136,16 +155,14 @@ const AppAdStoreIcon = styled.img`
 `;
 
 export const AppAd = () => (
-  <div className="row">
-    <AppAdContainer>
+  <AppAdContainer>
+    <div className="col-xs-12 col-lg-10 col-lg-offset-1">
       <div className="col-xs-0 col-md-4">
         <AppAdImage src={appDemo} alt="app screenshot" />
       </div>
+
       <div className="col-xs-12 col-md-8 col-md-offset-4">
-        <AppAdHeader>
-          Скачай мобильное <br className="hidden-xs hidden-xl" /> приложение
-          Aviasales.ru
-        </AppAdHeader>
+        <AppAdHeader>Скачай мобильное приложение Aviasales.ru</AppAdHeader>
         <AppAdRatingContainer>
           <img
             src={rating}
@@ -154,23 +171,23 @@ export const AppAd = () => (
           />
           <span>Более 103 000 оценок</span>
         </AppAdRatingContainer>
-        <div className="row">
-          <div className="col-xs-offset-6 col-xs-6 col-md-12 col-md-offset-0">
-            <AppAdLinksContainer>
-              <AppAdLink className="firstInLine">
-                <AppAdStoreIcon src={apple} alt="App Store" />
-                iPhone или iPad
-              </AppAdLink>
-              <AppAdLink className="middleInLine">
-                <AppAdStoreIcon src={android} alt="Google Play Store" />Android
-              </AppAdLink>
-              <AppAdLink>
-                <AppAdStoreIcon src={wf} alt="Windows Phone" />Windows Phone
-              </AppAdLink>
-            </AppAdLinksContainer>
-          </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-offset-6 col-xs-6 col-md-8 col-md-offset-4">
+          <AppAdLinksContainer>
+            <AppAdLink className="firstInLine">
+              <AppAdStoreIcon src={apple} alt="App Store" />
+              iPhone или iPad
+            </AppAdLink>
+            <AppAdLink className="middleInLine">
+              <AppAdStoreIcon src={android} alt="Google Play Store" />Android
+            </AppAdLink>
+            <AppAdLink>
+              <AppAdStoreIcon src={wf} alt="Windows Phone" />Windows Phone
+            </AppAdLink>
+          </AppAdLinksContainer>
         </div>
       </div>
-    </AppAdContainer>
-  </div>
+    </div>
+  </AppAdContainer>
 );
