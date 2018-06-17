@@ -9,6 +9,16 @@ import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
 const PassengersSelector = styled.div`
   position: relative;
 
+  @media only screen and (min-width: 768px) {
+    grid-column-start: 3;
+    grid-column-end: span ${props => (props.searchPerformed ? "1" : "2")};
+  }
+
+  @media only screen and (min-width: 992px) {
+    grid-column-start: 4;
+    grid-column-end: span 1;
+  }
+
   height: 56px;
 
   padding-left: 16px;
@@ -33,8 +43,11 @@ const PassengersSelector = styled.div`
 
   @media only screen and (min-width: 768px) {
     border-bottom-left-radius: 0;
+    border-bottom-right-radius: ${props =>
+      props.searchPerformed ? "0" : "5px"};
   }
   @media only screen and (min-width: 992px) {
+    border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
   }
 
@@ -146,7 +159,10 @@ class PassangersOpt extends Component {
     const totalPassangers =
       this.state.adults + this.state.kids + this.state.infants;
     return (
-      <PassengersSelector onClick={this.handleClick}>
+      <PassengersSelector
+        onClick={this.handleClick}
+        searchPerformed={this.props.searchPerformed}
+      >
         <PassangersNumberLabel>
           {totalPassangers} пассажир,{" "}
         </PassangersNumberLabel>

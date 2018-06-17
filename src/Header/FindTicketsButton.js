@@ -91,9 +91,10 @@ const ButtonWraper = styled.div`
   display: block;
   box-sizing: border-box;
 
-  /*  @media only screen and (min-width: 768px) and (max-width: 992px) {
-    width: 24%;
-  }*/
+  @media only screen and (min-width: 768px) {
+    grid-column-start: 4;
+    grid-column-end: span 1;
+  }
 
   width: 100%;
 
@@ -103,17 +104,23 @@ const ButtonWraper = styled.div`
 
   margin-top: 16px;
   @media only screen and (min-width: 768px) {
-    margin-top: 32px;
+    margin-top: ${props => (props.searchPerformed ? "0" : "32px")};
   }
   @media only screen and (min-width: 992px) {
-    margin-top: 48px;
+    margin-top: ${props => (props.searchPerformed ? "0" : "48px")};
   }
 `;
+
+const MakeQueryString = (origin, destination) => {
+  return origin.iataCode + destination.iataCode;
+};
 
 export default function FindTicketsButton(props) {
   return (
     <ButtonWraper searchPerformed={props.searchPerformed}>
-      <RouterLink to="/search">
+      <RouterLink
+        to={"/search/" + MakeQueryString(props.origin, props.destination)}
+      >
         {props.searchPerformed ? (
           <Button name="Find Tickets" type="submit" className={props.className}>
             Найти билеты

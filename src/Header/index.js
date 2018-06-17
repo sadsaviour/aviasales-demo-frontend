@@ -46,26 +46,6 @@ const LogoText = styled.p`
   color: #ffffff;
 `;
 
-const Delimener = styled.div`
-  min-width: ${props => (props.width ? props.width : "2px")};
-  max-width: ${props => (props.width ? props.width : "2px")};
-`;
-
-const SearchRow = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-
-  @media only screen and (min-width: 576px) {
-    flex-flow: row wrap;
-  }
-  @media only screen and (min-width: 768px) {
-    flex-flow: row wrap;
-  }
-  @media only screen and (min-width: 992px) {
-    flex-flow: row nowrap;
-  }
-`;
-
 const CurrencyButton = styled.div`
   box-sizing: border-box;
   width: 56px;
@@ -217,7 +197,7 @@ const SearchContainer = styled.div`
   grid-row-gap: 2px;
 
   @media only screen and (min-width: 768px) {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 56px 56px;
 
     grid-column-gap: 2px;
@@ -274,12 +254,9 @@ function ShortSearchQuery(props) {
     windowSize < 768 && (
       <div style={{ "flex-grow": "2" }}>
         <Cities>
-          {props.origin} — {props.destination}
+          {props.origin.city} — {props.destination.city}
         </Cities>
-        <DatesAndPassangers>
-          {props.departureDate} — {props.arrivalDate}, {props.passengersN}{" "}
-          passengers
-        </DatesAndPassangers>
+        <DatesAndPassangers>X — Y, N passengers</DatesAndPassangers>
       </div>
     )
   );
@@ -287,77 +264,44 @@ function ShortSearchQuery(props) {
 
 export default function Header(props) {
   return (
-    <StyledHeader>
-      {props.searchPerformed ? (
-        <div className="container">
+    <StyledHeader searchPerformed={props.searchPerformed}>
+      <div className="container">
+        <div className="col-xs-12">
           <div
-            className="container "
+            className="row between-xs middle-xs"
             style={
               props.width > 768
                 ? { "margin-bottom": "38px" }
-                : { "margin-bottom": "0" }
+                : { "margin-bottom": "32px" }
             }
           >
-            <div
-              className="row middle-xs middle-sm"
-              style={{
-                "justify-content": "space-between"
-              }}
-            >
-              <Logo width={props.width} />
+            <Logo width={props.width} />
+            {props.searchPerformed && (
               <ShortSearchQuery
                 width={props.width}
                 origin={props.origin}
                 destination={props.destination}
-                departureDate={props.departureDate}
-                arrivalDate={props.arrivalDate}
-                passengersN={props.passengersN}
               />
+            )}
+            {props.searchPerformed && <CurrencyButton>RUB</CurrencyButton>}
+          </div>
 
-              <CurrencyButton>RUB</CurrencyButton>
-            </div>
-          </div>
-          <div
-            className="row middle-xl middle-lg hidden-xs hidden-sm"
-            style={{ "margin-bottom": "38px" }}
-          >
-            <div className="col-lg-10 col-xl-10">
-              <SearchRow>
-                <DepartureCity
-                  origin={props.origin}
-                  updateCity={props.updateCity}
-                  swapCitiesCallback={props.swapCitiesCallback}
-                />
-                <Delimener className="hidden-xs hidden-sm" />
-                <ArrivalCity destination={props.destination} />
-                <Delimener className="hidden-xs hidden-sm hidden-md" />
-                <FlightDates />
-                <Delimener className="hidden-xs hidden-sm" />
-                <PassangersOpt />
-                <Delimener className="hidden-lg hidden-xl hidden-xs hidden-sm" />
-                <FindTicketsButton className="hidden-lg hidden-xl" />
-              </SearchRow>
-            </div>
-            <div className="col-xl-2 col-lg-2 hidden-xs hidden-sm hidden-md">
-              <FindTicketsButton />
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="container">
-          <div className="col-xs-12">
-            <div className="row">
-              <Logo width={props.width} />
-            </div>
+          {!props.searchPerformed && (
             <div className="row center-xs">
               <LandingHeader>Поиск дешевых авиабилетов</LandingHeader>
             </div>
+          )}
+
+          {!props.searchPerformed && (
             <div className="row center-xs">
               <LandingSubHeader>
                 Лучший способ купить авиабилеты дешево
               </LandingSubHeader>
             </div>
-            <div className="row">
+          )}
+
+          <div className="row middle-lg">
+            <div className="col-xs-12 col-lg-10">
               <SearchContainer>
                 <DepartureCity
                   origin={props.origin}
@@ -369,15 +313,45 @@ export default function Header(props) {
                   updateDestination={props.updateDestination}
                 />
                 <FlightDates />
-                <PassangersOpt />
+                <PassangersOpt
+                  origin={props.origin}
+                  searchPerformed={props.searchPerformed}
+                />
+                {props.searchPerformed &&
+                  props.width < 992 && (
+                    <FindTicketsButton
+                      searchString={props.searchString}
+                      searchPerformed={props.searchPerformed}
+                      origin={props.origin}
+                      destination={props.destination}
+                    />
+                  )}
               </SearchContainer>
             </div>
-            <div className="row center-xs">
-              <FindTicketsButton searchPerformed={props.searchPerformed} />
-            </div>
+            {props.searchPerformed &&
+              props.width > 992 && (
+                <div className="col-lg-2">
+                  <FindTicketsButton
+                    searchString={props.searchString}
+                    searchPerformed={props.searchPerformed}
+                    origin={props.origin}
+                    destination={props.destination}
+                  />
+                </div>
+              )}
           </div>
+          {!props.searchPerformed && (
+            <div className="row center-xs">
+              <FindTicketsButton
+                searchString={props.searchString}
+                searchPerformed={props.searchPerformed}
+                origin={props.origin}
+                destination={props.destination}
+              />
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </StyledHeader>
   );
 }

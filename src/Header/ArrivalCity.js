@@ -5,6 +5,16 @@ import onClickOutside from "react-onclickoutside";
 const SearchFormDestination = styled.div`
   position: relative;
 
+  @media only screen and (min-width: 768px) {
+    grid-column-start: 3;
+    grid-column-end: span 2;
+  }
+
+  @media only screen and (min-width: 992px) {
+    grid-column-start: 2;
+    grid-column-end: span 1;
+  }
+
   background-color: #fff;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {

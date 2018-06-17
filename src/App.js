@@ -20,6 +20,8 @@ export default class App extends Component {
       arrivalDate: "3 mar",
       passengersNumber: 1,
 
+      searchString: "blah",
+
       searchPerformed: false,
 
       width: window.innerWidth,
@@ -105,14 +107,15 @@ export default class App extends Component {
                 searchPerformed={false}
                 width={this.state.width}
                 swapCitiesCallback={this.swapCities}
+                searchString={this.state.searchString}
               />
             )}
-            city={this.state.city}
           />
           <Route
-            path="/search"
-            render={() => (
+            path="/search/:id"
+            render={props => (
               <Header
+                {...props}
                 origin={this.state.origin}
                 destination={this.state.destination}
                 departureDate={this.state.departureDate}
@@ -122,9 +125,9 @@ export default class App extends Component {
                 searchPerformed={true}
                 width={this.state.width}
                 swapCitiesCallback={this.swapCities}
+                searchString={this.state.searchString}
               />
             )}
-            city={this.state.city}
           />
           <Route
             exact={true}

@@ -9,6 +9,16 @@ import CalendarIcon from "./img/calendar.svg";
 const FlightDates = styled.div`
   display: flex;
   flex-flow: row nowrap;
+
+  @media only screen and (min-width: 768px) {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+
+  @media only screen and (min-width: 992px) {
+    grid-column-start: 3;
+    grid-column-end: span 1;
+  }
 `;
 
 const DepartureDate = styled.div`

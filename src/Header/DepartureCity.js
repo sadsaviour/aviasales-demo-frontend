@@ -7,6 +7,16 @@ import arrowsIcon from "./img/arrows.svg";
 const SearchFormOrigin = styled.div`
   position: relative;
 
+  @media only screen and (min-width: 768px) {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+
+  @media only screen and (min-width: 992px) {
+    grid-column-start: 1;
+    grid-column-end: span 1;
+  }
+
   background-color: #fff;
 
   border-top-left-radius: 5px;
