@@ -94,18 +94,13 @@ const DestinationsTypesContainer = styled.div`
 
   display: flex;
 
-/*  display: grid;
-  grid-template: auto auto / 92px 92px 92px;
-
-  @media only screen and (min-width: 768px) {
-    grid-template: auto / 92px 92px 92px 92px 92px 92px;*/
-  }
+  justify-content: center;
 `;
 
 export const DestinationTypesList = () => {
   return (
     <DestinationTypesListContiner>
-      <div className="col-xs-12 col-md-10 col-md-offset-1">
+      <div className="col-xs-12 col-md-10 col-md-offset-1 center-xs">
         <div className="row center-xs">
           <CompassIcon />
         </div>
