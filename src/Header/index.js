@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link, Route } from "react-router-dom";
 
+import { getDate, getMonth } from "date-fns";
+
 import logo from "./img/logo.svg";
 import backIcon from "./img/back-icon.svg";
 
@@ -13,7 +15,7 @@ import PassangersOpt from "./PassangersOpt";
 
 const StyledHeader = styled.header`
   padding-top: 10px;
-  padding-bottom: 88px;
+  padding-bottom: 10px;
 
   @media only screen and (min-width: 768px) {
     padding-bottom: ${props => (props.searchPerformed ? "32px" : "122px")}}
@@ -229,6 +231,21 @@ function Logo(props) {
 }
 
 function ShortSearchQuery(props) {
+  const monthes = [
+    "янв",
+    "фев",
+    "март",
+    "апр",
+    "май",
+    "июнь",
+    "июль",
+    "авг",
+    "сен",
+    "окт",
+    "нояб",
+    "дек"
+  ];
+
   const Cities = styled.div`
     margin-left: 26px;
     font-family: Roboto;
@@ -249,16 +266,17 @@ function ShortSearchQuery(props) {
 
     color: #ffffff;
   `;
-  const windowSize = props.width;
   return (
-    windowSize < 768 && (
-      <div style={{ "flex-grow": "2" }}>
-        <Cities>
-          {props.origin.city} — {props.destination.city}
-        </Cities>
-        <DatesAndPassangers>X — Y, N passengers</DatesAndPassangers>
-      </div>
-    )
+    <div style={{ "flex-grow": "2" }}>
+      <Cities>
+        {props.origin.city} — {props.destination.city}
+      </Cities>
+      <DatesAndPassangers>
+        {getDate(props.departureDate)} {monthes[getMonth(props.departureDate)]}{" "}
+        — {getDate(props.returnDate)} {monthes[getMonth(props.returnDate)]} ,{" "}
+        {props.adults + props.kids + props.infants} пассажир
+      </DatesAndPassangers>
+    </div>
   );
 }
 
@@ -267,22 +285,21 @@ export default function Header(props) {
     <StyledHeader searchPerformed={props.searchPerformed}>
       <div className="container">
         <div className="col-xs-12">
-          <div
-            className="row between-xs middle-xs"
-            style={
-              props.width > 768
-                ? { marginBottom: "38px" }
-                : { marginBottom: "32px" }
-            }
-          >
+          <div className="row between-xs middle-xs">
             <Logo width={props.width} />
-            {props.searchPerformed && (
-              <ShortSearchQuery
-                width={props.width}
-                origin={props.origin}
-                destination={props.destination}
-              />
-            )}
+            {props.searchPerformed &&
+              (props.width < 768 && (
+                <ShortSearchQuery
+                  width={props.width}
+                  origin={props.origin}
+                  destination={props.destination}
+                  departureDate={props.departureDate}
+                  returnDate={props.returnDate}
+                  adults={props.adults}
+                  kids={props.kids}
+                  infants={props.infants}
+                />
+              ))}
             {props.searchPerformed && <CurrencyButton>RUB</CurrencyButton>}
           </div>
 
@@ -300,7 +317,12 @@ export default function Header(props) {
             </div>
           )}
 
-          <div className="row middle-lg">
+          <div
+            className="row middle-lg hidden-xs"
+            style={
+              props.width > 768 ? { marginTop: "38px" } : { marginTop: "32px" }
+            }
+          >
             <div
               className={
                 props.searchPerformed
