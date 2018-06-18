@@ -223,6 +223,7 @@ class FlightDatesSelector extends Component {
   };
 
   setDepartureDate = (date, dateLabel) => {
+    this.props.updateDepartureDate(date);
     this.setState({
       departureDropdownVisible: false,
       returnDropdownVisible: true,
@@ -232,6 +233,7 @@ class FlightDatesSelector extends Component {
   };
 
   setReturnDate = (date, dateLabel) => {
+    this.props.updateReturnDate(date);
     this.setState({
       returnDropdownVisible: false,
       returnDateLabel: dateLabel,

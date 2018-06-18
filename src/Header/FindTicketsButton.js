@@ -1,6 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {
+  eachDay,
+  startOfMonth,
+  endOfMonth,
+  getISODay,
+  getDay,
+  getDate,
+  getMonth,
+  setMonth,
+  isBefore,
+  isWithinRange,
+  compareAsc
+} from "date-fns";
 
 import findTicketsIcon from "./img/findTicketsIcon.svg";
 
@@ -111,15 +124,61 @@ const ButtonWraper = styled.div`
   }
 `;
 
-const MakeQueryString = (origin, destination) => {
-  return origin.iataCode + destination.iataCode;
+const addZeroToString = number => {
+  if (number.length === 1) {
+    return 0 + number;
+  } else {
+    return number;
+  }
+};
+
+const MakeQueryString = (
+  origin,
+  destination,
+  destinationDate,
+  returnDate,
+  adults,
+  kids,
+  infants,
+  businessClass
+) => {
+  const departureDateString =
+    addZeroToString(getDate(destinationDate).toString()) +
+    addZeroToString((getMonth(destinationDate) + 1).toString());
+  const returnDateString =
+    addZeroToString(getDate(returnDate).toString()) +
+    addZeroToString((getMonth(returnDate) + 1).toString());
+  const passengers =
+    (businessClass ? "b" : "") +
+    (adults ? adults.toString() : "") +
+    (kids ? kids.toString() : "") +
+    (infants ? infants.toString() : "");
+  return (
+    origin.iataCode +
+    departureDateString +
+    destination.iataCode +
+    returnDateString +
+    passengers
+  );
 };
 
 export default function FindTicketsButton(props) {
   return (
     <ButtonWraper searchPerformed={props.searchPerformed}>
       <RouterLink
-        to={"/search/" + MakeQueryString(props.origin, props.destination)}
+        to={
+          "/search/" +
+          MakeQueryString(
+            props.origin,
+            props.destination,
+            props.departureDate,
+            props.returnDate,
+            props.adults,
+            props.kids,
+            props.infants,
+            props.businessClass
+          )
+        }
       >
         {props.searchPerformed ? (
           <Button name="Find Tickets" type="submit" className={props.className}>

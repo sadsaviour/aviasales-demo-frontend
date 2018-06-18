@@ -16,9 +16,12 @@ export default class App extends Component {
     this.state = {
       origin: { city: "Москва", iataCode: "VKO" },
       destination: { city: "", iataCode: "" },
-      departureDate: "24 feb",
-      arrivalDate: "3 mar",
-      passengersNumber: 1,
+      departureDate: null,
+      returnDate: null,
+      adults: 1,
+      kids: 0,
+      infants: 0,
+      businessClass: false,
 
       searchString: "blah",
 
@@ -63,6 +66,7 @@ export default class App extends Component {
       origin: { city: city, iataCode: iataCode }
     });
   };
+
   updateDestination = (city, iataCode) => {
     this.setState({
       destination: { city: city, iataCode: iataCode }
@@ -74,6 +78,20 @@ export default class App extends Component {
       return { origin: prevState.destination, destination: prevState.origin };
     });
   };
+
+  updateDepartureDate = date => {
+    this.setState({
+      departureDate: date
+    });
+  };
+
+  updateReturnDate = date => {
+    this.setState({
+      returnDate: date
+    });
+  };
+
+  updateAppState = f => this.setState(f);
 
   componentWillMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
@@ -100,10 +118,19 @@ export default class App extends Component {
             path="/"
             render={() => (
               <Header
+                updateAppState={this.updateAppState}
                 origin={this.state.origin}
                 destination={this.state.destination}
+                departureDate={this.state.departureDate}
+                returnDate={this.state.returnDate}
                 updateOrigin={this.updateOrigin}
                 updateDestination={this.updateDestination}
+                updateDepartureDate={this.updateDepartureDate}
+                updateReturnDate={this.updateReturnDate}
+                adults={this.state.adults}
+                kids={this.state.kids}
+                infants={this.state.infants}
+                businessClass={this.state.businessClass}
                 searchPerformed={false}
                 width={this.state.width}
                 swapCitiesCallback={this.swapCities}
@@ -116,12 +143,19 @@ export default class App extends Component {
             render={props => (
               <Header
                 {...props}
+                updateAppState={this.updateAppState}
                 origin={this.state.origin}
                 destination={this.state.destination}
                 departureDate={this.state.departureDate}
-                arrivalDate={this.state.arrivalDate}
+                returnDate={this.state.returnDate}
                 updateOrigin={this.updateOrigin}
                 updateDestination={this.updateDestination}
+                updateDepartureDate={this.updateDepartureDate}
+                updateReturnDate={this.updateReturnDate}
+                adults={this.state.adults}
+                kids={this.state.kids}
+                infants={this.state.infants}
+                businessClass={this.state.businessClass}
                 searchPerformed={true}
                 width={this.state.width}
                 swapCitiesCallback={this.swapCities}

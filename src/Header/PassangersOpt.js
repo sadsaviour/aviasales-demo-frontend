@@ -147,10 +147,10 @@ class PassangersOpt extends Component {
     this.hideDropdown();
   };
 
-  changeState = f => this.setState(f);
+  changeState = f => this.props.updateAppState(f);
 
   handleBusinessClassCheckboxChange = () => {
-    this.setState(prevState => ({
+    this.props.updateAppState(prevState => ({
       businessClass: !prevState.businessClass
     }));
   };
@@ -173,15 +173,15 @@ class PassangersOpt extends Component {
         <DropdownIcon src={dropdown_icon} alt="dropdown-arrow" />
         <Dropdown show={this.state.dropdown}>
           <AdultsCounter
-            adults={this.state.adults}
+            adults={this.props.adults}
             changeCallback={f => this.changeState(f)}
           />
           <KidsCounter
-            kids={this.state.kids}
+            kids={this.props.kids}
             changeCallback={f => this.changeState(f)}
           />
           <InfantsCounter
-            infants={this.state.infants}
+            infants={this.props.infants}
             changeCallback={f => this.changeState(f)}
           />
           <PassangerOptionsDelimener />
@@ -189,6 +189,7 @@ class PassangersOpt extends Component {
             <BussinesClassCheckbox
               type="checkbox"
               onClick={this.handleBusinessClassCheckboxChange}
+              defaultChecked={this.props.businessClass}
             />
             <BussinesClassLabel>Бизнес-класс</BussinesClassLabel>
           </label>

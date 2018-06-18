@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-function incrementAdults(state, props) {
+function incrementAdults(state) {
+  console.log(JSON.stringify(state));
   if (state.adults < 7) return { adults: state.adults + 1 };
 }
 
 function decrementAdults(state) {
-  if (state.adults > 1) return { adults: state.adults - 1 };
+  if (state.adults > 1)
+    if (state.adults - 1 < state.infants)
+      return { adults: state.adults - 1, infants: state.infants - 1 };
+    else return { adults: state.adults - 1 };
 }
 
-function incrementKids(state, props) {
+function incrementKids(state) {
   if (state.kids < 7) return { kids: state.kids + 1 };
 }
 
@@ -17,7 +21,7 @@ function decrementKids(state) {
   if (state.kids > 0) return { kids: state.kids - 1 };
 }
 
-function incrementInfants(state, props) {
+function incrementInfants(state) {
   if (state.infants < state.adults) return { infants: state.infants + 1 };
 }
 

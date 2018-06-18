@@ -312,10 +312,18 @@ export default function Header(props) {
                   destination={props.destination}
                   updateDestination={props.updateDestination}
                 />
-                <FlightDates />
+                <FlightDates
+                  updateDepartureDate={props.updateDepartureDate}
+                  updateReturnDate={props.updateReturnDate}
+                />
                 <PassangersOpt
                   origin={props.origin}
                   searchPerformed={props.searchPerformed}
+                  adults={props.adults}
+                  kids={props.kids}
+                  infants={props.infants}
+                  businessClass={props.businessClass}
+                  updateAppState={props.updateAppState}
                 />
                 {props.searchPerformed &&
                   props.width < 992 && (
@@ -324,6 +332,12 @@ export default function Header(props) {
                       searchPerformed={props.searchPerformed}
                       origin={props.origin}
                       destination={props.destination}
+                      departureDate={props.departureDate}
+                      returnDate={props.returnDate}
+                      adults={props.adults}
+                      kids={props.kids}
+                      infants={props.infants}
+                      businessClass={props.businessClass}
                     />
                   )}
               </SearchContainer>
@@ -336,6 +350,12 @@ export default function Header(props) {
                     searchPerformed={props.searchPerformed}
                     origin={props.origin}
                     destination={props.destination}
+                    departureDate={props.departureDate}
+                    returnDate={props.returnDate}
+                    adults={props.adults}
+                    kids={props.kids}
+                    infants={props.infants}
+                    businessClass={props.businessClass}
                   />
                 </div>
               )}
@@ -347,6 +367,12 @@ export default function Header(props) {
                 searchPerformed={props.searchPerformed}
                 origin={props.origin}
                 destination={props.destination}
+                departureDate={props.departureDate}
+                returnDate={props.returnDate}
+                adults={props.adults}
+                kids={props.kids}
+                infants={props.infants}
+                businessClass={props.businessClass}
               />
             </div>
           )}
