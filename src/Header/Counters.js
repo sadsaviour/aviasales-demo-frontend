@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 function incrementAdults(state, props) {
-  return { adults: state.adults + 1 };
+  if (state.adults < 7) return { adults: state.adults + 1 };
 }
 
 function decrementAdults(state) {
@@ -10,7 +10,7 @@ function decrementAdults(state) {
 }
 
 function incrementKids(state, props) {
-  return { kids: state.kids + 1 };
+  if (state.kids < 7) return { kids: state.kids + 1 };
 }
 
 function decrementKids(state) {
@@ -18,7 +18,7 @@ function decrementKids(state) {
 }
 
 function incrementInfants(state, props) {
-  return { infants: state.infants + 1 };
+  if (state.infants < state.adults) return { infants: state.infants + 1 };
 }
 
 function decrementInfants(state) {
