@@ -271,8 +271,8 @@ export default function Header(props) {
             className="row between-xs middle-xs"
             style={
               props.width > 768
-                ? { "margin-bottom": "38px" }
-                : { "margin-bottom": "32px" }
+                ? { marginBottom: "38px" }
+                : { marginBottom: "32px" }
             }
           >
             <Logo width={props.width} />
@@ -301,7 +301,13 @@ export default function Header(props) {
           )}
 
           <div className="row middle-lg">
-            <div className="col-xs-12 col-lg-10">
+            <div
+              className={
+                props.searchPerformed
+                  ? "col-xs-12 col-lg-10"
+                  : "col-xs-12 col-lg-10 col-lg-offset-1"
+              }
+            >
               <SearchContainer>
                 <DepartureCity
                   origin={props.origin}

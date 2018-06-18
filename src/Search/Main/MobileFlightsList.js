@@ -136,7 +136,7 @@ export default function MobileFlightsList(props) {
                 <img
                   src={arrivalIcon}
                   alt="Arrival icon"
-                  style={{ "margin-right": "8px" }}
+                  style={{ marginRight: "8px" }}
                 />
                 <div>
                   {f.directFlight.departure.time} —
@@ -150,7 +150,7 @@ export default function MobileFlightsList(props) {
               <img
                 src={durationIcon}
                 alt="Duration icon"
-                style={{ "margin-right": "8px" }}
+                style={{ marginRight: "8px" }}
               />
               <div>{f.directFlight.flightDuration}</div>
             </FlightLine>
@@ -164,7 +164,7 @@ export default function MobileFlightsList(props) {
                 <img
                   src={departureIcon}
                   alt="Arrival icon"
-                  style={{ "margin-right": "8px" }}
+                  style={{ marginRight: "8px" }}
                 />
                 <div>
                   {f.backFlight.departure.time} — {f.backFlight.arrival.time}
@@ -177,7 +177,7 @@ export default function MobileFlightsList(props) {
               <img
                 src={durationIcon}
                 alt="Duration icon"
-                style={{ "margin-right": "8px" }}
+                style={{ marginRight: "8px" }}
               />
               <div>{f.backFlight.flightDuration}</div>
             </div>

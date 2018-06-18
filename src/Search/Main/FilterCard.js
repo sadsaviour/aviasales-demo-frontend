@@ -62,13 +62,13 @@ export default function FilterCard(props) {
       <img
         src={dropdownIcon}
         alt="visibility toggle"
-        style={{ "margin-right": "6px" }}
+        style={{ marginRight: "6px" }}
       />
     ) : (
       <img
         src={dropdownIcon}
         alt="visibility toggle"
-        style={{ transform: "scaleY(-1)", "margin-right": "6px" }}
+        style={{ transform: "scaleY(-1)", marginRight: "6px" }}
       />
     );
   }

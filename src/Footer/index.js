@@ -272,7 +272,7 @@ export default function Footer(props) {
           </Copyright>
         </div>
       ) : (
-        <div className="container" style={{ "margin-top": "26px" }}>
+        <div className="container" style={{ marginTop: "26px" }}>
           <div className="row">
             <div className="col-lg-8">
               <nav>
@@ -315,10 +315,10 @@ export default function Footer(props) {
                 <AppLink
                   src={microsoft}
                   alt="Windows Phone"
-                  style={{ "margin-right": "8px" }}
+                  style={{ marginRight: "8px" }}
                 />
               </div>
-              <Copyright className="end-lg" style={{ "margin-top": "32px" }}>
+              <Copyright className="end-lg" style={{ marginTop: "32px" }}>
                 © 2007–2018, Aviasales — дешевые авиабилеты
               </Copyright>
             </div>

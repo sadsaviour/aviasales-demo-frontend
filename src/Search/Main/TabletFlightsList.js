@@ -54,7 +54,7 @@ function CarrierLogo(props) {
         key={carrier}
         src={Logotypes[carrier].small}
         alt={carrier}
-        style={{ "margin-right": "12px" }}
+        style={{ marginRight: "12px" }}
       />
     ));
   } else {

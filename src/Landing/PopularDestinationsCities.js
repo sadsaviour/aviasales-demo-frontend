@@ -91,8 +91,8 @@ export const PopularDestinationsCities = () => {
       <div className="col-xs-12 col-md-10 col-md-offset-1">
         <div className="row">
           {topDestinations.map(d => (
-            <div className="col-lg-6">
-              <PopularDestinationCity key={d.city}>
+            <div className="col-lg-6" key={d.city}>
+              <PopularDestinationCity>
                 <PopularDestinationImage src={d.img} alt={d.city} />
                 <div className="container">
                   <div className="row between-xs">

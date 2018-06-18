@@ -1,19 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {
-  eachDay,
-  startOfMonth,
-  endOfMonth,
-  getISODay,
-  getDay,
-  getDate,
-  getMonth,
-  setMonth,
-  isBefore,
-  isWithinRange,
-  compareAsc
-} from "date-fns";
+import { getDate, getMonth } from "date-fns";
 
 import findTicketsIcon from "./img/findTicketsIcon.svg";
 

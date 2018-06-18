@@ -37,7 +37,7 @@ export const Tips = () => {
   return (
     <div className="col-xs-12 col-lg-10 col-lg-offset-1">
       {tipsText.map(t => (
-        <section>
+        <section key={t.heading}>
           <TipsHeader>
             <TipsIcon src={t.icon} alt={"icon"} />
             {t.heading}

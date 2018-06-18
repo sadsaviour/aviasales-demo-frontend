@@ -185,8 +185,8 @@ export const SpecialOffersList = () => {
         </SpecialOffersListHeader>
         <div className="row">
           {specialOffers.map(o => (
-            <div className="col-xs-12 col-md-4">
-              <SpecialOfferContainer key={o.offerHighlight}>
+            <div className="col-xs-12 col-md-4" key={o.offerHighlight}>
+              <SpecialOfferContainer>
                 <SpecialOfferHeader>
                   <SpecialOfferHeaderText>
                     {o.offerHighlight}
@@ -218,7 +218,7 @@ export const SpecialOffersList = () => {
         <SpecialOffersListFooter>
           <div className="row between-xs">
             <div className="col-xs-12 col-md-6">
-              <div style={{ "text-decoration": "underline" }}>
+              <div style={{ textDecoration: "underline" }}>
                 {" "}
                 Смотреть все спецпредложения
               </div>
