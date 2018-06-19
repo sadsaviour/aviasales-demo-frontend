@@ -139,7 +139,7 @@ const MakeQueryString = (
   const passengers =
     (businessClass ? "b" : "") +
     (adults ? adults.toString() : "") +
-    (kids ? kids.toString() : "") +
+    (kids ? kids.toString() : infants ? "0" : "") +
     (infants ? infants.toString() : "");
   return (
     origin.iataCode +

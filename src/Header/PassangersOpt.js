@@ -157,7 +157,7 @@ class PassangersOpt extends Component {
 
   render() {
     const totalPassangers =
-      this.state.adults + this.state.kids + this.state.infants;
+      this.props.adults + this.props.kids + this.props.infants;
     return (
       <PassengersSelector
         onClick={this.handleClick}

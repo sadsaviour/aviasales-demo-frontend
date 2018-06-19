@@ -129,7 +129,7 @@ export default class App extends Component {
       businessClass: urlPattern.exec(props.match.params.id)[7],
       adults: urlPattern.exec(props.match.params.id)[8],
       kids: urlPattern.exec(props.match.params.id)[9],
-      infants: urlPattern.exec(props.match.params.id)[9]
+      infants: urlPattern.exec(props.match.params.id)[10]
     };
 
     const restoredState = {
@@ -169,20 +169,7 @@ export default class App extends Component {
       searchPerformed: true
     };
 
-    /**  this.setState(prevState =>
-      Object.keys(prevState).reduce(function(acc, current) {
-        console.log("prev", prevState[current]);
-        console.log("rest", restoredState[current]);
-        return null;
-        /**   if (prevState[current] !== restoredState[current])
-          return (acc.current = restoredState[current]);
-        else return (acc.current = prevState[current]);
-      }, {})
-    );*/
-
     this.setState(restoredState);
-    console.log("params", restoredState);
-    //return restoredState;
   }
 
   render() {
