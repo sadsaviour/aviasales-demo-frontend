@@ -341,6 +341,8 @@ export default function Header(props) {
                   updateDestination={props.updateDestination}
                 />
                 <FlightDates
+                  departureDate={props.departureDate}
+                  returnDate={props.returnDate}
                   updateDepartureDate={props.updateDepartureDate}
                   updateReturnDate={props.updateReturnDate}
                 />

@@ -2,7 +2,21 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
-import DateSelector from "./MonthCreator.js";
+import {
+  eachDay,
+  startOfMonth,
+  endOfMonth,
+  getISODay,
+  getDay,
+  getDate,
+  getMonth,
+  setMonth,
+  isBefore,
+  isWithinRange,
+  compareAsc
+} from "date-fns";
+
+import DateSelector, { dateLabel } from "./MonthCreator.js";
 
 import CalendarIcon from "./img/calendar.svg";
 
@@ -200,10 +214,13 @@ class FlightDatesSelector extends Component {
     this.state = {
       departureDropdownVisible: false,
       returnDropdownVisible: false,
+
       departureDate: null,
       returnDate: null,
+
       departureDateLabel: null,
       returnDateLabel: null,
+
       month: null
     };
   }
@@ -226,18 +243,14 @@ class FlightDatesSelector extends Component {
     this.props.updateDepartureDate(date);
     this.setState({
       departureDropdownVisible: false,
-      returnDropdownVisible: true,
-      departureDateLabel: dateLabel,
-      departureDate: date
+      returnDropdownVisible: true
     });
   };
 
   setReturnDate = (date, dateLabel) => {
     this.props.updateReturnDate(date);
     this.setState({
-      returnDropdownVisible: false,
-      returnDateLabel: dateLabel,
-      returnDate: date
+      returnDropdownVisible: false
     });
   };
 
@@ -253,8 +266,8 @@ class FlightDatesSelector extends Component {
       <FlightDates>
         <DepartureDate>
           <p onClick={this.showDepartureDropdown}>
-            {this.state.departureDateLabel
-              ? this.state.departureDateLabel
+            {this.props.departureDate
+              ? dateLabel(this.props.departureDate)
               : "Туда"}
           </p>
           <img
@@ -265,10 +278,10 @@ class FlightDatesSelector extends Component {
           {this.state.departureDropdownVisible && (
             <Dropdown departure={true}>
               <DateSelector
-                refrenceDate={currentDate}
-                selectedDate={this.state.departureDate}
-                departureDate={this.state.departureDate}
-                returnDate={this.state.returnDate}
+                refrenceDate={this.props.departureDate}
+                selectedDate={this.props.departureDate}
+                departureDate={this.props.departureDate}
+                returnDate={this.props.returnDate}
                 setCallback={(date, dateLabel) =>
                   this.setDepartureDate(date, dateLabel)
                 }
@@ -285,8 +298,8 @@ class FlightDatesSelector extends Component {
         </DepartureDate>
         <ReturnDate>
           <p onClick={this.showReturnDropdown}>
-            {this.state.returnDateLabel
-              ? this.state.returnDateLabel
+            {this.props.returnDate
+              ? dateLabel(this.props.returnDate)
               : "Обратно"}
           </p>
           <img
@@ -297,10 +310,10 @@ class FlightDatesSelector extends Component {
           {this.state.returnDropdownVisible && (
             <Dropdown return={true}>
               <DateSelector
-                refrenceDate={currentDate}
-                selectedDate={this.state.returnDate}
-                departureDate={this.state.departureDate}
-                returnDate={this.state.returnDate}
+                refrenceDate={this.props.returnDate}
+                selectedDate={this.props.returnDate}
+                departureDate={this.props.departureDate}
+                returnDate={this.props.returnDate}
                 setCallback={(date, dateLabel) =>
                   this.setReturnDate(date, dateLabel)
                 }

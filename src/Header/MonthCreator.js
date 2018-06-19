@@ -145,7 +145,11 @@ function dayOfWeekLabel(singleDate) {
   return daysLabels[day];
 }
 
-function monthLabel(date) {
+export function dateLabel(date) {
+  return getDate(date) + " " + monthLabel(date) + ", " + dayOfWeekLabel(date);
+}
+
+export function monthLabel(date) {
   const month = getMonth(date);
   const monthes = [
     "январь",
@@ -168,8 +172,10 @@ function monthLabel(date) {
 export function getEachDateOfMonth(referenceDate, departureDate, returnDate) {
   const currentDate = new Date();
 
-  const monthStart = startOfMonth(referenceDate);
-  const monthEnd = endOfMonth(referenceDate);
+  const dateToShow = referenceDate === null ? currentDate : referenceDate;
+
+  const monthStart = startOfMonth(dateToShow);
+  const monthEnd = endOfMonth(dateToShow);
 
   const wholeMonth = eachDay(monthStart, monthEnd);
 
@@ -198,6 +204,8 @@ export function getEachDateOfMonth(referenceDate, departureDate, returnDate) {
   return dates;
 }
 
+const currentDate = new Date();
+
 export default class DateSelector extends Component {
   constructor(props) {
     super(props);
@@ -205,11 +213,31 @@ export default class DateSelector extends Component {
       selectedDate: this.props.selectedDate,
       departureDate: this.props.departureDate,
       returnDate: this.props.returnDate,
-      refrenceDate: this.props.refrenceDate,
-      refrenceMonth: getMonth(this.props.refrenceDate),
-      refrenceMonthLabel: getMonthInRussian(this.props.refrenceDate),
+      refrenceDate: this.props.refrenceDate
+        ? this.props.refrenceDate
+        : this.props.departureDate
+          ? this.props.departureDate
+          : currentDate,
+      refrenceMonth: getMonth(
+        this.props.refrenceDate
+          ? this.props.refrenceDate
+          : this.props.departureDate
+            ? this.props.departureDate
+            : currentDate
+      ),
+      refrenceMonthLabel: getMonthInRussian(
+        this.props.refrenceDate
+          ? this.props.refrenceDate
+          : this.props.departureDate
+            ? this.props.departureDate
+            : currentDate
+      ),
       month: getEachDateOfMonth(
-        this.props.refrenceDate,
+        this.props.refrenceDate
+          ? this.props.refrenceDate
+          : this.props.departureDate
+            ? this.props.departureDate
+            : currentDate,
         this.props.departureDate,
         this.props.returnDate
       )
@@ -296,9 +324,9 @@ export default class DateSelector extends Component {
         >
           <SingleDateLabel>{date}</SingleDateLabel>
           {/* It appears one can't compare date objects directly */
-          compareAsc(props.month[date].date, this.state.departureDate) ===
+          compareAsc(props.month[date].date, this.props.departureDate) ===
             0 && <DepartureDateCursor src={selectedDateCursor} alt="cursor" />}
-          {compareAsc(props.month[date].date, this.state.returnDate) === 0 && (
+          {compareAsc(props.month[date].date, this.props.returnDate) === 0 && (
             <ReturnDateCursor src={selectedDateCursor} alt="cursor" />
           )}
         </SingleDate>

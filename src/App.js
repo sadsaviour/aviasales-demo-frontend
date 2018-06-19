@@ -16,8 +16,8 @@ export default class App extends Component {
     this.state = {
       origin: { city: "Москва", iataCode: "VKO" },
       destination: { city: "Барселона", iataCode: "BCN" },
-      departureDate: new Date(),
-      returnDate: new Date(),
+      departureDate: null,
+      returnDate: null,
       adults: 1,
       kids: 0,
       infants: 0,
