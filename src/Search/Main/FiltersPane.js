@@ -124,9 +124,9 @@ export default function FiltersPane(props) {
           src={planeIcon}
           alt="plane icon"
           style={{
-            "vertical-align": "middle",
-            "margin-left": "5px",
-            "margin-right": "5px"
+            verticalAlign: "middle",
+            marginLeft: "5px",
+            marginRight: "5px"
           }}
         />{" "}
         Барселона
@@ -170,9 +170,9 @@ export default function FiltersPane(props) {
           src={planeIcon}
           alt="plane icon"
           style={{
-            "vertical-align": "middle",
-            "margin-left": "5px",
-            "margin-right": "5px"
+            verticalAlign: "middle",
+            marginLeft: "5px",
+            marginRight: "5px"
           }}
         />{" "}
         Москва
@@ -216,9 +216,9 @@ export default function FiltersPane(props) {
           src={planeIcon}
           alt="plane icon"
           style={{
-            "vertical-align": "middle",
-            "margin-left": "5px",
-            "margin-right": "5px"
+            verticalAlign: "middle",
+            marginLeft: "5px",
+            marginRight: "5px"
           }}
         />{" "}
         Барселона
@@ -238,9 +238,9 @@ export default function FiltersPane(props) {
           src={planeIcon}
           alt="plane icon"
           style={{
-            "vertical-align": "middle",
-            "margin-left": "5px",
-            "margin-right": "5px"
+            verticalAlign: "middle",
+            marginLeft: "5px",
+            marginRight: "5px"
           }}
         />{" "}
         Москва
@@ -258,7 +258,7 @@ export default function FiltersPane(props) {
   );
 
   const alliansesList = carriers.alliances.map(a => (
-    <div className="row between-lg middle-lg ">
+    <div className="row between-lg middle-lg " key={a.name}>
       <input type="checkbox" />
       <OptionLabel>{a.name}</OptionLabel>
       <OptionPrice>{a.price}</OptionPrice>
@@ -266,7 +266,7 @@ export default function FiltersPane(props) {
   ));
 
   const individualCarriersList = carriers.carriers.map(c => (
-    <div className="row between-lg middle-lg">
+    <div className="row between-lg middle-lg" key={c.name}>
       <input type="checkbox" />
       <OptionLabel>{c.name}</OptionLabel>
       <OptionPrice>{c.price}</OptionPrice>

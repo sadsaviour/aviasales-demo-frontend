@@ -99,7 +99,7 @@ function CarrierLogo(props) {
         key={carrier}
         src={Logotypes[carrier].small}
         alt={carrier}
-        style={{ "margin-left": "12px" }}
+        style={{ marginLeft: "12px" }}
       />
     ));
   } else {
@@ -119,7 +119,7 @@ export default function MobileFlightsList(props) {
       <div className="container">
         <div
           className="row between-xs middle-xs"
-          style={{ "padding-top": "12px", "padding-bottom": "10px" }}
+          style={{ paddingTop: "12px", paddingBottom: "10px" }}
         >
           <div className="col-xs-6 start-xs middle-xs">
             <StyledPrice>{f.offers.best.price}</StyledPrice>

@@ -137,13 +137,13 @@ export default function TabletFlightsList(props) {
             <div
               className="row end-md middle-md"
               style={{
-                "padding-top": "12px",
-                "padding-bottom": "10px",
-                "padding-right": "10px"
+                paddingTop: "12px",
+                paddingBottom: "10px",
+                paddingRight: "10px"
               }}
             >
               <CarrierLogo carrier={f.carrier} />
-              <div style={{ "flex-grow": "2" }} />
+              <div style={{ flexGrow: "2" }} />
               {f.charter && <StyledCharter>ЧАРТЕР</StyledCharter>}
               <img src={shareIcon} alt="share" />
             </div>

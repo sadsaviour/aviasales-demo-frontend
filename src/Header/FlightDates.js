@@ -2,20 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
-import {
-  eachDay,
-  startOfMonth,
-  endOfMonth,
-  getISODay,
-  getDay,
-  getDate,
-  getMonth,
-  setMonth,
-  isBefore,
-  isWithinRange,
-  compareAsc
-} from "date-fns";
-
 import DateSelector, { dateLabel } from "./MonthCreator.js";
 
 import CalendarIcon from "./img/calendar.svg";
