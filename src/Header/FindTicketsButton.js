@@ -167,6 +167,9 @@ export default function FindTicketsButton(props) {
             props.businessClass
           )
         }
+        onClick={() =>
+          props.updateAppState({ searchPerformed: true, stateIsDefault: false })
+        }
       >
         {props.searchPerformed ? (
           <Button name="Find Tickets" type="submit" className={props.className}>

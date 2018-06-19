@@ -366,6 +366,7 @@ export default function Header(props) {
                       kids={props.kids}
                       infants={props.infants}
                       businessClass={props.businessClass}
+                      updateAppState={props.updateAppState}
                     />
                   )}
               </SearchContainer>
@@ -384,6 +385,7 @@ export default function Header(props) {
                     kids={props.kids}
                     infants={props.infants}
                     businessClass={props.businessClass}
+                    updateAppState={props.updateAppState}
                   />
                 </div>
               )}
@@ -401,6 +403,7 @@ export default function Header(props) {
                 kids={props.kids}
                 infants={props.infants}
                 businessClass={props.businessClass}
+                updateAppState={props.updateAppState}
               />
             </div>
           )}
