@@ -147,12 +147,17 @@ class ArrivalCity extends Component {
       ]
     };
 
+    this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleFocus(event) {
     this.setState({ dropdownVisible: true });
+  }
+
+  handleChange(event) {
+    this.props.updateDestination(event.target.value);
   }
 
   handleClick(event) {
@@ -181,7 +186,7 @@ class ArrivalCity extends Component {
         <AutocompleteBlock>
           <AutocompleteInput
             type="text"
-            name="Departure City"
+            name="Destination City"
             value={this.props.destination.city}
             placeholder="Город прибытия"
             autoComplete="off"

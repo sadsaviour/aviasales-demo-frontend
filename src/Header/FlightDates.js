@@ -273,10 +273,10 @@ class FlightDatesSelector extends Component {
                 }
               />
               <OneWayPricesOption>
-                <label class="container">
+                <label className="container">
                   Показать цены в одну сторону
                   <OneWayPricesToggle type="checkbox" />
-                  <span class="switch" />
+                  <span className="switch" />
                 </label>
               </OneWayPricesOption>
             </Dropdown>
