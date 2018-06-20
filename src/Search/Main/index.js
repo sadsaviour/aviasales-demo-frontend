@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import flightsData, { filters } from "./data.js";
+import { filters } from "./data.js";
 
 import MobileFlightsList from "./MobileFlightsList";
 import FiltersPane from "./FiltersPane";
@@ -98,7 +98,7 @@ export default class Main extends Component {
     return (
       <StyledMain>
         <div className="hidden-md hidden-lg hidden-xl">
-          <MobileFlightsList flights={flightsData} />
+          <MobileFlightsList flights={this.props.flightsData} />
           <div className="row center-xs ">
             <MobileFiltersButton>Фильтровать</MobileFiltersButton>
           </div>
@@ -107,7 +107,13 @@ export default class Main extends Component {
         <div className="container hidden-xs">
           <div className="row">
             <div className="col-md-12 col-lg-3 col-xl-3 hidden-md ">
-              <FiltersPane filters={filters} />
+              <FiltersPane
+                filters={filters}
+                multyCarriersFilter={this.props.multyCarriersFilter}
+                handleCarriersFilterChange={
+                  this.props.handleCarriersFilterChange
+                }
+              />
             </div>
             <div className="col-md-12 col-lg-9 col-xl-7">
               <div className="row center-md hidden-xs hidden-lg hidden-xl">
@@ -115,7 +121,7 @@ export default class Main extends Component {
                   <TabletFiltersIcon src={filtersIcon} alt="filters" />
                 </TabletFiltersButton>
               </div>
-              <TabletFlightsList flights={flightsData} />
+              <TabletFlightsList flights={this.props.flightsData} />
               <ShowMoreButton>ПОКАЗАТЬ ЕЩЕ 10 БИЛЕТОВ!</ShowMoreButton>
             </div>
             <div className="col-lg-offset-2" />

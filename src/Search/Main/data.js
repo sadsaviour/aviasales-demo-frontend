@@ -102,7 +102,7 @@ export const filters = {
   agenciesNumber: 26
 };
 
-const flightsData = [
+export const flightsData = [
   {
     id: "1",
     carrier: "Rossya",

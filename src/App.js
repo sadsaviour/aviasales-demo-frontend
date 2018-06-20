@@ -4,6 +4,7 @@ import "./normalize.css";
 import "./flexboxgrid2.css";
 
 import "./App.css";
+import { flightsData } from "./Search/Main/data";
 
 import Header from "./Header/index";
 import Main from "./Landing/index";
@@ -41,8 +42,16 @@ export default class App extends Component {
         { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
         { name: "Мальта", country: "Мальта", iataCode: "MLA" },
         { name: "Москва", country: "Россия", iataCode: "VKO" }
-      ]
+      ],
+
+      flightsData: flightsData,
+      flightsDataToDisplay: flightsData,
+
+      multyCarriersFilter: true
     };
+    this.handleCarriersFilterChange = this.handleCarriersFilterChange.bind(
+      this
+    );
   }
 
   findIataCode(city) {
@@ -172,6 +181,32 @@ export default class App extends Component {
     this.setState(restoredState);
   }
 
+  filterMonoCarriersFlights() {
+    const filteredFlights = this.state.flightsData.filter(
+      f => typeof f.carrier === "string"
+    );
+    this.setState({ flightsDataToDisplay: filteredFlights });
+  }
+
+  filterMultiCarriersFlights() {
+    const filteredFlights = this.state.flightsData.filter(
+      f =>
+        typeof f.carrier === "string" ||
+        Object.prototype.toString.call(f.carrier) === "[object Array]"
+    );
+    this.setState({ flightsDataToDisplay: filteredFlights });
+  }
+
+  handleCarriersFilterChange(event) {
+    event.target.checked
+      ? this.filterMultiCarriersFlights()
+      : this.filterMonoCarriersFlights();
+    this.setState(prevState => ({
+      multyCarriersFilter: !prevState.multyCarriersFilter
+    }));
+    console.log("event", event.target.checked);
+  }
+
   render() {
     return (
       <Router>
@@ -254,15 +289,20 @@ export default class App extends Component {
             }
           />
           <Route
-            path="/test/:id"
-            render={props => console.log("props", props) || <div />}
-          />
-          <Route
             exact={true}
             path="/"
             render={() => <Main width={this.state.width} />}
           />
-          <Route path="/search" component={SearchMain} />
+          <Route
+            path="/search"
+            render={props => (
+              <SearchMain
+                flightsData={this.state.flightsDataToDisplay}
+                multyCarriersFilter={this.state.multyCarriersFilter}
+                handleCarriersFilterChange={this.handleCarriersFilterChange}
+              />
+            )}
+          />
           <Footer />
         </div>
       </Router>

@@ -109,7 +109,7 @@ export default function FiltersPane(props) {
   const carriers = props.filters.carriers;
 
   const changesList = changes.map(f => (
-    <div className="row between-lg middle-lg">
+    <div className="row between-lg middle-lg" key={f.option}>
       <input type="checkbox" />
       <OptionLabel>{f.option}</OptionLabel>
       <OptionPrice>{f.price}</OptionPrice>
@@ -259,7 +259,7 @@ export default function FiltersPane(props) {
 
   const alliansesList = carriers.alliances.map(a => (
     <div className="row between-lg middle-lg " key={a.name}>
-      <input type="checkbox" />
+      <input type="checkbox" defaultChecked={true} />
       <OptionLabel>{a.name}</OptionLabel>
       <OptionPrice>{a.price}</OptionPrice>
     </div>
@@ -267,7 +267,7 @@ export default function FiltersPane(props) {
 
   const individualCarriersList = carriers.carriers.map(c => (
     <div className="row between-lg middle-lg" key={c.name}>
-      <input type="checkbox" />
+      <input type="checkbox" defaultChecked={true} />
       <OptionLabel>{c.name}</OptionLabel>
       <OptionPrice>{c.price}</OptionPrice>
     </div>
@@ -276,7 +276,11 @@ export default function FiltersPane(props) {
   const carriersList = (
     <div>
       <div className="row between-lg middle-lg">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={props.multyCarriersFilter}
+          onChange={props.handleCarriersFilterChange}
+        />
         <OptionLabel>Несколько авиакомпаний</OptionLabel>
         <OptionExtraInfo>
           Показывать билеты с перелетами, выполняемыми несколькими
