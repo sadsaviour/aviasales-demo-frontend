@@ -192,8 +192,6 @@ const OneWayPricesToggle = styled.input`
   margin-right: 16px;
 `;
 
-const currentDate = new Date();
-
 class FlightDatesSelector extends Component {
   constructor(props) {
     super(props);
