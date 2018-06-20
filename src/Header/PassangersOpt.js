@@ -96,13 +96,11 @@ const PassangerOptionsDelimener = styled.div`
   background: #dbdbdb;
 `;
 
-const BussinesClassLabel = styled.span`
-  margin-left: 6px;
-
+const BussinesClassLabel = styled.div`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  line-height: 18px;
+  line-height: 36px;
   font-size: 12px;
 
   color: #4a4a4a;
@@ -185,14 +183,15 @@ class PassangersOpt extends Component {
             changeCallback={f => this.changeState(f)}
           />
           <PassangerOptionsDelimener />
-          <label>
-            <BussinesClassCheckbox
+          <BussinesClassLabel className="styledCheckbox">
+            Бизнес-класс
+            <input
               type="checkbox"
               onClick={this.handleBusinessClassCheckboxChange}
               defaultChecked={this.props.businessClass}
             />
-            <BussinesClassLabel>Бизнес-класс</BussinesClassLabel>
-          </label>
+            <span className="checkmark" />
+          </BussinesClassLabel>
         </Dropdown>
       </PassengersSelector>
     );

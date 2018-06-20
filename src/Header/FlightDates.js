@@ -111,8 +111,8 @@ const Dropdown = styled.div`
 `;
 
 const OneWayPricesOption = styled.div`
-  /* Customize the label (the container) */
-  .container {
+  /* Customize the label (the iosStyleCheckbox) */
+  .iosStyleCheckbox {
     display: block;
     position: relative;
 
@@ -133,7 +133,7 @@ const OneWayPricesOption = styled.div`
   }
 
   /* Hide the browser's default checkbox */
-  .container input {
+  .iosStyleCheckbox input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -153,12 +153,12 @@ const OneWayPricesOption = styled.div`
   }
 
   /* On mouse-over, add a grey background color */
-  .container:hover input ~ .switch {
+  .iosStyleCheckbox:hover input ~ .switch {
     background-color: #bccdd6;
   }
 
   /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .switch {
+  .iosStyleCheckbox input:checked ~ .switch {
     background-color: #2196f3;
   }
 
@@ -171,12 +171,12 @@ const OneWayPricesOption = styled.div`
   }
 
   /* Transform the switch when checked */
-  .container input:checked ~ .switch:after {
+  .iosStyleCheckbox input:checked ~ .switch:after {
     left: 18px;
   }
 
   /* Style the switch/indicator */
-  .container .switch:after {
+  .iosStyleCheckbox .switch:after {
     left: 2px;
     top: 2px;
     width: 20px;
@@ -271,7 +271,7 @@ class FlightDatesSelector extends Component {
                 }
               />
               <OneWayPricesOption>
-                <label className="container">
+                <label className="iosStyleCheckbox">
                   Показать цены в одну сторону
                   <OneWayPricesToggle type="checkbox" />
                   <span className="switch" />

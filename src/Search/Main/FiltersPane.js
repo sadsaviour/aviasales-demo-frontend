@@ -9,9 +9,7 @@ const StyledFiltersPane = styled.div`
   background-color: #ffffff;
 `;
 
-const OptionLabel = styled.div`
-  margin-left: 6px;
-
+const OptionLabel = styled.label`
   flex-grow: 1;
 
   font-family: Roboto;
@@ -110,8 +108,11 @@ export default function FiltersPane(props) {
 
   const changesList = changes.map(f => (
     <div className="row between-lg middle-lg" key={f.option}>
-      <input type="checkbox" />
-      <OptionLabel>{f.option}</OptionLabel>
+      <OptionLabel className="styledCheckbox">
+        {f.option}
+        <input type="checkbox" />
+        <span className="checkmark" />
+      </OptionLabel>
       <OptionPrice>{f.price}</OptionPrice>
     </div>
   ));
@@ -259,16 +260,22 @@ export default function FiltersPane(props) {
 
   const alliansesList = carriers.alliances.map(a => (
     <div className="row between-lg middle-lg " key={a.name}>
-      <input type="checkbox" defaultChecked={true} />
-      <OptionLabel>{a.name}</OptionLabel>
+      <OptionLabel className="styledCheckbox">
+        {a.name}
+        <input type="checkbox" defaultChecked={true} />
+        <span className="checkmark" />
+      </OptionLabel>
       <OptionPrice>{a.price}</OptionPrice>
     </div>
   ));
 
   const individualCarriersList = carriers.carriers.map(c => (
     <div className="row between-lg middle-lg" key={c.name}>
-      <input type="checkbox" defaultChecked={true} />
-      <OptionLabel>{c.name}</OptionLabel>
+      <OptionLabel className="styledCheckbox">
+        {c.name}
+        <input type="checkbox" defaultChecked={true} />
+        <span className="checkmark" />
+      </OptionLabel>
       <OptionPrice>{c.price}</OptionPrice>
     </div>
   ));
@@ -276,12 +283,15 @@ export default function FiltersPane(props) {
   const carriersList = (
     <div>
       <div className="row between-lg middle-lg">
-        <input
-          type="checkbox"
-          checked={props.multyCarriersFilter}
-          onChange={props.handleCarriersFilterChange}
-        />
-        <OptionLabel>Несколько авиакомпаний</OptionLabel>
+        <OptionLabel className="styledCheckbox">
+          Несколько авиакомпаний
+          <input
+            type="checkbox"
+            checked={props.multyCarriersFilter}
+            onChange={props.handleCarriersFilterChange}
+          />
+          <span className="checkmark" />
+        </OptionLabel>
         <OptionExtraInfo>
           Показывать билеты с перелетами, выполняемыми несколькими
           авиакомпаниями, включая выбранную
