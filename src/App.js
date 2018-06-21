@@ -6,14 +6,14 @@ import "./normalize.css";
 import "./flexboxgrid2.css";
 
 import "./App.css";
-import { flightsData } from "./Search/Main/data";
+import { flightsData } from "./SearchResults/data";
 
 import favicon from "./assets/aviasales.png";
 
-import Header from "./Header/index";
-import Main from "./Landing/index";
-import Footer from "./Footer/index";
-import SearchMain from "./Search/Main/index";
+import Header from "./Header/Header";
+import Landing from "./Landing/Landing";
+import Footer from "./Footer/Footer";
+import SearchResults from "./SearchResults/SearchResults";
 
 export default class App extends Component {
   constructor(props) {
@@ -303,12 +303,12 @@ export default class App extends Component {
           <Route
             exact={true}
             path="/"
-            render={() => <Main width={this.state.width} />}
+            render={() => <Landing width={this.state.width} />}
           />
           <Route
             path="/search"
             render={props => (
-              <SearchMain
+              <SearchResults
                 flightsData={this.state.flightsDataToDisplay}
                 multyCarriersFilter={this.state.multyCarriersFilter}
                 handleCarriersFilterChange={this.handleCarriersFilterChange}
