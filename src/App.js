@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 import "./normalize.css";
 import "./flexboxgrid2.css";
 
 import "./App.css";
 import { flightsData } from "./Search/Main/data";
+
+import favicon from "./assets/aviasales.png";
 
 import Header from "./Header/index";
 import Main from "./Landing/index";
@@ -211,10 +215,18 @@ export default class App extends Component {
     return (
       <Router>
         <div className="App">
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto:400,500"
-            rel="stylesheet"
-          />
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>
+              Дешевые авиабилеты онлайн, цены. Поиск билетов на самолет и
+              сравнение цен — Aviasales.ru
+            </title>
+            <link
+              href="https://fonts.googleapis.com/css?family=Roboto:400,500,bold"
+              rel="stylesheet"
+            />
+            <link rel="shortcut icon" type="image/png" href={favicon} />
+          </Helmet>
           <Route
             exact
             path="/"
