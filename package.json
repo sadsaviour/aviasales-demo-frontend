@@ -6,6 +6,7 @@
     "@reactions/component": "^2.0.2",
     "date-fns": "^1.29.0",
     "moment": "^2.22.2",
+    "now": "^11.2.4",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-flexbox-grid": "^2.1.0",
@@ -20,5 +21,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1"
   }
 }
