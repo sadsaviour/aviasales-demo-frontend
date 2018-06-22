@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { filters } from "./data.js";
+import { filters } from "./data";
 
 import MobileFlightsList from "./MobileFlightsList";
 import FiltersPane from "./FiltersPane";
