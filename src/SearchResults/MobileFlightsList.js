@@ -65,7 +65,6 @@ function SpecialMarkBanner(props) {
           </span>
         </StyledBannerTitle>
       );
-      break;
     case "Fastest":
       return (
         <StyledBannerTitle style={{ background: "#AF7542" }}>
@@ -75,7 +74,6 @@ function SpecialMarkBanner(props) {
           </span>
         </StyledBannerTitle>
       );
-      break;
     case "TheBest":
       return (
         <StyledBannerTitle style={{ background: "#C279D1" }}>
@@ -85,7 +83,6 @@ function SpecialMarkBanner(props) {
           </span>
         </StyledBannerTitle>
       );
-      break;
     default:
       return null;
   }
