@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
-const SearchFormDestination = styled.div`
+const Container = styled.div`
   position: relative;
+
+  box-sizing: border-box;
+
+  padding-left: 16px;
+  padding-top: 18px;
 
   @media only screen and (min-width: 768px) {
     grid-column-start: 3;
@@ -22,16 +27,7 @@ const SearchFormDestination = styled.div`
   }
 `;
 
-const AutocompleteBlock = styled.div`
-  position: relative;
-
-  box-sizing: border-box;
-
-  padding-left: 16px;
-  padding-top: 18px;
-`;
-
-const AutocompleteInput = styled.input`
+const CityInput = styled.input`
   width: 70%;
 
   font-family: Roboto;
@@ -46,7 +42,7 @@ const AutocompleteInput = styled.input`
   text-overflow: ellipsis;
 `;
 
-const AutocompleteDropdown = styled.div`
+const Dropdown = styled.div`
   display: ${props => (props.visible ? "flex" : "none")};
   flex-flow: column;
 
@@ -64,7 +60,7 @@ const AutocompleteDropdown = styled.div`
   border-radius: 2px;
 `;
 
-const AutocompleteAirportCode = styled.div`
+const IATACodeLabel = styled.div`
   position: absolute;
   right: 16px;
   top: 19px;
@@ -98,12 +94,12 @@ const Suggestion = styled.div`
   }
 `;
 
-const SuggestionCity = styled.div`
+const City = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
-const SuggestionCountry = styled.div`
+const Country = styled.div`
   flex-grow: 2;
 
   margin-left: 2px;
@@ -115,7 +111,7 @@ const SuggestionCountry = styled.div`
   text-overflow: ellipsis;
 `;
 
-const SuggestionIATACode = styled.div`
+const IATACode = styled.div`
   flex-shrink: 0;
   flex-basis: 23px;
   font-weight: normal;
@@ -126,8 +122,6 @@ class ArrivalCity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: this.props.destination.city,
-      iataCode: this.props.destination.iataCode,
       dropdownVisible: false,
 
       airports: [
@@ -166,7 +160,7 @@ class ArrivalCity extends Component {
   }
 
   handleClickOutside = evt => {
-    this.setState({ suggestion: false });
+    this.setState({ dropdownVisible: false });
   };
 
   render() {
@@ -176,35 +170,31 @@ class ArrivalCity extends Component {
         style={{ cursor: "pointer" }}
         onClick={() => this.handleClick(a)}
       >
-        <SuggestionCity>{a.name}, </SuggestionCity>
-        <SuggestionCountry>{a.country}</SuggestionCountry>
-        <SuggestionIATACode>{a.iataCode}</SuggestionIATACode>
+        <City>{a.name}, </City>
+        <Country>{a.country}</Country>
+        <IATACode>{a.iataCode}</IATACode>
       </Suggestion>
     ));
     return (
-      <SearchFormDestination>
-        <AutocompleteBlock>
-          <AutocompleteInput
-            type="text"
-            name="Destination City"
-            value={this.props.destination.city}
-            placeholder="Город прибытия"
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck="off"
-            onFocus={this.handleFocus}
-            onChange={this.handleChange}
-          />
-          <AutocompleteDropdown visible={this.state.dropdownVisible}>
-            {airportSuggestionsList}
-          </AutocompleteDropdown>
-        </AutocompleteBlock>
+      <Container>
+        <CityInput
+          type="text"
+          name="Destination City"
+          value={this.props.destination.city}
+          placeholder="Город прибытия"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck="off"
+          onFocus={this.handleFocus}
+          onChange={this.handleChange}
+        />
+        <Dropdown visible={this.state.dropdownVisible}>
+          {airportSuggestionsList}
+        </Dropdown>
         {this.props.destination.city && (
-          <AutocompleteAirportCode>
-            {this.props.destination.iataCode}
-          </AutocompleteAirportCode>
+          <IATACodeLabel>{this.props.destination.iataCode}</IATACodeLabel>
         )}
-      </SearchFormDestination>
+      </Container>
     );
   }
 }
