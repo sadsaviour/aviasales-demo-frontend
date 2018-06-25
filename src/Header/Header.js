@@ -8,12 +8,12 @@ import logo from "./img/logo.svg";
 import backIcon from "./img/back-icon.svg";
 
 import ArrivalCity from "./ArrivalCity";
-import DepartureCity from "./DepartureCity";
+import OriginCity from "./OriginCity";
 import FlightDates from "./FlightDates";
 import FindTicketsButton from "./FindTicketsButton";
-import PassangersOpt from "./PassangersOpt";
+import PassangersNumberSelector from "./PassangersNumberSelector";
 
-const StyledHeader = styled.header`
+const Container = styled.header`
   padding-top: 10px;
   padding-bottom: 10px;
 
@@ -286,7 +286,7 @@ function ShortSearchQuery(props) {
 
 export default function Header(props) {
   return (
-    <StyledHeader searchPerformed={props.searchPerformed}>
+    <Container searchPerformed={props.searchPerformed}>
       <div className="container">
         <div className="row between-xs middle-xs">
           <Logo width={props.width} />
@@ -336,7 +336,7 @@ export default function Header(props) {
             }
           >
             <SearchContainer>
-              <DepartureCity
+              <OriginCity
                 origin={props.origin}
                 updateOrigin={props.updateOrigin}
                 swapCitiesCallback={props.swapCitiesCallback}
@@ -351,7 +351,7 @@ export default function Header(props) {
                 updateDepartureDate={props.updateDepartureDate}
                 updateReturnDate={props.updateReturnDate}
               />
-              <PassangersOpt
+              <PassangersNumberSelector
                 origin={props.origin}
                 searchPerformed={props.searchPerformed}
                 adults={props.adults}
@@ -415,6 +415,6 @@ export default function Header(props) {
           </div>
         )}
       </div>
-    </StyledHeader>
+    </Container>
   );
 }
