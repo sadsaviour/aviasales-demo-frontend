@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { getDate, getMonth } from "date-fns";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { getDate, getMonth } from 'date-fns';
 
-import findTicketsIcon from "./img/findTicketsIcon.svg";
+import findTicketsIcon from './img/findTicketsIcon.svg';
 
 const Button = styled.button`
   height: 56px;
@@ -100,24 +100,23 @@ const ButtonWraper = styled.div`
   width: 100%;
 
   @media only screen and (min-width: 768px) {
-    width: ${props => (props.searchPerformed ? "100%" : "308px")};
+    width: ${props => (props.searchPerformed ? '100%' : '308px')};
   }
 
   margin-top: 16px;
   @media only screen and (min-width: 768px) {
-    margin-top: ${props => (props.searchPerformed ? "0" : "32px")};
+    margin-top: ${props => (props.searchPerformed ? '0' : '32px')};
   }
   @media only screen and (min-width: 992px) {
-    margin-top: ${props => (props.searchPerformed ? "0" : "48px")};
+    margin-top: ${props => (props.searchPerformed ? '0' : '48px')};
   }
 `;
 
-const addZeroToString = number => {
+const addZeroToString = (number) => {
   if (number.length === 1) {
     return 0 + number;
-  } else {
-    return number;
   }
+  return number;
 };
 
 const MakeQueryString = (
@@ -128,25 +127,18 @@ const MakeQueryString = (
   adults,
   kids,
   infants,
-  businessClass
+  businessClass,
 ) => {
-  const departureDateString =
-    addZeroToString(getDate(destinationDate).toString()) +
-    addZeroToString((getMonth(destinationDate) + 1).toString());
-  const returnDateString =
-    addZeroToString(getDate(returnDate).toString()) +
-    addZeroToString((getMonth(returnDate) + 1).toString());
-  const passengers =
-    (businessClass ? "b" : "") +
-    (adults ? adults.toString() : "") +
-    (kids ? kids.toString() : infants ? "0" : "") +
-    (infants ? infants.toString() : "");
+  const departureDateString = addZeroToString(getDate(destinationDate).toString())
+    + addZeroToString((getMonth(destinationDate) + 1).toString());
+  const returnDateString = addZeroToString(getDate(returnDate).toString())
+    + addZeroToString((getMonth(returnDate) + 1).toString());
+  const passengers = (businessClass ? 'b' : '')
+    + (adults ? adults.toString() : '')
+    + (kids ? kids.toString() : infants ? '0' : '')
+    + (infants ? infants.toString() : '');
   return (
-    origin.iataCode +
-    departureDateString +
-    destination.iataCode +
-    returnDateString +
-    passengers
+    origin.iataCode + departureDateString + destination.iataCode + returnDateString + passengers
   );
 };
 
@@ -154,33 +146,24 @@ export default function FindTicketsButton(props) {
   return (
     <ButtonWraper searchPerformed={props.searchPerformed}>
       <RouterLink
-        to={
-          "/search/" +
-          MakeQueryString(
-            props.origin,
-            props.destination,
-            props.departureDate,
-            props.returnDate,
-            props.adults,
-            props.kids,
-            props.infants,
-            props.businessClass
-          )
-        }
-        onClick={() =>
-          props.updateAppState({ searchPerformed: true, stateIsDefault: false })
-        }
+        to={`/search/${MakeQueryString(
+          props.origin,
+          props.destination,
+          props.departureDate,
+          props.returnDate,
+          props.adults,
+          props.kids,
+          props.infants,
+          props.businessClass,
+        )}`}
+        onClick={() => props.updateAppState({ searchPerformed: true, stateIsDefault: false })}
       >
         {props.searchPerformed ? (
           <Button name="Find Tickets" type="submit" className={props.className}>
             Найти билеты
           </Button>
         ) : (
-          <LandingButton
-            name="Find Tickets"
-            type="submit"
-            className={props.className}
-          >
+          <LandingButton name="Find Tickets" type="submit" className={props.className}>
             Найти билеты
             <IconWraper src={findTicketsIcon} alt="Find Tickets" />
           </LandingButton>

@@ -1,27 +1,27 @@
-import React from "react";
-import styled from "styled-components";
-import { Link, Route } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link, Route } from 'react-router-dom';
 
-import { getDate, getMonth } from "date-fns";
+import { getDate, getMonth } from 'date-fns';
 
-import logo from "./img/logo.svg";
-import backIcon from "./img/back-icon.svg";
+import logo from './img/logo.svg';
+import backIcon from './img/back-icon.svg';
 
-import ArrivalCity from "./ArrivalCity";
-import DepartureCity from "./DepartureCity";
-import FlightDates from "./FlightDates";
-import FindTicketsButton from "./FindTicketsButton";
-import PassangersOpt from "./PassangersOpt";
+import ArrivalCity from './ArrivalCity';
+import DepartureCity from './DepartureCity';
+import FlightDates from './FlightDates';
+import FindTicketsButton from './FindTicketsButton';
+import PassangersOpt from './PassangersOpt';
 
 const StyledHeader = styled.header`
   padding-top: 10px;
   padding-bottom: 10px;
 
   @media only screen and (min-width: 768px) {
-    padding-bottom: ${props => (props.searchPerformed ? "32px" : "122px")}}
+    padding-bottom: ${props => (props.searchPerformed ? '32px' : '122px')}}
 
   @media only screen and (min-width: 992px) {
-    padding-bottom: ${props => (props.searchPerformed ? "32px" : "254px")}}
+    padding-bottom: ${props => (props.searchPerformed ? '32px' : '254px')}}
 
   background: linear-gradient(
     148.48deg,
@@ -90,9 +90,9 @@ const BackLink = styled(Link)`
 const MobileLogo = () => (
   <div
     style={{
-      display: "flex",
-      flexflow: "row nowrap",
-      alignItems: "center"
+      display: 'flex',
+      flexflow: 'row nowrap',
+      alignItems: 'center',
     }}
   >
     <img src={logo} alt="Aviasales" />
@@ -108,13 +108,15 @@ const MobileLogoActive = () => (
 const TabletLogo = () => (
   <div
     style={{
-      display: "flex",
-      flexflow: "row nowrap",
-      alignItems: "center"
+      display: 'flex',
+      flexflow: 'row nowrap',
+      alignItems: 'center',
     }}
   >
     <img src={logo} alt="Aviasales" />
-    <LogoText>aviasales</LogoText>
+    <LogoText>
+aviasales
+    </LogoText>
   </div>
 );
 
@@ -122,14 +124,16 @@ const TabletLogoActive = () => (
   <BackLink to="/">
     <div
       style={{
-        display: "flex",
-        flexflow: "row nowrap",
-        alignItems: "center",
-        marginLeft: "8px"
+        display: 'flex',
+        flexflow: 'row nowrap',
+        alignItems: 'center',
+        marginLeft: '8px',
       }}
     >
       <img src={logo} alt="Aviasales" />
-      <LogoText>aviasales</LogoText>
+      <LogoText>
+aviasales
+      </LogoText>
     </div>
   </BackLink>
 );
@@ -228,25 +232,26 @@ function Logo(props) {
   ) : (
     <div>
       <Route exact path="/" component={TabletLogo} />
-      <Route path="/search" component={TabletLogoActive} />{" "}
+      <Route path="/search" component={TabletLogoActive} />
+      {' '}
     </div>
   );
 }
 
 function ShortSearchQuery(props) {
   const monthes = [
-    "янв",
-    "фев",
-    "март",
-    "апр",
-    "май",
-    "июнь",
-    "июль",
-    "авг",
-    "сен",
-    "окт",
-    "нояб",
-    "дек"
+    'янв',
+    'фев',
+    'март',
+    'апр',
+    'май',
+    'июнь',
+    'июль',
+    'авг',
+    'сен',
+    'окт',
+    'нояб',
+    'дек',
   ];
 
   const Cities = styled.div`
@@ -270,14 +275,29 @@ function ShortSearchQuery(props) {
     color: #ffffff;
   `;
   return (
-    <div style={{ "flex-grow": "2" }}>
+    <div style={{ 'flex-grow': '2' }}>
       <Cities>
-        {props.origin.city} — {props.destination.city}
+        {props.origin.city}
+        {' '}
+—
+        {props.destination.city}
       </Cities>
       <DatesAndPassangers>
-        {getDate(props.departureDate)} {monthes[getMonth(props.departureDate)]}{" "}
-        — {getDate(props.returnDate)} {monthes[getMonth(props.returnDate)]} ,{" "}
-        {props.adults + props.kids + props.infants} пассажир
+        {getDate(props.departureDate)}
+        {' '}
+        {monthes[getMonth(props.departureDate)]}
+        {' '}
+—
+        {' '}
+        {getDate(props.returnDate)}
+        {' '}
+        {monthes[getMonth(props.returnDate)]}
+        {' '}
+,
+        {' '}
+        {props.adults + props.kids + props.infants}
+        {' '}
+пассажир
       </DatesAndPassangers>
     </div>
   );
@@ -289,8 +309,8 @@ export default function Header(props) {
       <div className="container">
         <div className="row between-xs middle-xs">
           <Logo width={props.width} />
-          {props.searchPerformed &&
-            (props.width < 768 && (
+          {props.searchPerformed
+            && (props.width < 768 && (
               <ShortSearchQuery
                 width={props.width}
                 origin={props.origin}
@@ -302,34 +322,36 @@ export default function Header(props) {
                 infants={props.infants}
               />
             ))}
-          {props.searchPerformed && <CurrencyButton>RUB</CurrencyButton>}
+          {props.searchPerformed && (
+          <CurrencyButton>
+RUB
+          </CurrencyButton>
+          )}
         </div>
 
         {!props.searchPerformed && (
           <div className="row center-xs">
-            <LandingHeader>Поиск дешевых авиабилетов</LandingHeader>
+            <LandingHeader>
+Поиск дешевых авиабилетов
+            </LandingHeader>
           </div>
         )}
 
         {!props.searchPerformed && (
           <div className="row center-xs">
             <LandingSubHeader>
-              Лучший способ купить авиабилеты дешево
+Лучший способ купить авиабилеты дешево
             </LandingSubHeader>
           </div>
         )}
 
         <div
           className="row middle-lg hidden-xs"
-          style={
-            props.width > 768 ? { marginTop: "38px" } : { marginTop: "32px" }
-          }
+          style={props.width > 768 ? { marginTop: '38px' } : { marginTop: '32px' }}
         >
           <div
             className={
-              props.searchPerformed
-                ? "col-xs-12 col-lg-10"
-                : "col-xs-12 col-lg-10 col-lg-offset-1"
+              props.searchPerformed ? 'col-xs-12 col-lg-10' : 'col-xs-12 col-lg-10 col-lg-offset-1'
             }
           >
             <SearchContainer>
@@ -357,8 +379,8 @@ export default function Header(props) {
                 businessClass={props.businessClass}
                 updateAppState={props.updateAppState}
               />
-              {props.searchPerformed &&
-                props.width < 992 && (
+              {props.searchPerformed
+                && props.width < 992 && (
                   <FindTicketsButton
                     searchString={props.searchString}
                     searchPerformed={props.searchPerformed}
@@ -372,11 +394,11 @@ export default function Header(props) {
                     businessClass={props.businessClass}
                     updateAppState={props.updateAppState}
                   />
-                )}
+              )}
             </SearchContainer>
           </div>
-          {props.searchPerformed &&
-            props.width > 992 && (
+          {props.searchPerformed
+            && props.width > 992 && (
               <div className="col-lg-2">
                 <FindTicketsButton
                   searchString={props.searchString}
@@ -392,7 +414,7 @@ export default function Header(props) {
                   updateAppState={props.updateAppState}
                 />
               </div>
-            )}
+          )}
         </div>
         {!props.searchPerformed && (
           <div className="row center-xs">

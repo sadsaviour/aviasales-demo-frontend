@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import prevMonthIcon from "./img/prevMonthIcon.svg";
-import nextMonthIcon from "./img/nextMonthIcon.svg";
-import selectedDateCursor from "./img/selectedDateCursor.svg";
+import prevMonthIcon from './img/prevMonthIcon.svg';
+import nextMonthIcon from './img/nextMonthIcon.svg';
+import selectedDateCursor from './img/selectedDateCursor.svg';
 
 import {
   eachDay,
@@ -16,8 +16,8 @@ import {
   setMonth,
   isBefore,
   isWithinRange,
-  compareAsc
-} from "date-fns";
+  compareAsc,
+} from 'date-fns';
 
 const MonthSelector = styled.div`
   display: flex;
@@ -65,11 +65,11 @@ const SingleDate = styled.div`
   text-align: center;
   text-transform: uppercase;
 
-  color: ${props => (props.past ? "rgba(74, 74, 74, 0.1)" : "#4A4A4A")};
+  color: ${props => (props.past ? 'rgba(74, 74, 74, 0.1)' : '#4A4A4A')};
 
-  background: ${props => (props.inDatesRange ? "#F4F4F4" : "none")};
+  background: ${props => (props.inDatesRange ? '#F4F4F4' : 'none')};
 
-  cursor: ${props => (props.past ? "auto" : "pointer")}
+  cursor: ${props => (props.past ? 'auto' : 'pointer')}
   
 `;
 
@@ -121,18 +121,18 @@ const WeekDay = styled.div`
 function getMonthInRussian(date) {
   const month = getMonth(date);
   const monthes = [
-    "январь",
-    "февраль",
-    "март",
-    "апрель",
-    "май",
-    "июнь",
-    "июль",
-    "август",
-    "сентябрь",
-    "октябрь",
-    "ноябрь",
-    "декабрь"
+    'январь',
+    'февраль',
+    'март',
+    'апрель',
+    'май',
+    'июнь',
+    'июль',
+    'август',
+    'сентябрь',
+    'октябрь',
+    'ноябрь',
+    'декабрь',
   ];
 
   return monthes[month];
@@ -140,30 +140,30 @@ function getMonthInRussian(date) {
 
 function dayOfWeekLabel(singleDate) {
   /* Sunday is first cause getDay works with american stile week*/
-  const daysLabels = ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
+  const daysLabels = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
   const day = getDay(singleDate);
   return daysLabels[day];
 }
 
 export function dateLabel(date) {
-  return getDate(date) + " " + monthLabel(date) + ", " + dayOfWeekLabel(date);
+  return getDate(date) + ' ' + monthLabel(date) + ', ' + dayOfWeekLabel(date);
 }
 
 export function monthLabel(date) {
   const month = getMonth(date);
   const monthes = [
-    "январь",
-    "февраль",
-    "март",
-    "апрель",
-    "май",
-    "июнь",
-    "июль",
-    "август",
-    "сентябрь",
-    "октябрь",
-    "ноябрь",
-    "декабрь"
+    'январь',
+    'февраль',
+    'март',
+    'апрель',
+    'май',
+    'июнь',
+    'июль',
+    'август',
+    'сентябрь',
+    'октябрь',
+    'ноябрь',
+    'декабрь',
   ];
 
   return monthes[month];
@@ -185,18 +185,10 @@ export function getEachDateOfMonth(referenceDate, departureDate, returnDate) {
       date: singleDate,
       day: getISODay(singleDate),
       dateLabel:
-        getDate(singleDate) +
-        " " +
-        monthLabel(singleDate) +
-        ", " +
-        dayOfWeekLabel(singleDate),
+        getDate(singleDate) + ' ' + monthLabel(singleDate) + ', ' + dayOfWeekLabel(singleDate),
       month: getMonth(singleDate),
-      past:
-        isBefore(singleDate, currentDate) ||
-        isBefore(singleDate, departureDate),
-      inDatesRange: returnDate
-        ? isWithinRange(singleDate, departureDate, returnDate)
-        : false
+      past: isBefore(singleDate, currentDate) || isBefore(singleDate, departureDate),
+      inDatesRange: returnDate ? isWithinRange(singleDate, departureDate, returnDate) : false,
     };
     return map;
   }, {});
@@ -223,14 +215,14 @@ export default class DateSelector extends Component {
           ? this.props.refrenceDate
           : this.props.departureDate
             ? this.props.departureDate
-            : currentDate
+            : currentDate,
       ),
       refrenceMonthLabel: getMonthInRussian(
         this.props.refrenceDate
           ? this.props.refrenceDate
           : this.props.departureDate
             ? this.props.departureDate
-            : currentDate
+            : currentDate,
       ),
       month: getEachDateOfMonth(
         this.props.refrenceDate
@@ -239,44 +231,30 @@ export default class DateSelector extends Component {
             ? this.props.departureDate
             : currentDate,
         this.props.departureDate,
-        this.props.returnDate
-      )
+        this.props.returnDate,
+      ),
     };
     this.showNextMonth = this.showNextMonth.bind(this);
     this.showPrevMonth = this.showPrevMonth.bind(this);
   }
 
   showNextMonth() {
-    const nextMonthDate = setMonth(
-      this.state.refrenceDate,
-      this.state.refrenceMonth + 1
-    );
+    const nextMonthDate = setMonth(this.state.refrenceDate, this.state.refrenceMonth + 1);
     this.setState({
       refrenceDate: nextMonthDate,
       refrenceMonth: getMonth(nextMonthDate),
       refrenceMonthLabel: getMonthInRussian(nextMonthDate),
-      month: getEachDateOfMonth(
-        nextMonthDate,
-        this.props.departureDate,
-        this.props.returnDate
-      )
+      month: getEachDateOfMonth(nextMonthDate, this.props.departureDate, this.props.returnDate),
     });
   }
 
   showPrevMonth() {
-    const nextMonthDate = setMonth(
-      this.state.refrenceDate,
-      this.state.refrenceMonth - 1
-    );
+    const nextMonthDate = setMonth(this.state.refrenceDate, this.state.refrenceMonth - 1);
     this.setState({
       refrenceDate: nextMonthDate,
       refrenceMonth: getMonth(nextMonthDate),
       refrenceMonthLabel: getMonthInRussian(nextMonthDate),
-      month: getEachDateOfMonth(
-        nextMonthDate,
-        this.props.departureDate,
-        this.props.returnDate
-      )
+      month: getEachDateOfMonth(nextMonthDate, this.props.departureDate, this.props.returnDate),
     });
   }
 
@@ -284,7 +262,7 @@ export default class DateSelector extends Component {
     this.props.setCallback(date, dateLabel);
     this.setState({
       dropdownVisible: false,
-      selectedDate: date
+      selectedDate: date,
     });
   };
 
@@ -292,7 +270,7 @@ export default class DateSelector extends Component {
     this.props.setCallback(date, dateLabel);
     this.setState({
       dropdownVisible: false,
-      departureDate: date
+      departureDate: date,
     });
   };
 
@@ -300,7 +278,7 @@ export default class DateSelector extends Component {
     this.props.setCallback(date, dateLabel);
     this.setState({
       dropdownVisible: false,
-      returnDate: date
+      returnDate: date,
     });
   };
 
@@ -315,17 +293,14 @@ export default class DateSelector extends Component {
           inDatesRange={props.month[date].inDatesRange}
           onClick={
             !props.month[date].past &&
-            (() =>
-              this.setSelectedDate(
-                props.month[date].date,
-                props.month[date].dateLabel
-              ))
+            (() => this.setSelectedDate(props.month[date].date, props.month[date].dateLabel))
           }
         >
           <SingleDateLabel>{date}</SingleDateLabel>
           {/* It appears one can't compare date objects directly */
-          compareAsc(props.month[date].date, this.props.departureDate) ===
-            0 && <DepartureDateCursor src={selectedDateCursor} alt="cursor" />}
+          compareAsc(props.month[date].date, this.props.departureDate) === 0 && (
+            <DepartureDateCursor src={selectedDateCursor} alt="cursor" />
+          )}
           {compareAsc(props.month[date].date, this.props.returnDate) === 0 && (
             <ReturnDateCursor src={selectedDateCursor} alt="cursor" />
           )}
@@ -338,14 +313,14 @@ export default class DateSelector extends Component {
           <img
             src={prevMonthIcon}
             alt="Previous month"
-            style={{ cursor: "pointer", marginLeft: "8px" }}
+            style={{ cursor: 'pointer', marginLeft: '8px' }}
             onClick={this.showPrevMonth}
           />
           <MonthLabel>{this.state.refrenceMonthLabel}</MonthLabel>
           <img
             src={nextMonthIcon}
             alt="Next month"
-            style={{ cursor: "pointer", marginRight: "8px" }}
+            style={{ cursor: 'pointer', marginRight: '8px' }}
             onClick={this.showNextMonth}
           />
         </MonthSelector>

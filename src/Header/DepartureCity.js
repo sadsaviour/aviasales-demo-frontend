@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import onClickOutside from "react-onclickoutside";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import onClickOutside from 'react-onclickoutside';
 
-import arrowsIcon from "./img/arrows.svg";
+import arrowsIcon from './img/arrows.svg';
 
 const SearchFormOrigin = styled.div`
   position: relative;
@@ -55,7 +55,7 @@ const AutocompleteInput = styled.input`
 `;
 
 const AutocompleteDropdown = styled.div`
-  display: ${props => (props.visible ? "flex" : "none")};
+  display: ${props => (props.visible ? 'flex' : 'none')};
   flex-flow: column;
 
   box-sizing: border-box;
@@ -67,8 +67,7 @@ const AutocompleteDropdown = styled.div`
   width: 100%;
 
   background: #ffffff;
-  box-shadow: 0px 0px 8px rgba(74, 74, 74, 0.2),
-    0px 2px 4px rgba(74, 74, 74, 0.2);
+  box-shadow: 0px 0px 8px rgba(74, 74, 74, 0.2), 0px 2px 4px rgba(74, 74, 74, 0.2);
   border-radius: 2px;
 `;
 
@@ -151,20 +150,20 @@ class DepartureCity extends Component {
       dropdownVisible: false,
 
       airports: [
-        { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
-        { name: "Барселона", country: "Испания", iataCode: "BCN" },
-        { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
-        { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
-        { name: "Батуми", country: "Грузия", iataCode: "CMB" },
-        { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
-        { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
-        { name: "Манила", country: "Филипинны", iataCode: "MNL" },
-        { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
-        { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
-        { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
-        { name: "Мальта", country: "Мальта", iataCode: "MLA" },
-        { name: "Москва", country: "Россия", iataCode: "VKO" }
-      ]
+        { name: 'Бангкок', country: 'Таиланд', iataCode: 'BKK' },
+        { name: 'Барселона', country: 'Испания', iataCode: 'BCN' },
+        { name: 'Баландино', country: 'Челябинск', iataCode: 'CEK' },
+        { name: 'Бандаранаике', country: 'Коломбо', iataCode: 'CMB' },
+        { name: 'Батуми', country: 'Грузия', iataCode: 'CMB' },
+        { name: 'Денпасар Бали', country: 'Индонезия', iataCode: 'DPS' },
+        { name: 'Франкфурт-на-Майне', country: 'Германия', iataCode: 'FRA' },
+        { name: 'Манила', country: 'Филипинны', iataCode: 'MNL' },
+        { name: 'Мале', country: 'Мальдивы', iataCode: 'MLE' },
+        { name: 'Мюнхен', country: 'Германия', iataCode: 'MUC' },
+        { name: 'Минеральные Воды', country: 'Россия', iataCode: 'MRV' },
+        { name: 'Мальта', country: 'Мальта', iataCode: 'MLA' },
+        { name: 'Москва', country: 'Россия', iataCode: 'VKO' },
+      ],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -191,11 +190,7 @@ class DepartureCity extends Component {
 
   render() {
     const airportSuggestionsList = this.state.airports.map(a => (
-      <Suggestion
-        key={a.name}
-        style={{ cursor: "pointer" }}
-        onClick={() => this.handleClick(a)}
-      >
+      <Suggestion key={a.name} style={{ cursor: 'pointer' }} onClick={() => this.handleClick(a)}>
         <SuggestionCity>{a.name}, </SuggestionCity>
         <SuggestionCountry>{a.country}</SuggestionCountry>
         <SuggestionIATACode>{a.iataCode}</SuggestionIATACode>
@@ -220,9 +215,7 @@ class DepartureCity extends Component {
             {airportSuggestionsList}
           </AutocompleteDropdown>
         </AutocompleteBlock>
-        <AutocompleteAirportCode>
-          {this.props.origin.iataCode}
-        </AutocompleteAirportCode>
+        <AutocompleteAirportCode>{this.props.origin.iataCode}</AutocompleteAirportCode>
         <SwapCitiesButton onClick={this.props.swapCitiesCallback}>
           <img src={arrowsIcon} alt="Arrows" />
         </SwapCitiesButton>
