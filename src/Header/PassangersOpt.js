@@ -7,7 +7,7 @@ import dropdown_icon from "./img/dropdown-arrow.svg";
 import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
 import Logotypes from "../SearchResults/Logotypes/logos";
 
-const PassengersSelector = styled.div`
+const Container = styled.div`
   position: relative;
 
   @media only screen and (min-width: 768px) {
@@ -97,7 +97,7 @@ const PassangerOptionsDelimener = styled.div`
   background: #dbdbdb;
 `;
 
-const BussinesClassLabel = styled.label`
+const BussinesClassOption = styled.label`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -107,7 +107,7 @@ const BussinesClassLabel = styled.label`
   color: #4a4a4a;
 `;
 
-class PassangersOpt extends Component {
+class PassengersNumberSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -150,7 +150,7 @@ class PassangersOpt extends Component {
     const totalPassangers =
       this.props.adults + this.props.kids + this.props.infants;
     return (
-      <PassengersSelector
+      <Container
         onClick={this.handleClick}
         searchPerformed={this.props.searchPerformed}
       >
@@ -176,7 +176,7 @@ class PassangersOpt extends Component {
             changeCallback={f => this.changeState(f)}
           />
           <PassangerOptionsDelimener />
-          <BussinesClassLabel className="styledCheckbox">
+          <BussinesClassOption className="styledCheckbox">
             Бизнес-класс
             <input
               type="checkbox"
@@ -184,11 +184,11 @@ class PassangersOpt extends Component {
               checked={this.props.businessClass}
             />
             <span className="checkmark" />
-          </BussinesClassLabel>
+          </BussinesClassOption>
         </Dropdown>
-      </PassengersSelector>
+      </Container>
     );
   }
 }
 
-export default onClickOutside(PassangersOpt);
+export default onClickOutside(PassengersNumberSelector);
