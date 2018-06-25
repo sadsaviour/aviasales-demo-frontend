@@ -5,6 +5,7 @@ import onClickOutside from "react-onclickoutside";
 import dropdown_icon from "./img/dropdown-arrow.svg";
 
 import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
+import Logotypes from "../SearchResults/Logotypes/logos";
 
 const PassengersSelector = styled.div`
   position: relative;
@@ -96,7 +97,7 @@ const PassangerOptionsDelimener = styled.div`
   background: #dbdbdb;
 `;
 
-const BussinesClassLabel = styled.div`
+const BussinesClassLabel = styled.label`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -113,14 +114,10 @@ class PassangersOpt extends Component {
       adults: 1,
       kids: 0,
       infants: 0,
-      businessClass: false,
       dropdown: false
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleBusinessClassCheckboxChange = this.handleBusinessClassCheckboxChange.bind(
-      this
-    );
   }
 
   showDropdown() {
@@ -183,8 +180,8 @@ class PassangersOpt extends Component {
             Бизнес-класс
             <input
               type="checkbox"
-              onClick={this.handleBusinessClassCheckboxChange}
-              defaultChecked={this.props.businessClass}
+              onChange={this.handleBusinessClassCheckboxChange}
+              checked={this.props.businessClass}
             />
             <span className="checkmark" />
           </BussinesClassLabel>
