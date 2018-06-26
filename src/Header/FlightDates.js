@@ -254,7 +254,7 @@ class FlightDatesSelector extends Component {
       <FlightDates>
         <DepartureDate onClick={this.showDepartureDropdown}>
           {this.props.departureDate ? (
-            <p>dateLabel(this.props.departureDate)</p>
+            <p>{dateLabel(this.props.departureDate)}</p>
           ) : (
             <Placeholder>Туда</Placeholder>
           )}
@@ -286,7 +286,7 @@ class FlightDatesSelector extends Component {
         </DepartureDate>
         <ReturnDate onClick={this.showReturnDropdown}>
           {this.props.returnDate ? (
-            <p>dateLabel(this.props.returnDate)</p>
+            <p>{dateLabel(this.props.returnDate)}</p>
           ) : (
             <Placeholder>Обратно</Placeholder>
           )}
