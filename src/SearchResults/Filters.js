@@ -307,12 +307,21 @@ export default function Filters({
 
   return (
     <Container>
-      <FilterCard body={ChangesList} title="ПЕРЕСАДКИ" />
-      <FilterCard body={DirectDepartureTime} title="ВРЕМЯ ВЫЛЕТА И ПРИБЫТИЯ" />
+      <FilterCard body={ChangesList} title="ПЕРЕСАДКИ" expanded />
+      <FilterCard
+        body={DirectDepartureTime}
+        title="ВРЕМЯ ВЫЛЕТА И ПРИБЫТИЯ"
+        expanded
+      />
       <FilterCard title="БАГАЖ" />
       <FilterCard title="Длительность пересадки" />
-      <FilterCard body={FlightDuration} title="Время в пути" />
-      <FilterCard body={CarriersList} otionsCount="43" title="Авиакомпании" />
+      <FilterCard body={FlightDuration} title="Время в пути" expanded />
+      <FilterCard
+        body={CarriersList}
+        otionsCount="43"
+        title="Авиакомпании"
+        expanded
+      />
       <FilterCard title="аэропорты" />
       <FilterCard otionsCount="71" title="аэропорт пересадки" />
       <FilterCard title="агенства" />

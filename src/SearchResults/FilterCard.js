@@ -3,11 +3,7 @@ import styled from "styled-components";
 
 import dropdownIcon from "./img/dropdown-icon.svg";
 
-export default function FilterCard(props) {
-  const title = props.title;
-  const Body = props.body;
-  const optionsCount = props.otionsCount;
-
+export default function FilterCard({ title, body, optionsCount, expanded }) {
   const Container = styled.div`
     box-sizing: border-box;
     display: flex;
@@ -57,21 +53,16 @@ export default function FilterCard(props) {
     padding-right: 8px;
   `;
 
-  function DropdownIcon(props) {
-    return !props.expand ? (
-      <img
-        src={dropdownIcon}
-        alt="visibility toggle"
-        style={{ marginRight: "6px" }}
-      />
+  const DropdownIcon = () =>
+    expanded ? (
+      <img src={dropdownIcon} alt="" style={{ marginRight: "6px" }} />
     ) : (
       <img
         src={dropdownIcon}
-        alt="visibility toggle"
-        style={{ transform: "scaleY(-1)", marginRight: "6px" }}
+        alt=""
+        style={{ transform: "rotate(-90deg)", marginRight: "6px" }}
       />
     );
-  }
 
   return (
     <Container>
@@ -82,7 +73,7 @@ export default function FilterCard(props) {
           <OptionCount>{optionsCount}</OptionCount>
         </Title>
       </Header>
-      {Body && <BodyBlock>{Body}</BodyBlock>}
+      {body && <BodyBlock>{body}</BodyBlock>}
     </Container>
   );
 }
