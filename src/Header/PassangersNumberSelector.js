@@ -5,7 +5,6 @@ import onClickOutside from "react-onclickoutside";
 import dropdown_icon from "./img/dropdown-arrow.svg";
 
 import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
-import Logotypes from "../SearchResults/Logotypes/logos";
 
 const Container = styled.div`
   position: relative;
