@@ -19,6 +19,12 @@ const StyledMain = styled.main`
     padding-bottom: 40px;
   }
 
+  box-sizing: border-box;
+
+  margin-left: auto;
+
+  margin-right: auto;
+
   background: #eaeaea;
 `;
 
@@ -97,7 +103,7 @@ export default class Main extends Component {
   render() {
     return (
       <StyledMain>
-        <div className="hidden-md hidden-lg hidden-xl">
+        <div className="container hidden-md hidden-lg hidden-xl">
           <MobileFlightsList flights={this.props.flightsData} />
           <div className="row center-xs ">
             <MobileFiltersButton>Фильтровать</MobileFiltersButton>
