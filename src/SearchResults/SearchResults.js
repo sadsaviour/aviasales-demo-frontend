@@ -92,48 +92,41 @@ const TabletFiltersIcon = styled.img`
   height: 14px;
 `;
 
-export default class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filtersCollapsed: props.width < 768
-    };
-  }
-
-  render() {
-    return (
-      <StyledMain>
-        <div className="container hidden-md hidden-lg hidden-xl">
-          <MobileFlightsList flights={this.props.flightsData} />
-          <div className="row center-xs ">
-            <MobileFiltersButton>Фильтровать</MobileFiltersButton>
-          </div>
+export default function Main({
+  flightsData,
+  multyCarriersFilter,
+  handleCarriersFilterChange
+}) {
+  return (
+    <StyledMain>
+      <div className="container hidden-md hidden-lg hidden-xl">
+        <MobileFlightsList flights={flightsData} />
+        <div className="row center-xs ">
+          <MobileFiltersButton>Фильтровать</MobileFiltersButton>
         </div>
+      </div>
 
-        <div className="container hidden-xs">
-          <div className="row">
-            <div className="col-md-12 col-lg-3 col-xl-3 hidden-md ">
-              <Filters
-                filters={filters}
-                multyCarriersFilter={this.props.multyCarriersFilter}
-                handleCarriersFilterChange={
-                  this.props.handleCarriersFilterChange
-                }
-              />
-            </div>
-            <div className="col-md-12 col-lg-9 col-xl-7">
-              <div className="row center-md hidden-xs hidden-lg hidden-xl">
-                <TabletFiltersButton>
-                  <TabletFiltersIcon src={filtersIcon} alt="filters" />
-                </TabletFiltersButton>
-              </div>
-              <TabletFlightsList flights={this.props.flightsData} />
-              <ShowMoreButton>ПОКАЗАТЬ ЕЩЕ 10 БИЛЕТОВ!</ShowMoreButton>
-            </div>
-            <div className="col-lg-offset-2" />
+      <div className="container hidden-xs">
+        <div className="row">
+          <div className="col-md-12 col-lg-3 col-xl-3 hidden-md ">
+            <Filters
+              filters={filters}
+              multyCarriersFilter={multyCarriersFilter}
+              handleCarriersFilterChange={handleCarriersFilterChange}
+            />
           </div>
+          <div className="col-md-12 col-lg-9 col-xl-7">
+            <div className="row center-md hidden-xs hidden-lg hidden-xl">
+              <TabletFiltersButton>
+                <TabletFiltersIcon src={filtersIcon} alt="filters" />
+              </TabletFiltersButton>
+            </div>
+            <TabletFlightsList flights={flightsData} />
+            <ShowMoreButton>ПОКАЗАТЬ ЕЩЕ 10 БИЛЕТОВ!</ShowMoreButton>
+          </div>
+          <div className="col-lg-offset-2" />
         </div>
-      </StyledMain>
-    );
-  }
+      </div>
+    </StyledMain>
+  );
 }
