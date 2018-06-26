@@ -81,6 +81,10 @@ const ReturnDate = styled.div`
   color: #4a4a4a;
 `;
 
+const Placeholder = styled.p`
+  color: #a0b0b9;
+`;
+
 const Dropdown = styled.div`
   position: absoulte;
   box-sizing: border-box;
@@ -248,12 +252,12 @@ class FlightDatesSelector extends Component {
   render() {
     return (
       <FlightDates>
-        <DepartureDate>
-          <p onClick={this.showDepartureDropdown}>
-            {this.props.departureDate
-              ? dateLabel(this.props.departureDate)
-              : "Туда"}
-          </p>
+        <DepartureDate onClick={this.showDepartureDropdown}>
+          {this.props.departureDate ? (
+            <p>dateLabel(this.props.departureDate)</p>
+          ) : (
+            <Placeholder>Туда</Placeholder>
+          )}
           <img
             src={CalendarIcon}
             alt="Calendar"
@@ -280,12 +284,12 @@ class FlightDatesSelector extends Component {
             </Dropdown>
           )}
         </DepartureDate>
-        <ReturnDate>
-          <p onClick={this.showReturnDropdown}>
-            {this.props.returnDate
-              ? dateLabel(this.props.returnDate)
-              : "Обратно"}
-          </p>
+        <ReturnDate onClick={this.showReturnDropdown}>
+          {this.props.returnDate ? (
+            <p>dateLabel(this.props.returnDate)</p>
+          ) : (
+            <Placeholder>Обратно</Placeholder>
+          )}
           <img
             src={CalendarIcon}
             alt="Calendar"

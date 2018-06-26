@@ -40,6 +40,10 @@ const CityInput = styled.input`
   border: 0;
 
   text-overflow: ellipsis;
+
+  ::placeholder {
+    color: #a0b0b9;
+  }
 `;
 
 const Dropdown = styled.div`
