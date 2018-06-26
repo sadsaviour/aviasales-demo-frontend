@@ -30,7 +30,7 @@ export default class App extends Component {
       searchPerformed: false,
       stateIsDefault: true,
 
-      width: window.innerWidth,
+      windowSize: window.innerWidth,
 
       airports: [
         { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
@@ -119,7 +119,7 @@ export default class App extends Component {
   }
 
   handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
+    this.setState({ windowSize: window.innerWidth });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -246,7 +246,7 @@ export default class App extends Component {
                 infants={this.state.infants}
                 businessClass={this.state.businessClass}
                 searchPerformed={false}
-                width={this.state.width}
+                windowSize={this.state.windowSize}
                 swapCitiesCallback={this.swapCities}
                 searchString={this.state.searchString}
               />
@@ -272,7 +272,7 @@ export default class App extends Component {
                     updateDepartureDate={this.updateDepartureDate}
                     updateReturnDate={this.updateReturnDate}
                     searchPerformed={this.state.searchPerformed}
-                    width={this.state.width}
+                    windowSize={this.state.windowSize}
                     swapCitiesCallback={this.swapCities}
                     searchString={this.state.searchString}
                   />
@@ -293,7 +293,7 @@ export default class App extends Component {
                   updateDepartureDate={this.updateDepartureDate}
                   updateReturnDate={this.updateReturnDate}
                   searchPerformed={this.state.searchPerformed}
-                  width={this.state.width}
+                  windowSize={this.state.windowSize}
                   swapCitiesCallback={this.swapCities}
                   searchString={this.state.searchString}
                 />
@@ -303,7 +303,7 @@ export default class App extends Component {
           <Route
             exact={true}
             path="/"
-            render={() => <Landing width={this.state.width} />}
+            render={() => <Landing windowSize={this.state.windowSize} />}
           />
           <Route
             path="/search"
