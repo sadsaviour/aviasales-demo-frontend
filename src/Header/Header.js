@@ -221,12 +221,12 @@ const SearchContainer = styled.div`
 function Logo(props) {
   const windowSize = props.width;
   return windowSize < 768 ? (
-    <div>
+    <div style={{ marginLeft: "6px" }}>
       <Route exact path="/" component={MobileLogo} />
       <Route path="/search" component={MobileLogoActive} />
     </div>
   ) : (
-    <div>
+    <div style={{ marginLeft: "6px" }}>
       <Route exact path="/" component={TabletLogo} />
       <Route path="/search" component={TabletLogoActive} />{" "}
     </div>
@@ -272,12 +272,14 @@ function ShortSearchQuery(props) {
   return (
     <div style={{ "flex-grow": "2" }}>
       <Cities>
-        {props.origin.city} —
+        {props.origin.city}
+        {" — "}
         {props.destination.city}
       </Cities>
       <DatesAndPassangers>
-        {getDate(props.departureDate)} {monthes[getMonth(props.departureDate)]}{" "}
-        — {getDate(props.returnDate)} {monthes[getMonth(props.returnDate)]} ,{" "}
+        {getDate(props.departureDate)} {monthes[getMonth(props.departureDate)]}
+        {" — "}
+        {getDate(props.returnDate)} {monthes[getMonth(props.returnDate)]} ,{" "}
         {props.adults + props.kids + props.infants} пассажир
       </DatesAndPassangers>
     </div>
