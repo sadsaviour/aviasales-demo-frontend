@@ -66,7 +66,7 @@ const Services = [
   "Помощь"
 ];
 
-const StyledFooter = styled.div`
+const Container = styled.div`
   padding-top: 32px;
   padding-bottom: 24px;
 `;
@@ -116,7 +116,7 @@ const StyledHr = styled.hr`
   color: #e0e6e8;
 `;
 
-const StyledInfoLink = styled.p`
+const InfoLink = styled.p`
   margin-top: 0;
   margin-bottom: 8px;
   margin-right: 12px;
@@ -183,9 +183,9 @@ function List(props) {
   return props.list.map(i => <FooterBlockItems key={i}>{i}</FooterBlockItems>);
 }
 
-export default function Footer(props) {
+export default function Footer({ windowSize }) {
   return (
-    <StyledFooter>
+    <Container>
       <div className="container">
         <div className="row">
           <div className="col-xs-6 col-md-3 col-lg-2">
@@ -221,16 +221,16 @@ export default function Footer(props) {
         </div>
       </div>
       <StyledHr />
-      {window.innerWidth <= 992 ? (
+      {windowSize <= 992 ? (
         <div className="container">
           <nav>
-            <StyledInfoLink>О компании</StyledInfoLink>
-            <StyledInfoLink>Партнёрская программа</StyledInfoLink>
-            <StyledInfoLink>Реклама</StyledInfoLink>
-            <StyledInfoLink>Вакансии</StyledInfoLink>
-            <StyledInfoLink>Помощь</StyledInfoLink>
-            <StyledInfoLink>Правила</StyledInfoLink>
-            <StyledInfoLink>White Label авиабилеты</StyledInfoLink>
+            <InfoLink>О компании</InfoLink>
+            <InfoLink>Партнёрская программа</InfoLink>
+            <InfoLink>Реклама</InfoLink>
+            <InfoLink>Вакансии</InfoLink>
+            <InfoLink>Помощь</InfoLink>
+            <InfoLink>Правила</InfoLink>
+            <InfoLink>White Label авиабилеты</InfoLink>
           </nav>
           <nav>
             <SocialIconBlock>
@@ -276,13 +276,13 @@ export default function Footer(props) {
           <div className="row">
             <div className="col-lg-8">
               <nav>
-                <StyledInfoLink>О компании</StyledInfoLink>
-                <StyledInfoLink>Партнёрская программа</StyledInfoLink>
-                <StyledInfoLink>Реклама</StyledInfoLink>
-                <StyledInfoLink>Вакансии</StyledInfoLink>
-                <StyledInfoLink>Помощь</StyledInfoLink>
-                <StyledInfoLink>Правила</StyledInfoLink>
-                <StyledInfoLink>White Label авиабилеты</StyledInfoLink>
+                <InfoLink>О компании</InfoLink>
+                <InfoLink>Партнёрская программа</InfoLink>
+                <InfoLink>Реклама</InfoLink>
+                <InfoLink>Вакансии</InfoLink>
+                <InfoLink>Помощь</InfoLink>
+                <InfoLink>Правила</InfoLink>
+                <InfoLink>White Label авиабилеты</InfoLink>
               </nav>
               <nav>
                 <SocialIconBlock>
@@ -325,6 +325,6 @@ export default function Footer(props) {
           </div>
         </div>
       )}
-    </StyledFooter>
+    </Container>
   );
 }

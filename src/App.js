@@ -315,7 +315,7 @@ export default class App extends Component {
               />
             )}
           />
-          <Footer />
+          <Footer windowSize={this.state.windowSize} />
         </div>
       </Router>
     );
