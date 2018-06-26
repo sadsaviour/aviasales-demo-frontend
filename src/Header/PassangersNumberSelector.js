@@ -62,8 +62,14 @@ const Container = styled.div`
 `;
 
 const PassangersNumberLabel = styled.div`
+  display: block;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+const BusinessClassLabel = styled.span`
+  color: #a0b0b9;
 `;
 
 const DropdownIcon = styled.img`
@@ -156,10 +162,10 @@ class PassengersNumberSelector extends Component {
       >
         <PassangersNumberLabel>
           {totalPassangers} пассажир,{" "}
+          <BusinessClassLabel>
+            {this.state.businessClass ? "бизнес" : "эконом"}
+          </BusinessClassLabel>
         </PassangersNumberLabel>
-        <div style={{ color: "#A0B0B9" }}>
-          {this.state.businessClass ? "бизнес" : "эконом"}
-        </div>
 
         <DropdownIcon src={dropdown_icon} alt="dropdown-arrow" />
         <Dropdown show={this.state.dropdown}>
