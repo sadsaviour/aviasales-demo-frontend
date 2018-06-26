@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 import FilterCard from "./FilterCard";
+import ResetButton from "./ResetButton";
 
 import planeIcon from "./img/filter-plane.svg";
 
-const StyledFiltersPane = styled.div`
+const Container = styled.div`
   background-color: #ffffff;
 `;
 
@@ -79,12 +80,12 @@ const DirectionsLabel = styled.div`
   color: #4a4a4a;
 `;
 
-const Slider = styled.div`
+const RangeSelector = styled.div`
   margin-top: 4px;
   margin-bottom: 24px;
 `;
 
-const Circle = styled.div`
+const Slider = styled.div`
   width: 16px;
   height: 16px;
 
@@ -93,7 +94,7 @@ const Circle = styled.div`
   border-radius: 50px;
 `;
 
-const Line = styled.div`
+const Axis = styled.div`
   flex-grow: 2;
   height: 2px;
 
@@ -101,12 +102,12 @@ const Line = styled.div`
   border-radius: 2px;
 `;
 
-export default function FiltersPane(props) {
-  const changes = props.filters.changes;
-  const departureTime = props.filters.departureTime;
-  const carriers = props.filters.carriers;
-
-  const changesList = changes.map(f => (
+export default function Filters({
+  filters: { changes, departureTime, carriers },
+  multyCarriersFilter,
+  handleCarriersFilterChange
+}) {
+  const ChangesList = changes.map(f => (
     <div className="row between-lg middle-lg" key={f.option}>
       <OptionLabel className="styledCheckbox">
         {f.option}
@@ -117,7 +118,7 @@ export default function FiltersPane(props) {
     </div>
   ));
 
-  const directDepartureTime = (
+  const DirectDepartureTime = (
     <div className="column">
       <FlightDirectionLabel className="row">
         Москва{" "}
@@ -144,11 +145,11 @@ export default function FiltersPane(props) {
         </DirectionsLabel>
       </div>
 
-      <Slider className="row middle-lg">
-        <Circle />
-        <Line />
-        <Circle />
-      </Slider>
+      <RangeSelector className="row middle-lg">
+        <Slider />
+        <Axis />
+        <Slider />
+      </RangeSelector>
 
       <DirectionsLabel className="row">Прибытие в Барселону:</DirectionsLabel>
 
@@ -159,11 +160,11 @@ export default function FiltersPane(props) {
         <DirectionsLabel>{departureTime.direct.arrivalTimeTo}</DirectionsLabel>
       </div>
 
-      <Slider className="row middle-lg">
-        <Circle />
-        <Line />
-        <Circle />
-      </Slider>
+      <RangeSelector className="row middle-lg">
+        <Slider />
+        <Axis />
+        <Slider />
+      </RangeSelector>
 
       <FlightDirectionLabel className="row">
         Барселона{"  "}
@@ -188,11 +189,11 @@ export default function FiltersPane(props) {
         <DirectionsLabel>{departureTime.back.departureTimeTo}</DirectionsLabel>
       </div>
 
-      <Slider className="row middle-lg">
-        <Circle />
-        <Line />
-        <Circle />
-      </Slider>
+      <RangeSelector className="row middle-lg">
+        <Slider />
+        <Axis />
+        <Slider />
+      </RangeSelector>
 
       <DirectionsLabel className="row">Прибытие в Москву:</DirectionsLabel>
 
@@ -201,15 +202,15 @@ export default function FiltersPane(props) {
         <DirectionsLabel>{departureTime.back.arrivalTimeTo}</DirectionsLabel>
       </div>
 
-      <Slider className="row middle-lg">
-        <Circle />
-        <Line />
-        <Circle />
-      </Slider>
+      <RangeSelector className="row middle-lg">
+        <Slider />
+        <Axis />
+        <Slider />
+      </RangeSelector>
     </div>
   );
 
-  const flightDuration = (
+  const FlightDuration = (
     <div className="column">
       <FlightDirectionLabel className="row">
         Москва{" "}
@@ -228,11 +229,11 @@ export default function FiltersPane(props) {
         <DirectionsLabel>от 04ч 20м</DirectionsLabel>
         <DirectionsLabel>до 48ч 50м</DirectionsLabel>
       </div>
-      <Slider className="row middle-lg">
-        <Circle />
-        <Line />
-        <Circle />
-      </Slider>
+      <RangeSelector className="row middle-lg">
+        <Slider />
+        <Axis />
+        <Slider />
+      </RangeSelector>
       <FlightDirectionLabel className="row">
         Барселона{" "}
         <img
@@ -250,45 +251,45 @@ export default function FiltersPane(props) {
         <DirectionsLabel>от 04ч 10м</DirectionsLabel>
         <DirectionsLabel>до 41ч 20м</DirectionsLabel>
       </div>
-      <Slider className="row middle-lg">
-        <Circle />
-        <Line />
-        <Circle />
-      </Slider>
+      <RangeSelector className="row middle-lg">
+        <Slider />
+        <Axis />
+        <Slider />
+      </RangeSelector>
     </div>
   );
 
-  const alliansesList = carriers.alliances.map(a => (
+  const AlliansesList = carriers.alliances.map(a => (
     <div className="row between-lg middle-lg " key={a.name}>
       <OptionLabel className="styledCheckbox">
         {a.name}
-        <input type="checkbox" defaultChecked={true} />
+        <input type="checkbox" defaultChecked />
         <span className="checkmark" />
       </OptionLabel>
       <OptionPrice>{a.price}</OptionPrice>
     </div>
   ));
 
-  const individualCarriersList = carriers.carriers.map(c => (
+  const IndividualCarriersList = carriers.carriers.map(c => (
     <div className="row between-lg middle-lg" key={c.name}>
       <OptionLabel className="styledCheckbox">
         {c.name}
-        <input type="checkbox" defaultChecked={true} />
+        <input type="checkbox" defaultChecked />
         <span className="checkmark" />
       </OptionLabel>
       <OptionPrice>{c.price}</OptionPrice>
     </div>
   ));
 
-  const carriersList = (
+  const CarriersList = (
     <div>
       <div className="row between-lg middle-lg">
         <OptionLabel className="styledCheckbox">
           Несколько авиакомпаний
           <input
             type="checkbox"
-            checked={props.multyCarriersFilter}
-            onChange={props.handleCarriersFilterChange}
+            checked={multyCarriersFilter}
+            onChange={handleCarriersFilterChange}
           />
           <span className="checkmark" />
         </OptionLabel>
@@ -298,23 +299,24 @@ export default function FiltersPane(props) {
         </OptionExtraInfo>
       </div>
       <OptionsHeader>Альянсы</OptionsHeader>
-      {alliansesList}
+      {AlliansesList}
       <OptionsHeader>Авиакомпании</OptionsHeader>
-      {individualCarriersList}
+      {IndividualCarriersList}
     </div>
   );
 
   return (
-    <StyledFiltersPane>
-      <FilterCard body={changesList} title="ПЕРЕСАДКИ" />
-      <FilterCard body={directDepartureTime} title="ВРЕМЯ ВЫЛЕТА И ПРИБЫТИЯ" />
+    <Container>
+      <FilterCard body={ChangesList} title="ПЕРЕСАДКИ" />
+      <FilterCard body={DirectDepartureTime} title="ВРЕМЯ ВЫЛЕТА И ПРИБЫТИЯ" />
       <FilterCard title="БАГАЖ" />
       <FilterCard title="Длительность пересадки" />
-      <FilterCard body={flightDuration} title="Время в пути" />
-      <FilterCard body={carriersList} otionsCount="43" title="Авиакомпании" />
+      <FilterCard body={FlightDuration} title="Время в пути" />
+      <FilterCard body={CarriersList} otionsCount="43" title="Авиакомпании" />
       <FilterCard title="аэропорты" />
       <FilterCard otionsCount="71" title="аэропорт пересадки" />
       <FilterCard title="агенства" />
-    </StyledFiltersPane>
+      <ResetButton />
+    </Container>
   );
 }

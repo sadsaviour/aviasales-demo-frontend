@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { filters } from "./data";
 
 import MobileFlightsList from "./MobileFlightsList";
-import FiltersPane from "./FiltersPane";
+import Filters from "./Filters";
 import TabletFlightsList from "./TabletFlightsList";
 import filtersIcon from "./img/filtersIcon.svg";
 
@@ -107,7 +107,7 @@ export default class Main extends Component {
         <div className="container hidden-xs">
           <div className="row">
             <div className="col-md-12 col-lg-3 col-xl-3 hidden-md ">
-              <FiltersPane
+              <Filters
                 filters={filters}
                 multyCarriersFilter={this.props.multyCarriersFilter}
                 handleCarriersFilterChange={
