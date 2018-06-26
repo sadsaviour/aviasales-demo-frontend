@@ -13,9 +13,10 @@ import FlightDates from "./FlightDates";
 import FindTicketsButton from "./FindTicketsButton";
 import PassangersNumberSelector from "./PassangersNumberSelector";
 
-const Container = styled.header`
+const Container = styled.div`
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: ${({ searchPerformed }) =>
+    searchPerformed ? "10px" : "88px"}};
 
   @media only screen and (min-width: 768px) {
     padding-bottom: ${({ searchPerformed }) =>
@@ -138,6 +139,7 @@ const TabletLogoActive = () => (
 
 const LandingHeader = styled.h1`
   margin-top: 47px;
+  margin-bottom: -16px;
 
   @media only screen and (min-width: 768px) {
     margin-top: 80px;
@@ -430,19 +432,21 @@ export default function Header({
         </div>
         {!searchPerformed && (
           <div className="row center-xs">
-            <FindTicketsButton
-              searchString={searchString}
-              searchPerformed={searchPerformed}
-              origin={origin}
-              destination={destination}
-              departureDate={departureDate}
-              returnDate={returnDate}
-              adults={adults}
-              kids={kids}
-              infants={infants}
-              businessClass={businessClass}
-              updateAppState={updateAppState}
-            />
+            <div className="col-xs-12 ">
+              <FindTicketsButton
+                searchString={searchString}
+                searchPerformed={searchPerformed}
+                origin={origin}
+                destination={destination}
+                departureDate={departureDate}
+                returnDate={returnDate}
+                adults={adults}
+                kids={kids}
+                infants={infants}
+                businessClass={businessClass}
+                updateAppState={updateAppState}
+              />
+            </div>
           </div>
         )}
       </div>
