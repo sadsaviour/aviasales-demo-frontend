@@ -11,7 +11,7 @@ import apple from "./img/apple-store.svg";
 import google from "./img/google-store.svg";
 import microsoft from "./img/windows-store.svg";
 
-const States = [
+const states = [
   "Россия",
   "Таиланд",
   "Черногория",
@@ -20,7 +20,7 @@ const States = [
   "Грузия"
 ];
 
-const Cities = [
+const cities = [
   "Москва",
   "Санкт-Петербург",
   "Симферополь",
@@ -29,7 +29,7 @@ const Cities = [
   "Лондон"
 ];
 
-const Carriers = [
+const carriers = [
   "Air Berlin",
   "Air France",
   "Alitalia",
@@ -38,7 +38,7 @@ const Carriers = [
   "KLM"
 ];
 
-const Airports = [
+const airports = [
   "Шереметьево",
   "Курумоч",
   "Домодедово",
@@ -47,7 +47,7 @@ const Airports = [
   "Гамбург"
 ];
 
-const Destinations = [
+const destinations = [
   "MOW – SIP",
   "MOW – AER",
   "MOW – TIV",
@@ -56,7 +56,7 @@ const Destinations = [
   "MOW – BKK"
 ];
 
-const Services = [
+const services = [
   "Горящие авиабилеты",
   "Календарь низких цен",
   "Карта низких цен",
@@ -191,32 +191,32 @@ export default function Footer({ windowSize }) {
           <div className="col-xs-6 col-md-3 col-lg-2">
             <nav>
               <FooterBlockHeader>СТРАНЫ</FooterBlockHeader>
-              <List list={States} />
+              <List list={states} />
               <FooterBlockAll>Все страны →</FooterBlockAll>
             </nav>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>ГОРОДА</FooterBlockHeader>
-            <List list={Cities} />
+            <List list={cities} />
             <FooterBlockAll>Все аэропорты →</FooterBlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>АВИАКОМПАНИИ</FooterBlockHeader>
-            <List list={Carriers} />
+            <List list={carriers} />
             <FooterBlockAll>Все авиакомпании →</FooterBlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>АЭРОПОРТЫ</FooterBlockHeader>
-            <List list={Airports} />
+            <List list={airports} />
             <FooterBlockAll>Все аэропорты →</FooterBlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>НАПРАВЛЕНИЯ</FooterBlockHeader>
-            <List list={Destinations} />
+            <List list={destinations} />
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
             <FooterBlockHeader>СЕРВИСЫ</FooterBlockHeader>
-            <List list={Services} />
+            <List list={services} />
           </div>
         </div>
       </div>
