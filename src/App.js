@@ -33,11 +33,7 @@ const airports = [
 function findIataCode(city) {
   if (city !== "") {
     const iataCode = airports.find(a => a.name === "Бангкок").iataCode;
-    if (iataCode !== undefined) {
-      return iataCode;
-    } else {
-      return "";
-    }
+    return iataCode ? iataCode : "";
   } else {
     return "";
   }
