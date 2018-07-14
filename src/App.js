@@ -30,15 +30,6 @@ const airports = [
   { name: "Москва", country: "Россия", iataCode: "VKO" }
 ];
 
-function findIataCode(city) {
-  if (city !== "") {
-    const iataCode = airports.find(a => a.name === "Бангкок").iataCode;
-    return iataCode ? iataCode : "";
-  } else {
-    return "";
-  }
-}
-
 export default class App extends Component {
   state = {
     origin: { city: "Москва", iataCode: "VKO" },
