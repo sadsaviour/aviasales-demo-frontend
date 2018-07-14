@@ -71,7 +71,7 @@ const Container = styled.div`
   padding-bottom: 24px;
 `;
 
-const FooterBlockHeader = styled.h2`
+const BlockHeader = styled.h2`
   margin-bottom: 16px;
 
   font-family: Roboto;
@@ -83,7 +83,7 @@ const FooterBlockHeader = styled.h2`
   color: #4a4a4a;
 `;
 
-const FooterBlockItems = styled.p`
+const BlockItems = styled.p`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -93,7 +93,7 @@ const FooterBlockItems = styled.p`
   color: #5b5b5c;
 `;
 
-const FooterBlockAll = styled.p`
+const BlockAll = styled.p`
   margin-top: 16px;
   margin-bottom: 31px;
 
@@ -180,7 +180,7 @@ const Copyright = styled.p`
 `;
 
 function List(props) {
-  return props.list.map(i => <FooterBlockItems key={i}>{i}</FooterBlockItems>);
+  return props.list.map(i => <BlockItems key={i}>{i}</BlockItems>);
 }
 
 export default function Footer({ windowSize }) {
@@ -190,32 +190,32 @@ export default function Footer({ windowSize }) {
         <div className="row">
           <div className="col-xs-6 col-md-3 col-lg-2">
             <nav>
-              <FooterBlockHeader>СТРАНЫ</FooterBlockHeader>
+              <BlockHeader>СТРАНЫ</BlockHeader>
               <List list={states} />
-              <FooterBlockAll>Все страны →</FooterBlockAll>
+              <BlockAll>Все страны →</BlockAll>
             </nav>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>ГОРОДА</FooterBlockHeader>
+            <BlockHeader>ГОРОДА</BlockHeader>
             <List list={cities} />
-            <FooterBlockAll>Все аэропорты →</FooterBlockAll>
+            <BlockAll>Все аэропорты →</BlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>АВИАКОМПАНИИ</FooterBlockHeader>
+            <BlockHeader>АВИАКОМПАНИИ</BlockHeader>
             <List list={carriers} />
-            <FooterBlockAll>Все авиакомпании →</FooterBlockAll>
+            <BlockAll>Все авиакомпании →</BlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>АЭРОПОРТЫ</FooterBlockHeader>
+            <BlockHeader>АЭРОПОРТЫ</BlockHeader>
             <List list={airports} />
-            <FooterBlockAll>Все аэропорты →</FooterBlockAll>
+            <BlockAll>Все аэропорты →</BlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>НАПРАВЛЕНИЯ</FooterBlockHeader>
+            <BlockHeader>НАПРАВЛЕНИЯ</BlockHeader>
             <List list={destinations} />
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>СЕРВИСЫ</FooterBlockHeader>
+            <BlockHeader>СЕРВИСЫ</BlockHeader>
             <List list={services} />
           </div>
         </div>
