@@ -143,53 +143,46 @@ const SwapCitiesButton = styled.button`
   cursor: pointer;
 `;
 
+const airports = [
+  { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
+  { name: "Барселона", country: "Испания", iataCode: "BCN" },
+  { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
+  { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
+  { name: "Батуми", country: "Грузия", iataCode: "CMB" },
+  { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
+  { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
+  { name: "Манила", country: "Филипинны", iataCode: "MNL" },
+  { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
+  { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
+  { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
+  { name: "Мальта", country: "Мальта", iataCode: "MLA" },
+  { name: "Москва", country: "Россия", iataCode: "VKO" }
+];
+
 class OriginCity extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropdownVisible: false,
+  state = {
+    dropdownVisible: false
+  };
 
-      airports: [
-        { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
-        { name: "Барселона", country: "Испания", iataCode: "BCN" },
-        { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
-        { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
-        { name: "Батуми", country: "Грузия", iataCode: "CMB" },
-        { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
-        { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
-        { name: "Манила", country: "Филипинны", iataCode: "MNL" },
-        { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
-        { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
-        { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
-        { name: "Мальта", country: "Мальта", iataCode: "MLA" },
-        { name: "Москва", country: "Россия", iataCode: "VKO" }
-      ]
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = event => {
     this.props.updateOrigin(event.target.value);
-  }
+  };
 
-  handleFocus(event) {
+  handleFocus = event => {
     this.setState({ dropdownVisible: true });
-  }
+  };
 
-  handleClick(event) {
+  handleClick = event => {
     this.props.updateOrigin(event.name, event.iataCode);
     this.setState({ dropdownVisible: false });
-  }
+  };
 
   handleClickOutside = evt => {
     this.setState({ dropdownVisible: false });
   };
 
   render() {
-    const airportSuggestionsList = this.state.airports.map(a => (
+    const airportSuggestionsList = airports.map(a => (
       <Suggestion
         key={a.name}
         style={{ cursor: "pointer" }}

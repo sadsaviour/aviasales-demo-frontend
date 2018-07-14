@@ -197,21 +197,18 @@ const OneWayPricesToggle = styled.input`
 `;
 
 class FlightDatesSelector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      departureDropdownVisible: false,
-      returnDropdownVisible: false,
+  state = {
+    departureDropdownVisible: false,
+    returnDropdownVisible: false,
 
-      departureDate: null,
-      returnDate: null,
+    departureDate: null,
+    returnDate: null,
 
-      departureDateLabel: null,
-      returnDateLabel: null,
+    departureDateLabel: null,
+    returnDateLabel: null,
 
-      month: null
-    };
-  }
+    month: null
+  };
 
   showDepartureDropdown = () => {
     this.setState({

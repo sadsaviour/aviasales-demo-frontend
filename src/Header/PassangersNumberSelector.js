@@ -114,17 +114,12 @@ const BussinesClassOption = styled(Checkbox)`
 `;
 
 class PassengersNumberSelector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      adults: 1,
-      kids: 0,
-      infants: 0,
-      dropdown: false
-    };
-
-    this.handleClick = this.handleClick.bind(this);
-  }
+  state = {
+    adults: 1,
+    kids: 0,
+    infants: 0,
+    dropdown: false
+  };
 
   showDropdown() {
     this.setState({ dropdown: true });
@@ -134,11 +129,11 @@ class PassengersNumberSelector extends Component {
     this.setState({ dropdown: false });
   }
 
-  handleClick() {
+  handleClick = () => {
     if (!this.dropdown) {
       this.showDropdown();
     }
-  }
+  };
 
   handleClickOutside(evt) {
     this.hideDropdown();
