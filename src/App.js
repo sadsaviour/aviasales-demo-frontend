@@ -40,28 +40,25 @@ function findIataCode(city) {
 }
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      origin: { city: "Москва", iataCode: "VKO" },
-      destination: { city: "Барселона", iataCode: "BCN" },
-      departureDate: null,
-      returnDate: null,
-      adults: 1,
-      kids: 0,
-      infants: 0,
-      businessClass: false,
-      searchPerformed: false,
-      stateIsDefault: true,
+  state = {
+    origin: { city: "Москва", iataCode: "VKO" },
+    destination: { city: "Барселона", iataCode: "BCN" },
+    departureDate: null,
+    returnDate: null,
+    adults: 1,
+    kids: 0,
+    infants: 0,
+    businessClass: false,
+    searchPerformed: false,
+    stateIsDefault: true,
 
-      windowSize: window.innerWidth,
+    windowSize: window.innerWidth,
 
-      flightsData,
-      flightsDataToDisplay: flightsData,
+    flightsData,
+    flightsDataToDisplay: flightsData,
 
-      multyCarriersFilter: true
-    };
-  }
+    multyCarriersFilter: true
+  };
 
   updateOrigin = (city, iataCode) => {
     this.setState({
