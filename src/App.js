@@ -158,16 +158,28 @@ export default class App extends Component {
   }
 
   filterMonoCarriersFlights() {
-    const filteredFlights = this.state.flightsData.filter(
-      f => typeof f.carrier === "string"
+    function isSingleCarrier(f) {
+      return typeof f.carrier === "string";
+    }
+
+    const filteredFlights = this.state.flightsData.filter(f =>
+      isSingleCarrier(f)
     );
     this.setState({ flightsDataToDisplay: filteredFlights });
   }
 
   filterMultiCarriersFlights() {
+    function isMultyCarrier(f) {
+      return Object.prototype.toString.call(f.carrier) === "[object Array]";
+    }
+    function isSingleCarrier(f) {
+      return typeof f.carrier === "string";
+    }
+
     const filteredFlights = this.state.flightsData.filter(
-      f => Object.prototype.toString.call(f.carrier) === "[object Array]"
+      f => isSingleCarrier(f) || isMultyCarrier(f)
     );
+
     this.setState({ flightsDataToDisplay: filteredFlights });
   }
 
