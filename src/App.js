@@ -9,10 +9,10 @@ import { flightsData } from "./SearchResults/data";
 
 import favicon from "./assets/aviasales.png";
 
-import Header from "./Header/Header";
-import Landing from "./Landing/Landing";
-import Footer from "./Footer/Footer";
-import SearchResults from "./SearchResults/SearchResults";
+import Header from "./Header";
+import Landing from "./Landing";
+import Footer from "./Footer";
+import SearchResults from "./SearchResults";
 
 const airports = [
   { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
