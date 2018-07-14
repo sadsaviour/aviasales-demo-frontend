@@ -3,6 +3,7 @@ import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
 import dropdown_icon from "./img/dropdown-arrow.svg";
+import Checkbox from "../assets/Checkbox";
 
 import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
 
@@ -102,7 +103,7 @@ const PassangerOptionsDelimener = styled.div`
   background: #dbdbdb;
 `;
 
-const BussinesClassOption = styled.label`
+const BussinesClassOption = styled(Checkbox)`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -181,14 +182,11 @@ class PassengersNumberSelector extends Component {
             changeCallback={f => this.changeState(f)}
           />
           <PassangerOptionsDelimener />
-          <BussinesClassOption className="styledCheckbox">
+          <BussinesClassOption
+            onChange={this.handleBusinessClassCheckboxChange}
+            checked={this.props.businessClass}
+          >
             Бизнес-класс
-            <input
-              type="checkbox"
-              onChange={this.handleBusinessClassCheckboxChange}
-              checked={this.props.businessClass}
-            />
-            <span className="checkmark" />
           </BussinesClassOption>
         </Dropdown>
       </Container>

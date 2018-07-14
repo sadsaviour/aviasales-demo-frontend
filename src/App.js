@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 import "./normalize.css";
 import "./flexboxgrid2.css";
 
-import "./App.css";
 import { flightsData } from "./SearchResults/data";
 
 import favicon from "./assets/aviasales.png";
@@ -14,6 +13,35 @@ import Header from "./Header/Header";
 import Landing from "./Landing/Landing";
 import Footer from "./Footer/Footer";
 import SearchResults from "./SearchResults/SearchResults";
+
+const airports = [
+  { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
+  { name: "Барселона", country: "Испания", iataCode: "BCN" },
+  { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
+  { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
+  { name: "Батуми", country: "Грузия", iataCode: "CMB" },
+  { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
+  { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
+  { name: "Манила", country: "Филипинны", iataCode: "MNL" },
+  { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
+  { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
+  { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
+  { name: "Мальта", country: "Мальта", iataCode: "MLA" },
+  { name: "Москва", country: "Россия", iataCode: "VKO" }
+];
+
+function findIataCode(city) {
+  if (city !== "") {
+    const iataCode = airports.find(a => a.name === "Бангкок").iataCode;
+    if (iataCode !== undefined) {
+      return iataCode;
+    } else {
+      return "";
+    }
+  } else {
+    return "";
+  }
+}
 
 export default class App extends Component {
   constructor(props) {
@@ -32,44 +60,11 @@ export default class App extends Component {
 
       windowSize: window.innerWidth,
 
-      airports: [
-        { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
-        { name: "Барселона", country: "Испания", iataCode: "BCN" },
-        { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
-        { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
-        { name: "Батуми", country: "Грузия", iataCode: "CMB" },
-        { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
-        { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
-        { name: "Манила", country: "Филипинны", iataCode: "MNL" },
-        { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
-        { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
-        { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
-        { name: "Мальта", country: "Мальта", iataCode: "MLA" },
-        { name: "Москва", country: "Россия", iataCode: "VKO" }
-      ],
-
-      flightsData: flightsData,
+      flightsData,
       flightsDataToDisplay: flightsData,
 
       multyCarriersFilter: true
     };
-    this.handleCarriersFilterChange = this.handleCarriersFilterChange.bind(
-      this
-    );
-  }
-
-  findIataCode(city) {
-    if (city !== "") {
-      const iataCode = this.state.airports.find(a => a.name === "Бангкок")
-        .iataCode;
-      if (iataCode !== undefined) {
-        return iataCode;
-      } else {
-        return "";
-      }
-    } else {
-      return "";
-    }
   }
 
   updateOrigin = (city, iataCode) => {
@@ -122,10 +117,6 @@ export default class App extends Component {
     this.setState({ windowSize: window.innerWidth });
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.adults !== this.state.adults) console.log("tadah");
-  }
-
   restoreStateFromURL(props) {
     /** Pattern is following:
      * departure Iata, departure date (with 0), departure month (start from 1 and with 0),
@@ -148,13 +139,12 @@ export default class App extends Component {
     const restoredState = {
       origin: {
         iataCode: restoredParams.originIataCode,
-        city: this.state.airports.find(
-          a => a.iataCode === restoredParams.originIataCode
-        ).name
+        city: airports.find(a => a.iataCode === restoredParams.originIataCode)
+          .name
       },
       destination: {
         iataCode: restoredParams.destinationIataCode,
-        city: this.state.airports.find(
+        city: airports.find(
           a => a.iataCode === restoredParams.destinationIataCode
         ).name
       },
@@ -201,7 +191,7 @@ export default class App extends Component {
     this.setState({ flightsDataToDisplay: filteredFlights });
   }
 
-  handleCarriersFilterChange(event) {
+  handleCarriersFilterChange = event => {
     event.target.checked
       ? this.filterMultiCarriersFlights()
       : this.filterMonoCarriersFlights();
@@ -209,7 +199,7 @@ export default class App extends Component {
       multyCarriersFilter: !prevState.multyCarriersFilter
     }));
     console.log("event", event.target.checked);
-  }
+  };
 
   render() {
     return (
