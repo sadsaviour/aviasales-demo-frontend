@@ -7,8 +7,6 @@ import "./flexboxgrid2.css";
 
 import { flightsData } from "./SearchResults/data";
 
-import favicon from "./assets/aviasales.png";
-
 import Header from "./Header";
 import Landing from "./Landing";
 import Footer from "./Footer";
@@ -197,16 +195,10 @@ export default class App extends Component {
       <Router>
         <div className="App">
           <Helmet>
-            <meta charSet="utf-8" />
             <title>
               Дешевые авиабилеты онлайн, цены. Поиск билетов на самолет и
               сравнение цен — Aviasales.ru
             </title>
-            <link
-              href="https://fonts.googleapis.com/css?family=Roboto:400,500,bold"
-              rel="stylesheet"
-            />
-            <link rel="shortcut icon" type="image/png" href={favicon} />
           </Helmet>
           <Route
             exact
