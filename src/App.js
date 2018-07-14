@@ -81,8 +81,6 @@ export default class App extends Component {
     });
   };
 
-  updateAppState = f => this.setState(f);
-
   setSearchStatus = searchPerformed => {
     this.setState({
       searchPerformed
@@ -206,7 +204,7 @@ export default class App extends Component {
             path="/"
             render={() => (
               <Header
-                updateAppState={this.updateAppState}
+                updateAppState={this.setState}
                 origin={this.state.origin}
                 destination={this.state.destination}
                 departureDate={this.state.departureDate}
@@ -240,7 +238,7 @@ export default class App extends Component {
                     kids={this.state.kids}
                     infants={this.state.infants}
                     businessClass={this.state.businessClass}
-                    updateAppState={this.updateAppState}
+                    updateAppState={this.setState}
                     updateOrigin={this.updateOrigin}
                     updateDestination={this.updateDestination}
                     updateDepartureDate={this.updateDepartureDate}
@@ -261,7 +259,7 @@ export default class App extends Component {
                   kids={this.state.kids}
                   infants={this.state.infants}
                   businessClass={this.state.businessClass}
-                  updateAppState={this.updateAppState}
+                  updateAppState={this.setState}
                   updateOrigin={this.updateOrigin}
                   updateDestination={this.updateDestination}
                   updateDepartureDate={this.updateDepartureDate}
