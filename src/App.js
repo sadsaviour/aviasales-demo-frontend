@@ -166,9 +166,7 @@ export default class App extends Component {
 
   filterMultiCarriersFlights() {
     const filteredFlights = this.state.flightsData.filter(
-      f =>
-        typeof f.carrier === "string" ||
-        Object.prototype.toString.call(f.carrier) === "[object Array]"
+      f => Object.prototype.toString.call(f.carrier) === "[object Array]"
     );
     this.setState({ flightsDataToDisplay: filteredFlights });
   }
@@ -180,7 +178,6 @@ export default class App extends Component {
     this.setState(prevState => ({
       multyCarriersFilter: !prevState.multyCarriersFilter
     }));
-    console.log("event", event.target.checked);
   };
 
   render() {

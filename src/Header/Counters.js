@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 function incrementAdults(state) {
-  console.log(JSON.stringify(state));
   if (state.adults < 7) return { adults: state.adults + 1 };
 }
 
