@@ -53,13 +53,13 @@ export default class App extends Component {
 
   updateOrigin = (city, iataCode) => {
     this.setState({
-      origin: { city: city, iataCode: iataCode }
+      origin: { city, iataCode }
     });
   };
 
   updateDestination = (city, iataCode) => {
     this.setState({
-      destination: { city: city, iataCode: iataCode }
+      destination: { city, iataCode }
     });
   };
 
@@ -69,23 +69,23 @@ export default class App extends Component {
     });
   };
 
-  updateDepartureDate = date => {
+  updateDepartureDate = departureDate => {
     this.setState({
-      departureDate: date
+      departureDate
     });
   };
 
-  updateReturnDate = date => {
+  updateReturnDate = returnDate => {
     this.setState({
-      returnDate: date
+      returnDate
     });
   };
 
   updateAppState = f => this.setState(f);
 
-  setSearchStatus = flag => {
+  setSearchStatus = searchPerformed => {
     this.setState({
-      searchPerformed: flag
+      searchPerformed
     });
   };
 
