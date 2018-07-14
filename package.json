@@ -3,10 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reactions/component": "^2.0.2",
     "date-fns": "^1.29.0",
-    "debug": "^3.1.0",
-    "express": "^4.16.3",
     "now": "^11.2.4",
     "path": "^0.12.7",
     "react": "^16.3.2",
@@ -15,17 +12,11 @@
     "react-onclickoutside": "^6.7.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
-    "source-map-explorer": "^1.5.0",
     "styled-components": "^3.2.6"
   },
-  "scripts": {
-    "analyze": "source-map-explorer build/static/js/main.*",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
   "devDependencies": {
+    "source-map-explorer": "^1.5.0",
+    "debug": "^3.1.0",
     "eslint": "^4.9.0",
     "prettier-eslint": "^8.8.2",
     "eslint-config-prettier": "^2.9.0",
@@ -34,17 +25,11 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1"
   },
-  "eslintConfig": {
-    "rules": {
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ]
-    }
+  "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
