@@ -4,17 +4,15 @@ import styled from "styled-components";
 import { bestPricesLastMonth } from "./bestPrices";
 import bestPricesCalendarIcon from "./Assets/bestPricesCalendarIcon.svg";
 
-export const BestPricesCalendarIcon = ({ className }) => {
-  return (
-    <img className={className} src={bestPricesCalendarIcon} alt={"calendar"} />
-  );
-};
+export const CalendarIcon = ({ className }) => (
+  <img className={className} src={bestPricesCalendarIcon} alt="calendar" />
+);
 
-const BestPricesLastMonthContainer = styled.div`
+const LastMonthContainer = styled.div`
   padding-top: 32px;
 `;
 
-const BestPricesCalendarHeader = styled.div`
+const CalendarHeader = styled.div`
   margin-top: 24px;
 
   text-align: center;
@@ -29,7 +27,7 @@ const BestPricesCalendarHeader = styled.div`
   color: #4a4a4a;
 `;
 
-const BestPricesContainer = styled.div`
+const Container = styled.div`
   width: 100%;
 
   @media only screen and (min-width: 992px) {
@@ -73,18 +71,18 @@ const BestPricesContainer = styled.div`
   }
 `;
 
-const BestPricesHeader = styled.div`
+const Header = styled.div`
   display: flex;
   flex-flow: row nowrap;
 `;
 
-const BestPricesCityContainer = styled.div`
+const CityContainer = styled.div`
   flex-grow: 1;
 
   margin-bottom: 24px;
 `;
 
-const BestPricesCity = styled.div`
+const City = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -95,7 +93,7 @@ const BestPricesCity = styled.div`
 
   color: #5b5b5c;
 `;
-const BestPricesCountry = styled.div`
+const Country = styled.div`
   font-weight: 500;
   line-height: 20px;
   font-size: 12px;
@@ -119,14 +117,14 @@ const BestPriceContainer = styled.div`
   }
 `;
 
-const BestPricesOrigin = styled.div`
+const Origin = styled.div`
   font-weight: normal;
   line-height: 20px;
   font-size: 16px;
 
   color: #4a4a4a;
 `;
-const BestPricesPrice = styled.div`
+const Price = styled.div`
   font-weight: normal;
   line-height: 20px;
   font-size: 16px;
@@ -134,14 +132,14 @@ const BestPricesPrice = styled.div`
   color: #00bae8;
 `;
 
-const BestPricesFlag = styled.img`
+const Flag = styled.img`
   margin-top: 8px;
 
   width: 30px;
   height: 30px;
 `;
 
-const BestPricesCapture = styled.div`
+const Capture = styled.div`
   margin-top: 32px;
 
   font-family: Roboto;
@@ -154,7 +152,7 @@ const BestPricesCapture = styled.div`
   color: #4a4a4a;
 `;
 
-const BestPricesDisclaimer = styled.div`
+const Disclaimer = styled.div`
   margin-top: 24px;
   margin-bottom: 40px;
 
@@ -172,50 +170,48 @@ const BestPricesDisclaimer = styled.div`
   color: #a0b0b9;
 `;
 
-export const BestPricesLastMonth = () => {
-  return (
-    <BestPricesLastMonthContainer>
-      <div className="col-xs-12 col-md-10 col-md-offset-1">
-        <div className="row center-xs">
-          <BestPricesCalendarIcon />
-        </div>
-        <BestPricesCalendarHeader>
-          Лучшие цены на авиабилеты за последний месяц
-        </BestPricesCalendarHeader>
-        <div className="row between-lg">
-          {bestPricesLastMonth.map(c => (
-            <BestPricesContainer key={c.city}>
-              <div className="col-lg-12">
-                <BestPricesHeader>
-                  <BestPricesFlag src={c.flag} alt={c.country} />
-                  <BestPricesCityContainer>
-                    <BestPricesCity>{c.city}</BestPricesCity>
-                    <BestPricesCountry>{c.country}</BestPricesCountry>
-                  </BestPricesCityContainer>
-                </BestPricesHeader>
-
-                {c.prices.map(p => (
-                  <BestPriceContainer key={p.origin}>
-                    <BestPricesOrigin>{p.origin}</BestPricesOrigin>
-                    <BestPricesPrice>{p.price}</BestPricesPrice>
-                  </BestPriceContainer>
-                ))}
-              </div>
-            </BestPricesContainer>
-          ))}
-        </div>
-        <div className="row center-xs">
-          <BestPricesCapture>
-            Мы знаем, где купить авиабилеты дешево. Билеты на самолет в 220
-            стран мира. Поиск и сравнение цен на авиабилеты среди 100 агентств и
-            728 авиакомпаний.
-          </BestPricesCapture>
-          <BestPricesDisclaimer>
-            Цены, найденные пользователями за последние 48 часов, не являются
-            офертой.
-          </BestPricesDisclaimer>
-        </div>
+export const BestPricesLastMonth = () => (
+  <LastMonthContainer>
+    <div className="col-xs-12 col-md-10 col-md-offset-1">
+      <div className="row center-xs">
+        <CalendarIcon />
       </div>
-    </BestPricesLastMonthContainer>
-  );
-};
+      <CalendarHeader>
+        Лучшие цены на авиабилеты за последний месяц
+      </CalendarHeader>
+      <div className="row between-lg">
+        {bestPricesLastMonth.map(c => (
+          <Container key={c.city}>
+            <div className="col-lg-12">
+              <Header>
+                <Flag src={c.flag} alt={c.country} />
+                <CityContainer>
+                  <City>{c.city}</City>
+                  <Country>{c.country}</Country>
+                </CityContainer>
+              </Header>
+
+              {c.prices.map(p => (
+                <BestPriceContainer key={p.origin}>
+                  <Origin>{p.origin}</Origin>
+                  <Price>{p.price}</Price>
+                </BestPriceContainer>
+              ))}
+            </div>
+          </Container>
+        ))}
+      </div>
+      <div className="row center-xs">
+        <Capture>
+          Мы знаем, где купить авиабилеты дешево. Билеты на самолет в 220 стран
+          мира. Поиск и сравнение цен на авиабилеты среди 100 агентств и 728
+          авиакомпаний.
+        </Capture>
+        <Disclaimer>
+          Цены, найденные пользователями за последние 48 часов, не являются
+          офертой.
+        </Disclaimer>
+      </div>
+    </div>
+  </LastMonthContainer>
+);
