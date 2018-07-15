@@ -86,20 +86,20 @@ const CurrencyButton = styled.div`
   color: #ffffff;
 `;
 
+const FlexContainer = styled.div`
+  display: flex;
+  flexflow: row nowrap;
+  alignitems: center;
+`;
+
 const BackLink = styled(Link)`
   text-decoration: none;
 `;
 
 const MobileLogo = () => (
-  <div
-    style={{
-      display: "flex",
-      flexflow: "row nowrap",
-      alignItems: "center"
-    }}
-  >
+  <FlexContainer>
     <img src={logo} alt="Aviasales" />
-  </div>
+  </FlexContainer>
 );
 
 const MobileLogoActive = () => (
@@ -109,31 +109,18 @@ const MobileLogoActive = () => (
 );
 
 const TabletLogo = () => (
-  <div
-    style={{
-      display: "flex",
-      flexflow: "row nowrap",
-      alignItems: "center"
-    }}
-  >
+  <FlexContainer>
     <img src={logo} alt="Aviasales" />
     <LogoText>aviasales</LogoText>
-  </div>
+  </FlexContainer>
 );
 
 const TabletLogoActive = () => (
   <BackLink to="/">
-    <div
-      style={{
-        display: "flex",
-        flexflow: "row nowrap",
-        alignItems: "center",
-        marginLeft: "8px"
-      }}
-    >
+    <FlexContainer style={{ marginLeft: "8px" }}>
       <img src={logo} alt="Aviasales" />
       <LogoText>aviasales</LogoText>
-    </div>
+    </FlexContainer>
   </BackLink>
 );
 
