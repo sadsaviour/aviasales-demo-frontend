@@ -6,11 +6,6 @@ import { getDate, getMonth } from "date-fns";
 import findTicketsIcon from "./img/findTicketsIcon.svg";
 
 const Button = styled.button`
-  height: 56px;
-  @media only screen and (min-width: 992px) {
-    height: 58px;
-  }
-
   width: 100%;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -23,16 +18,26 @@ const Button = styled.button`
   border-radius: 4px;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: ${props => (props.searchPerformed ? 0 : "4px")};
+    border-top-left-radius: ${props => (props.searchPerformed ? 0 : "4px")};
+    border-top-right-radius: ${props => (props.searchPerformed ? 0 : "4px")};
+    border-bottom-right-radius: ${props =>
+      props.searchPerformed ? "5px" : "4px"};
   }
 
   font-family: Roboto;
   font-style: normal;
   font-weight: 900;
-  line-height: normal;
+  line-height: 56px;
+
+  @media only screen and (min-width: 768px) {
+    line-height: ${props => (props.searchPerformed ? "56px" : "64px")};
+  }
+
+  @media only screen and (min-width: 992px) {
+    line-height: 58px;
+  }
+
   font-size: 20px;
 
   @media only screen and (min-width: 992px) and (max-width: 1260px) {
@@ -40,36 +45,7 @@ const Button = styled.button`
   }
 
   text-align: center;
-
-  color: #ffffff;
-
-  cursor: pointer;
-`;
-
-const LandingButton = styled.button`
-  height: 56px;
-
-  @media only screen and (min-width: 768px) {
-    height: 64px;
-  }
-
-  width: 100%;
-
-  background: #ff9241;
-  border: 0;
-  border-radius: 4px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
-  font-size: 24px;
-
-  @media only screen and min-width: 768px {
-    font-size: 28px;
-  }
-
-  text-align: center;
+  vertical-align: middle;
 
   color: #ffffff;
 
@@ -122,7 +98,7 @@ const addZeroToString = number => {
   return number;
 };
 
-const MakeQueryString = (
+const codeSateToURL = (
   origin,
   destination,
   destinationDate,
@@ -152,38 +128,48 @@ const MakeQueryString = (
   );
 };
 
-export default function FindTicketsButton(props) {
+export default function FindTicketsButton({
+  searchPerformed,
+  origin,
+  destination,
+  destinationDate,
+  returnDate,
+  adults,
+  kids,
+  infants,
+  businessClass,
+  updateAppState,
+  className,
+  departureDate
+}) {
   return (
-    <ButtonWraper searchPerformed={props.searchPerformed}>
+    <ButtonWraper searchPerformed={searchPerformed}>
       <RouterLink
-        to={`/search/${MakeQueryString(
-          props.origin,
-          props.destination,
-          props.departureDate,
-          props.returnDate,
-          props.adults,
-          props.kids,
-          props.infants,
-          props.businessClass
+        to={`/search/${codeSateToURL(
+          origin,
+          destination,
+          departureDate,
+          returnDate,
+          adults,
+          kids,
+          infants,
+          businessClass
         )}`}
         onClick={() =>
-          props.updateAppState({ searchPerformed: true, stateIsDefault: false })
+          updateAppState({ searchPerformed: true, stateIsDefault: false })
         }
       >
-        {props.searchPerformed ? (
-          <Button name="Find Tickets" type="submit" className={props.className}>
-            Найти билеты
-          </Button>
-        ) : (
-          <LandingButton
-            name="Find Tickets"
-            type="submit"
-            className={props.className}
-          >
-            Найти билеты
+        <Button
+          name="Find Tickets"
+          type="submit"
+          className={className}
+          searchPerformed={searchPerformed}
+        >
+          Найти билеты
+          {!searchPerformed && (
             <IconWraper src={findTicketsIcon} alt="Find Tickets" />
-          </LandingButton>
-        )}
+          )}
+        </Button>
       </RouterLink>
     </ButtonWraper>
   );
