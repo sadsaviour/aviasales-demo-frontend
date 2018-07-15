@@ -6,8 +6,6 @@ import debounce from "lodash/debounce";
 import "./normalize.css";
 import "./flexboxgrid2.css";
 
-import { flightsData } from "./SearchResults/data";
-
 import Header from "./Header";
 import Landing from "./Landing";
 import Footer from "./Footer";
@@ -42,12 +40,7 @@ export default class App extends Component {
     searchPerformed: false,
     stateIsDefault: true,
 
-    windowSize: window.innerWidth,
-
-    flightsData,
-    flightsDataToDisplay: flightsData,
-
-    multyCarriersFilter: true
+    windowSize: window.innerWidth
   };
 
   updateOrigin = (city, iataCode) => {
@@ -162,41 +155,6 @@ export default class App extends Component {
     this.setState(restoredState);
   }
 
-  filterMonoCarriersFlights() {
-    function isSingleCarrier(f) {
-      return typeof f.carrier === "string";
-    }
-
-    const filteredFlights = this.state.flightsData.filter(f =>
-      isSingleCarrier(f)
-    );
-    this.setState({ flightsDataToDisplay: filteredFlights });
-  }
-
-  filterMultiCarriersFlights() {
-    function isMultyCarrier(f) {
-      return Object.prototype.toString.call(f.carrier) === "[object Array]";
-    }
-    function isSingleCarrier(f) {
-      return typeof f.carrier === "string";
-    }
-
-    const filteredFlights = this.state.flightsData.filter(
-      f => isSingleCarrier(f) || isMultyCarrier(f)
-    );
-
-    this.setState({ flightsDataToDisplay: filteredFlights });
-  }
-
-  handleCarriersFilterChange = event => {
-    event.target.checked
-      ? this.filterMultiCarriersFlights()
-      : this.filterMonoCarriersFlights();
-    this.setState(prevState => ({
-      multyCarriersFilter: !prevState.multyCarriersFilter
-    }));
-  };
-
   render() {
     return (
       <Router>
@@ -285,16 +243,7 @@ export default class App extends Component {
             path="/"
             render={() => <Landing windowSize={this.state.windowSize} />}
           />
-          <Route
-            path="/search"
-            render={props => (
-              <SearchResults
-                flightsData={this.state.flightsDataToDisplay}
-                multyCarriersFilter={this.state.multyCarriersFilter}
-                handleCarriersFilterChange={this.handleCarriersFilterChange}
-              />
-            )}
-          />
+          <Route path="/search" render={props => <SearchResults />} />
           <Footer windowSize={this.state.windowSize} />
         </div>
       </Router>

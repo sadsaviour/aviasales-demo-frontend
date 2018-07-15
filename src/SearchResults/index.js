@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
-import { filters } from "./data";
+import { filters, flightsData } from "./data";
 
 import MobileFlightsList from "./MobileFlightsList";
 import Filters from "./Filters";
@@ -92,41 +92,80 @@ const TabletFiltersIcon = styled.img`
   height: 14px;
 `;
 
-export default function Main({
-  flightsData,
-  multyCarriersFilter,
-  handleCarriersFilterChange
-}) {
-  return (
-    <StyledMain>
-      <div className="container hidden-md hidden-lg hidden-xl">
-        <MobileFlightsList flights={flightsData} />
-        <div className="row center-xs ">
-          <MobileFiltersButton>Фильтровать</MobileFiltersButton>
-        </div>
-      </div>
+export default class Main extends Component {
+  state = {
+    flightsData,
+    flightsDataToDisplay: flightsData,
+    multyCarriersFilter: true
+  };
 
-      <div className="container hidden-xs">
-        <div className="row">
-          <div className="col-md-12 col-lg-3 col-xl-3 hidden-md ">
-            <Filters
-              filters={filters}
-              multyCarriersFilter={multyCarriersFilter}
-              handleCarriersFilterChange={handleCarriersFilterChange}
-            />
+  filterMonoCarriersFlights = () => {
+    function isSingleCarrier(f) {
+      return typeof f.carrier === "string";
+    }
+
+    const filteredFlights = this.state.flightsData.filter(f =>
+      isSingleCarrier(f)
+    );
+    this.setState({ flightsDataToDisplay: filteredFlights });
+  };
+
+  filterMultiCarriersFlights = () => {
+    function isMultyCarrier(f) {
+      return Object.prototype.toString.call(f.carrier) === "[object Array]";
+    }
+    function isSingleCarrier(f) {
+      return typeof f.carrier === "string";
+    }
+
+    const filteredFlights = this.state.flightsData.filter(
+      f => isSingleCarrier(f) || isMultyCarrier(f)
+    );
+
+    this.setState({ flightsDataToDisplay: filteredFlights });
+  };
+
+  handleCarriersFilterChange = event => {
+    event.target.checked
+      ? this.filterMultiCarriersFlights()
+      : this.filterMonoCarriersFlights();
+    this.setState(prevState => ({
+      multyCarriersFilter: !prevState.multyCarriersFilter
+    }));
+  };
+
+  render() {
+    return (
+      <StyledMain>
+        <div className="container hidden-md hidden-lg hidden-xl">
+          <MobileFlightsList flights={this.state.flightsDataToDisplay} />
+          <div className="row center-xs ">
+            <MobileFiltersButton>Фильтровать</MobileFiltersButton>
           </div>
-          <div className="col-md-12 col-lg-9 col-xl-7">
-            <div className="row center-md hidden-xs hidden-lg hidden-xl">
-              <TabletFiltersButton>
-                <TabletFiltersIcon src={filtersIcon} alt="filters" />
-              </TabletFiltersButton>
-            </div>
-            <TabletFlightsList flights={flightsData} />
-            <ShowMoreButton>ПОКАЗАТЬ ЕЩЕ 10 БИЛЕТОВ!</ShowMoreButton>
-          </div>
-          <div className="col-lg-offset-2" />
         </div>
-      </div>
-    </StyledMain>
-  );
+
+        <div className="container hidden-xs">
+          <div className="row">
+            <div className="col-md-12 col-lg-3 col-xl-3 hidden-md ">
+              <Filters
+                filters={filters}
+                multyCarriersFilter={this.state.multyCarriersFilter}
+                handleCarriersFilterChange={this.handleCarriersFilterChange}
+              />
+            </div>
+            <div className="col-md-12 col-lg-9 col-xl-7">
+              <div className="row center-md hidden-xs hidden-lg hidden-xl">
+                <TabletFiltersButton>
+                  <TabletFiltersIcon src={filtersIcon} alt="filters" />
+                </TabletFiltersButton>
+              </div>
+              <TabletFlightsList flights={this.state.flightsDataToDisplay} />
+              <ShowMoreButton>ПОКАЗАТЬ ЕЩЕ 10 БИЛЕТОВ!</ShowMoreButton>
+            </div>
+            <div className="col-lg-offset-2" />
+          </div>
+        </div>
+      </StyledMain>
+    );
+  }
 }
