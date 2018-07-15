@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import debounce from "lodash/debounce";
 
 import "./normalize.css";
 import "./flexboxgrid2.css";
@@ -86,11 +87,17 @@ export default class App extends Component {
   };
 
   componentWillMount() {
-    window.addEventListener("resize", this.handleWindowSizeChange);
+    window.addEventListener(
+      "resize",
+      debounce(this.handleWindowSizeChange, 300)
+    );
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);
+    window.removeEventListener(
+      "resize",
+      debounce(this.handleWindowSizeChange, 300)
+    );
   }
 
   handleWindowSizeChange = () => {
