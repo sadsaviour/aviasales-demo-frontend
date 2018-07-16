@@ -103,9 +103,7 @@ const codeSateToURL = (
   destination,
   destinationDate,
   returnDate,
-  adults,
-  kids,
-  infants,
+  passengers,
   businessClass
 ) => {
   const departureDateString =
@@ -114,17 +112,21 @@ const codeSateToURL = (
   const returnDateString =
     addZeroToString(getDate(returnDate).toString()) +
     addZeroToString((getMonth(returnDate) + 1).toString());
-  const passengers =
+  const passengersString =
     (businessClass ? "b" : "") +
-    (adults ? adults.toString() : "") +
-    (kids ? kids.toString() : infants ? "0" : "") +
-    (infants ? infants.toString() : "");
+    (passengers.adults ? passengers.adults.toString() : "") +
+    (passengers.kids
+      ? passengers.kids.toString()
+      : passengers.infants
+        ? "0"
+        : "") +
+    (passengers.infants ? passengers.infants.toString() : "");
   return (
     origin.iataCode +
     departureDateString +
     destination.iataCode +
     returnDateString +
-    passengers
+    passengersString
   );
 };
 
@@ -134,9 +136,7 @@ export default function FindTicketsButton({
   destination,
   destinationDate,
   returnDate,
-  adults,
-  kids,
-  infants,
+  passengers,
   businessClass,
   updateAppState,
   className,
@@ -150,9 +150,7 @@ export default function FindTicketsButton({
           destination,
           departureDate,
           returnDate,
-          adults,
-          kids,
-          infants,
+          passengers,
           businessClass
         )}`}
         onClick={() =>

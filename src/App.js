@@ -29,48 +29,11 @@ const airports = [
 
 export default class App extends Component {
   state = {
-    origin: { city: "Москва", iataCode: "VKO" },
-    destination: { city: "Барселона", iataCode: "BCN" },
-    departureDate: null,
-    returnDate: null,
-    adults: 1,
-    kids: 0,
-    infants: 0,
-    businessClass: false,
     searchPerformed: false,
+
     stateIsDefault: true,
 
     windowSize: window.innerWidth
-  };
-
-  updateOrigin = (city, iataCode) => {
-    this.setState({
-      origin: { city, iataCode }
-    });
-  };
-
-  updateDestination = (city, iataCode) => {
-    this.setState({
-      destination: { city, iataCode }
-    });
-  };
-
-  swapCities = () => {
-    this.setState(prevState => {
-      return { origin: prevState.destination, destination: prevState.origin };
-    });
-  };
-
-  updateDepartureDate = departureDate => {
-    this.setState({
-      departureDate
-    });
-  };
-
-  updateReturnDate = returnDate => {
-    this.setState({
-      returnDate
-    });
   };
 
   setSearchStatus = searchPerformed => {
@@ -97,7 +60,7 @@ export default class App extends Component {
     this.setState({ windowSize: window.innerWidth });
   };
 
-  restoreStateFromURL(props) {
+  restoreStateFromURL = props => {
     /** Pattern is following:
      * departure Iata, departure date (with 0), departure month (start from 1 and with 0),
      * destination Iata, return date, return month,
@@ -153,7 +116,7 @@ export default class App extends Component {
     };
 
     this.setState(restoredState);
-  }
+  };
 
   render() {
     return (
@@ -171,21 +134,8 @@ export default class App extends Component {
             render={() => (
               <Header
                 updateAppState={this.setState}
-                origin={this.state.origin}
-                destination={this.state.destination}
-                departureDate={this.state.departureDate}
-                returnDate={this.state.returnDate}
-                updateOrigin={this.updateOrigin}
-                updateDestination={this.updateDestination}
-                updateDepartureDate={this.updateDepartureDate}
-                updateReturnDate={this.updateReturnDate}
-                adults={this.state.adults}
-                kids={this.state.kids}
-                infants={this.state.infants}
-                businessClass={this.state.businessClass}
                 searchPerformed={false}
                 windowSize={this.state.windowSize}
-                swapCitiesCallback={this.swapCities}
                 searchString={this.state.searchString}
               />
             )}
@@ -196,40 +146,15 @@ export default class App extends Component {
               this.state.stateIsDefault ? (
                 this.restoreStateFromURL(props) || (
                   <Header
-                    origin={this.state.origin}
-                    destination={this.state.destination}
-                    departureDate={this.state.departureDate}
-                    returnDate={this.state.returnDate}
-                    adults={this.state.adults}
-                    kids={this.state.kids}
-                    infants={this.state.infants}
-                    businessClass={this.state.businessClass}
                     updateAppState={this.setState}
-                    updateOrigin={this.updateOrigin}
-                    updateDestination={this.updateDestination}
-                    updateDepartureDate={this.updateDepartureDate}
-                    updateReturnDate={this.updateReturnDate}
                     searchPerformed={this.state.searchPerformed}
                     windowSize={this.state.windowSize}
-                    swapCitiesCallback={this.swapCities}
                     searchString={this.state.searchString}
                   />
                 )
               ) : (
                 <Header
-                  origin={this.state.origin}
-                  destination={this.state.destination}
-                  departureDate={this.state.departureDate}
-                  returnDate={this.state.returnDate}
-                  adults={this.state.adults}
-                  kids={this.state.kids}
-                  infants={this.state.infants}
-                  businessClass={this.state.businessClass}
                   updateAppState={this.setState}
-                  updateOrigin={this.updateOrigin}
-                  updateDestination={this.updateDestination}
-                  updateDepartureDate={this.updateDepartureDate}
-                  updateReturnDate={this.updateReturnDate}
                   searchPerformed={this.state.searchPerformed}
                   windowSize={this.state.windowSize}
                   swapCitiesCallback={this.swapCities}

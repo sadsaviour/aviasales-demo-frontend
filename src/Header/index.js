@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { Link, Route } from "react-router-dom";
 
@@ -228,6 +228,7 @@ function ShortSearchQuery({
   destination,
   departureDate,
   returnDate,
+  passengers,
   adults,
   kids,
   infants,
@@ -279,15 +280,18 @@ function ShortSearchQuery({
         {getDate(departureDate)} {monthes[getMonth(departureDate)]}
         {" — "}
         {getDate(returnDate)} {monthes[getMonth(returnDate)]} ,{" "}
-        {adults + kids + infants} пассажир
+        {passengers.adults + passengers.kids + passengers.infants} пассажир
       </DatesAndPassangers>
     </div>
   );
 }
 
-export default function Header({
+export default class Header extends Component {
+  /*({
   windowSize,
   searchPerformed,
+  searchString,
+
   origin,
   destination,
   departureDate,
@@ -295,148 +299,185 @@ export default function Header({
   adults,
   kids,
   infants,
+  businessClass,
+
   updateOrigin,
   swapCitiesCallback,
   updateDestination,
   updateDepartureDate,
   updateReturnDate,
-  businessClass,
-  updateAppState,
-  searchString,
+  
 
   ...props
-}) {
-  return (
-    <Container searchPerformed={searchPerformed}>
-      <div className="container">
-        <div className="row between-xs middle-xs">
-          <Logo windowSize={windowSize} />
-          {searchPerformed &&
-            (windowSize < 768 && (
-              <ShortSearchQuery
-                origin={origin}
-                destination={destination}
-                departureDate={departureDate}
-                returnDate={returnDate}
-                adults={adults}
-                kids={kids}
-                infants={infants}
-              />
-            ))}
-          {searchPerformed && <CurrencyButton>RUB</CurrencyButton>}
-        </div>
+}) */
 
-        {!searchPerformed && (
-          <div className="row center-xs">
-            <LandingHeader>Поиск дешевых авиабилетов</LandingHeader>
+  state = {
+    origin: { city: "Москва", iataCode: "VKO" },
+    destination: { city: "Барселона", iataCode: "BCN" },
+    departureDate: null,
+    returnDate: null,
+    passengers: {
+      adults: 1,
+      kids: 0,
+      infants: 0
+    },
+
+    businessClass: false
+  };
+
+  updateOrigin = (city, iataCode) => {
+    this.setState({
+      origin: { city, iataCode }
+    });
+  };
+
+  updateDestination = (city, iataCode) => {
+    this.setState({
+      destination: { city, iataCode }
+    });
+  };
+
+  swapCities = () => {
+    this.setState(prevState => {
+      return { origin: prevState.destination, destination: prevState.origin };
+    });
+  };
+
+  updateDepartureDate = departureDate => {
+    this.setState({
+      departureDate
+    });
+  };
+
+  updateReturnDate = returnDate => {
+    this.setState({
+      returnDate
+    });
+  };
+
+  render() {
+    const { windowSize, searchPerformed, searchString, ...other } = this.props;
+    return (
+      <Container searchPerformed={searchPerformed}>
+        <div className="container">
+          <div className="row between-xs middle-xs">
+            <Logo windowSize={windowSize} />
+            {searchPerformed &&
+              (windowSize < 768 && (
+                <ShortSearchQuery
+                  origin={this.state.origin}
+                  destination={this.state.destination}
+                  departureDate={this.state.departureDate}
+                  returnDate={this.state.returnDate}
+                  passengers={this.state.passengers}
+                />
+              ))}
+            {searchPerformed && <CurrencyButton>RUB</CurrencyButton>}
           </div>
-        )}
 
-        {!searchPerformed && (
-          <div className="row center-xs">
-            <LandingSubHeader>
-              Лучший способ купить авиабилеты дешево
-            </LandingSubHeader>
-          </div>
-        )}
+          {!searchPerformed && (
+            <div className="row center-xs">
+              <LandingHeader>Поиск дешевых авиабилетов</LandingHeader>
+            </div>
+          )}
 
-        <div
-          className={
-            searchPerformed ? "row middle-lg hidden-xs" : "row middle-lg "
-          }
-          style={
-            windowSize > 768 ? { marginTop: "38px" } : { marginTop: "32px" }
-          }
-        >
+          {!searchPerformed && (
+            <div className="row center-xs">
+              <LandingSubHeader>
+                Лучший способ купить авиабилеты дешево
+              </LandingSubHeader>
+            </div>
+          )}
+
           <div
             className={
-              searchPerformed
-                ? "col-xs-12 col-lg-10"
-                : "col-xs-12 col-lg-10 col-lg-offset-1"
+              searchPerformed ? "row middle-lg hidden-xs" : "row middle-lg "
+            }
+            style={
+              windowSize > 768 ? { marginTop: "38px" } : { marginTop: "32px" }
             }
           >
-            <SearchContainer>
-              <OriginCity
-                origin={origin}
-                updateOrigin={updateOrigin}
-                swapCitiesCallback={swapCitiesCallback}
-              />
-              <ArrivalCity
-                destination={destination}
-                updateDestination={updateDestination}
-              />
-              <FlightDates
-                departureDate={departureDate}
-                returnDate={returnDate}
-                updateDepartureDate={updateDepartureDate}
-                updateReturnDate={updateReturnDate}
-              />
-              <PassangersNumberSelector
-                origin={origin}
-                searchPerformed={searchPerformed}
-                adults={adults}
-                kids={kids}
-                infants={infants}
-                businessClass={businessClass}
-                updateAppState={updateAppState}
-              />
-              {searchPerformed &&
-                windowSize < 992 && (
+            <div
+              className={
+                searchPerformed
+                  ? "col-xs-12 col-lg-10"
+                  : "col-xs-12 col-lg-10 col-lg-offset-1"
+              }
+            >
+              <SearchContainer>
+                <OriginCity
+                  origin={this.state.origin}
+                  updateOrigin={this.updateOrigin}
+                  swapCitiesCallback={this.swapCitiesCallback}
+                />
+                <ArrivalCity
+                  destination={this.state.destination}
+                  updateDestination={this.updateDestination}
+                />
+                <FlightDates
+                  departureDate={this.state.departureDate}
+                  returnDate={this.state.returnDate}
+                  updateDepartureDate={this.updateDepartureDate}
+                  updateReturnDate={this.updateReturnDate}
+                />
+                <PassangersNumberSelector
+                  searchPerformed={this.state.searchPerformed}
+                  passengers={this.state.passengers}
+                  businessClass={this.state.businessClass}
+                  updateAppState={f => this.setState(f)}
+                />
+                {searchPerformed &&
+                  windowSize < 992 && (
+                    <FindTicketsButton
+                      searchString={searchString}
+                      searchPerformed={searchPerformed}
+                      origin={this.state.origin}
+                      destination={this.state.destination}
+                      departureDate={this.state.departureDate}
+                      returnDate={this.state.returnDate}
+                      passengers={this.state.passengers}
+                      businessClass={this.state.businessClass}
+                      updateAppState={f => this.setState(f)}
+                    />
+                  )}
+              </SearchContainer>
+            </div>
+            {searchPerformed &&
+              windowSize > 992 && (
+                <div className="col-lg-2">
                   <FindTicketsButton
                     searchString={searchString}
                     searchPerformed={searchPerformed}
-                    origin={origin}
-                    destination={destination}
-                    departureDate={departureDate}
-                    returnDate={returnDate}
-                    adults={adults}
-                    kids={kids}
-                    infants={infants}
-                    businessClass={businessClass}
-                    updateAppState={updateAppState}
+                    origin={this.state.origin}
+                    destination={this.state.destination}
+                    departureDate={this.state.departureDate}
+                    returnDate={this.state.returnDate}
+                    passengers={this.state.passengers}
+                    businessClass={this.state.businessClass}
+                    updateAppState={f => this.setState(f)}
                   />
-                )}
-            </SearchContainer>
+                </div>
+              )}
           </div>
-          {searchPerformed &&
-            windowSize > 992 && (
-              <div className="col-lg-2">
+          {!searchPerformed && (
+            <div className="row center-xs">
+              <div className="col-xs-12 ">
                 <FindTicketsButton
                   searchString={searchString}
                   searchPerformed={searchPerformed}
-                  origin={origin}
-                  destination={destination}
-                  departureDate={departureDate}
-                  returnDate={returnDate}
-                  adults={adults}
-                  kids={kids}
-                  infants={infants}
-                  businessClass={businessClass}
-                  updateAppState={updateAppState}
+                  origin={this.state.origin}
+                  destination={this.state.destination}
+                  departureDate={this.state.departureDate}
+                  returnDate={this.state.returnDate}
+                  passengers={this.state.passengers}
+                  businessClass={this.state.businessClass}
+                  updateAppState={f => this.setState(f)}
                 />
               </div>
-            )}
-        </div>
-        {!searchPerformed && (
-          <div className="row center-xs">
-            <div className="col-xs-12 ">
-              <FindTicketsButton
-                searchString={searchString}
-                searchPerformed={searchPerformed}
-                origin={origin}
-                destination={destination}
-                departureDate={departureDate}
-                returnDate={returnDate}
-                adults={adults}
-                kids={kids}
-                infants={infants}
-                businessClass={businessClass}
-                updateAppState={updateAppState}
-              />
             </div>
-          </div>
-        )}
-      </div>
-    </Container>
-  );
+          )}
+        </div>
+      </Container>
+    );
+  }
 }

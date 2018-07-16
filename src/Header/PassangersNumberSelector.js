@@ -115,9 +115,6 @@ const BussinesClassOption = styled(Checkbox)`
 
 class PassengersNumberSelector extends Component {
   state = {
-    adults: 1,
-    kids: 0,
-    infants: 0,
     dropdown: false
   };
 
@@ -149,7 +146,9 @@ class PassengersNumberSelector extends Component {
 
   render() {
     const totalPassangers =
-      this.props.adults + this.props.kids + this.props.infants;
+      this.props.passengers.adults +
+      this.props.passengers.kids +
+      this.props.passengers.infants;
     return (
       <Container
         onClick={this.handleClick}
@@ -158,23 +157,23 @@ class PassengersNumberSelector extends Component {
         <PassangersNumberLabel>
           {totalPassangers} пассажир,{" "}
           <BusinessClassLabel>
-            {this.state.businessClass ? "бизнес" : "эконом"}
+            {this.props.businessClass ? "бизнес" : "эконом"}
           </BusinessClassLabel>
         </PassangersNumberLabel>
 
         <DropdownIcon src={dropdown_icon} alt="dropdown-arrow" />
         <Dropdown show={this.state.dropdown}>
           <AdultsCounter
-            adults={this.props.adults}
-            changeCallback={f => this.changeState(f)}
+            adults={this.props.passengers.adults}
+            changeCallback={f => this.props.updateAppState(f)}
           />
           <KidsCounter
-            kids={this.props.kids}
-            changeCallback={f => this.changeState(f)}
+            kids={this.props.passengers.kids}
+            changeCallback={f => this.props.updateAppState(f)}
           />
           <InfantsCounter
-            infants={this.props.infants}
-            changeCallback={f => this.changeState(f)}
+            infants={this.props.passengers.infants}
+            changeCallback={f => this.props.updateAppState(f)}
           />
           <PassangerOptionsDelimener />
           <BussinesClassOption

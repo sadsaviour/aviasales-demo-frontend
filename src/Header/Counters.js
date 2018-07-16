@@ -2,30 +2,38 @@ import React from "react";
 import styled from "styled-components";
 
 function incrementAdults(state) {
-  if (state.adults < 7) return { adults: state.adults + 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (adults < 7) return { passengers: { adults: adults + 1, kids, infants } };
 }
 
 function decrementAdults(state) {
-  if (state.adults > 1)
-    if (state.adults - 1 < state.infants)
-      return { adults: state.adults - 1, infants: state.infants - 1 };
-    else return { adults: state.adults - 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (adults > 1)
+    if (adults - 1 < infants)
+      return { passengers: { adults: adults - 1, infants: infants - 1, kids } };
+    else return { passengers: { adults: adults - 1, kids, infants } };
 }
 
 function incrementKids(state) {
-  if (state.kids < 7) return { kids: state.kids + 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (kids < 7) return { passengers: { kids: kids + 1, adults, infants } };
 }
 
 function decrementKids(state) {
-  if (state.kids > 0) return { kids: state.kids - 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (kids > 0) return { passengers: { kids: kids - 1, adults, infants } };
 }
 
 function incrementInfants(state) {
-  if (state.infants < state.adults) return { infants: state.infants + 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (infants < adults)
+    return { passengers: { infants: infants + 1, kids, adults } };
 }
 
 function decrementInfants(state) {
-  if (state.infants > 0) return { infants: state.infants - 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (infants > 0)
+    return { passengers: { infants: infants - 1, kids, adults } };
 }
 
 const CounterLabel = styled.div`
