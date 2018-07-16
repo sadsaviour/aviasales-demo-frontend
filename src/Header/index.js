@@ -103,7 +103,7 @@ const MobileLogo = () => (
 );
 
 const MobileLogoActive = () => (
-  <BackLink to="/">
+  <BackLink to="/" onClick={() => this.props.setSearchStatus(false)}>
     <img src={backIcon} alt="back" />
   </BackLink>
 );
@@ -116,7 +116,7 @@ const TabletLogo = () => (
 );
 
 const TabletLogoActive = () => (
-  <BackLink to="/">
+  <BackLink to="/" onClick={() => this.props.setSearchStatus(false)}>
     <FlexContainer style={{ marginLeft: "8px" }}>
       <img src={logo} alt="Aviasales" />
       <LogoText>aviasales</LogoText>
@@ -209,11 +209,11 @@ const SearchContainer = styled.div`
   width: 100%;
 `;
 
-function Logo({ windowSize }) {
+function Logo({ windowSize, setSearchStatus }) {
   return windowSize < 768 ? (
     <div style={{ marginLeft: "6px" }}>
       <Route exact path="/" component={MobileLogo} />
-      <Route path="/search" component={MobileLogoActive} />
+      <Route path="/search" render={MobileLogoActive} />
     </div>
   ) : (
     <div style={{ marginLeft: "6px" }}>
@@ -287,43 +287,24 @@ function ShortSearchQuery({
 }
 
 export default class Header extends Component {
-  /*({
-  windowSize,
-  searchPerformed,
-  searchString,
+  state =
+    /* this.props.restoredState
+    ? this.props.restoredState
+    : */
+    {
+      origin: { city: "Москва", iataCode: "VKO" },
+      destination: { city: "Барселона", iataCode: "BCN" },
+      departureDate: null,
+      returnDate: null,
+      passengers: {
+        adults: 1,
+        kids: 0,
+        infants: 0
+      },
 
-  origin,
-  destination,
-  departureDate,
-  returnDate,
-  adults,
-  kids,
-  infants,
-  businessClass,
-
-  updateOrigin,
-  swapCitiesCallback,
-  updateDestination,
-  updateDepartureDate,
-  updateReturnDate,
-  
-
-  ...props
-}) */
-
-  state = {
-    origin: { city: "Москва", iataCode: "VKO" },
-    destination: { city: "Барселона", iataCode: "BCN" },
-    departureDate: null,
-    returnDate: null,
-    passengers: {
-      adults: 1,
-      kids: 0,
-      infants: 0
-    },
-
-    businessClass: false
-  };
+      businessClass: false,
+      restoredState: this.props.restoredState
+    };
 
   updateOrigin = (city, iataCode) => {
     this.setState({
@@ -356,12 +337,28 @@ export default class Header extends Component {
   };
 
   render() {
-    const { windowSize, searchPerformed, searchString, ...other } = this.props;
+    const {
+      windowSize,
+      searchPerformed,
+      searchString,
+      setSearchStatus,
+      restoredState,
+      ...other
+    } = this.props;
+    const isSessionFromURL = searchPerformed
+      ? false
+      : restoredState
+        ? true
+        : false;
+    if (isSessionFromURL) {
+      setSearchStatus(true);
+      this.setState(restoredState);
+    }
     return (
       <Container searchPerformed={searchPerformed}>
         <div className="container">
           <div className="row between-xs middle-xs">
-            <Logo windowSize={windowSize} />
+            <Logo windowSize={windowSize} setSearchStatus={setSearchStatus} />
             {searchPerformed &&
               (windowSize < 768 && (
                 <ShortSearchQuery
@@ -431,6 +428,7 @@ export default class Header extends Component {
                     <FindTicketsButton
                       searchString={searchString}
                       searchPerformed={searchPerformed}
+                      setSearchStatus={setSearchStatus}
                       origin={this.state.origin}
                       destination={this.state.destination}
                       departureDate={this.state.departureDate}
@@ -448,6 +446,7 @@ export default class Header extends Component {
                   <FindTicketsButton
                     searchString={searchString}
                     searchPerformed={searchPerformed}
+                    setSearchStatus={setSearchStatus}
                     origin={this.state.origin}
                     destination={this.state.destination}
                     departureDate={this.state.departureDate}
@@ -465,6 +464,7 @@ export default class Header extends Component {
                 <FindTicketsButton
                   searchString={searchString}
                   searchPerformed={searchPerformed}
+                  setSearchStatus={setSearchStatus}
                   origin={this.state.origin}
                   destination={this.state.destination}
                   departureDate={this.state.departureDate}

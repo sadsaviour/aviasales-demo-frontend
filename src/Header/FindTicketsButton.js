@@ -132,13 +132,13 @@ const codeSateToURL = (
 
 export default function FindTicketsButton({
   searchPerformed,
+  setSearchStatus,
   origin,
   destination,
   destinationDate,
   returnDate,
   passengers,
   businessClass,
-  updateAppState,
   className,
   departureDate
 }) {
@@ -153,9 +153,7 @@ export default function FindTicketsButton({
           passengers,
           businessClass
         )}`}
-        onClick={() =>
-          updateAppState({ searchPerformed: true, stateIsDefault: false })
-        }
+        onClick={() => setSearchStatus(true)}
       >
         <Button
           name="Find Tickets"

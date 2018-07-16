@@ -199,15 +199,7 @@ const OneWayPricesToggle = styled.input`
 class FlightDatesSelector extends Component {
   state = {
     departureDropdownVisible: false,
-    returnDropdownVisible: false,
-
-    departureDate: null,
-    returnDate: null,
-
-    departureDateLabel: null,
-    returnDateLabel: null,
-
-    month: null
+    returnDropdownVisible: false
   };
 
   showDepartureDropdown = () => {
@@ -224,15 +216,15 @@ class FlightDatesSelector extends Component {
     });
   };
 
-  setDepartureDate = (date, dateLabel) => {
-    this.props.updateDepartureDate(date);
+  setDepartureDate = date => {
     this.setState({
       departureDropdownVisible: false,
       returnDropdownVisible: true
     });
+    this.props.updateDepartureDate(date);
   };
 
-  setReturnDate = (date, dateLabel) => {
+  setReturnDate = date => {
     this.props.updateReturnDate(date);
     this.setState({
       returnDropdownVisible: false
@@ -249,11 +241,13 @@ class FlightDatesSelector extends Component {
   render() {
     return (
       <FlightDates>
-        <DepartureDate onClick={this.showDepartureDropdown}>
+        <DepartureDate>
           {this.props.departureDate ? (
-            <p>{dateLabel(this.props.departureDate)}</p>
+            <p onClick={this.showDepartureDropdown}>
+              {dateLabel(this.props.departureDate)}
+            </p>
           ) : (
-            <Placeholder>Туда</Placeholder>
+            <Placeholder onClick={this.showDepartureDropdown}>Туда</Placeholder>
           )}
           <img
             src={CalendarIcon}
@@ -267,9 +261,7 @@ class FlightDatesSelector extends Component {
                 selectedDate={this.props.departureDate}
                 departureDate={this.props.departureDate}
                 returnDate={this.props.returnDate}
-                setCallback={(date, dateLabel) =>
-                  this.setDepartureDate(date, dateLabel)
-                }
+                setCallback={this.setDepartureDate}
               />
               <OneWayPricesOption>
                 <label className="iosStyleCheckbox">
@@ -281,11 +273,13 @@ class FlightDatesSelector extends Component {
             </Dropdown>
           )}
         </DepartureDate>
-        <ReturnDate onClick={this.showReturnDropdown}>
+        <ReturnDate>
           {this.props.returnDate ? (
-            <p>{dateLabel(this.props.returnDate)}</p>
+            <p onClick={this.showReturnDropdown}>
+              {dateLabel(this.props.returnDate)}
+            </p>
           ) : (
-            <Placeholder>Обратно</Placeholder>
+            <Placeholder onClick={this.showReturnDropdown}>Обратно</Placeholder>
           )}
           <img
             src={CalendarIcon}

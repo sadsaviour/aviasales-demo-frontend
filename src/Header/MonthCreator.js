@@ -275,27 +275,10 @@ export default class DateSelector extends Component {
     });
   };
 
-  setSelectedDate = (date, dateLabel) => {
-    this.props.setCallback(date, dateLabel);
+  setSelectedDate = date => {
+    this.props.setCallback(date);
     this.setState({
-      dropdownVisible: false,
       selectedDate: date
-    });
-  };
-
-  setDepartureDate = (date, dateLabel) => {
-    this.props.setCallback(date, dateLabel);
-    this.setState({
-      dropdownVisible: false,
-      departureDate: date
-    });
-  };
-
-  setReturnDate = (date, dateLabel) => {
-    this.props.setCallback(date, dateLabel);
-    this.setState({
-      dropdownVisible: false,
-      returnDate: date
     });
   };
 
@@ -309,12 +292,9 @@ export default class DateSelector extends Component {
           past={props.month[date].past}
           inDatesRange={props.month[date].inDatesRange}
           onClick={
-            !props.month[date].past &&
-            (() =>
-              this.setSelectedDate(
-                props.month[date].date,
-                props.month[date].dateLabel
-              ))
+            props.month[date].past
+              ? undefined
+              : () => this.setSelectedDate(props.month[date].date)
           }
         >
           <SingleDateLabel>{date}</SingleDateLabel>

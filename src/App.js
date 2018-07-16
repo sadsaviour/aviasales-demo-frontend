@@ -30,9 +30,6 @@ const airports = [
 export default class App extends Component {
   state = {
     searchPerformed: false,
-
-    stateIsDefault: true,
-
     windowSize: window.innerWidth
   };
 
@@ -108,14 +105,14 @@ export default class App extends Component {
         0
       ),
       businessClass: restoredParams.businessClass ? true : false,
-      adults: Number(restoredParams.adults),
-      kids: Number(restoredParams.kids ? restoredParams.kids : 0),
-      infants: Number(restoredParams.infants ? restoredParams.infants : 0),
-      stateIsDefault: false,
-      searchPerformed: true
+      passengers: {
+        adults: Number(restoredParams.adults),
+        kids: Number(restoredParams.kids ? restoredParams.kids : 0),
+        infants: Number(restoredParams.infants ? restoredParams.infants : 0)
+      }
     };
 
-    this.setState(restoredState);
+    return restoredState;
   };
 
   render() {
@@ -134,7 +131,8 @@ export default class App extends Component {
             render={() => (
               <Header
                 updateAppState={this.setState}
-                searchPerformed={false}
+                searchPerformed={this.state.searchPerformed}
+                setSearchStatus={this.setSearchStatus}
                 windowSize={this.state.windowSize}
                 searchString={this.state.searchString}
               />
@@ -142,26 +140,16 @@ export default class App extends Component {
           />
           <Route
             path="/search/:id"
-            render={props =>
-              this.state.stateIsDefault ? (
-                this.restoreStateFromURL(props) || (
-                  <Header
-                    updateAppState={this.setState}
-                    searchPerformed={this.state.searchPerformed}
-                    windowSize={this.state.windowSize}
-                    searchString={this.state.searchString}
-                  />
-                )
-              ) : (
-                <Header
-                  updateAppState={this.setState}
-                  searchPerformed={this.state.searchPerformed}
-                  windowSize={this.state.windowSize}
-                  swapCitiesCallback={this.swapCities}
-                  searchString={this.state.searchString}
-                />
-              )
-            }
+            render={props => (
+              <Header
+                setSearchStatus={this.setSearchStatus}
+                restoredState={this.restoreStateFromURL(props)}
+                updateAppState={this.setState}
+                searchPerformed={this.state.searchPerformed}
+                windowSize={this.state.windowSize}
+                searchString={this.state.searchString}
+              />
+            )}
           />
           <Route
             exact={true}
