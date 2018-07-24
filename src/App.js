@@ -105,7 +105,6 @@ export default class App extends Component {
                 searchPerformed={this.state.searchPerformed}
                 setSearchStatus={this.setSearchStatus}
                 windowSize={this.state.windowSize}
-                searchString={this.state.searchString}
               />
             )}
           />
@@ -118,7 +117,6 @@ export default class App extends Component {
                 updateAppState={this.setState}
                 searchPerformed={this.state.searchPerformed}
                 windowSize={this.state.windowSize}
-                searchString={this.state.searchString}
               />
             )}
           />

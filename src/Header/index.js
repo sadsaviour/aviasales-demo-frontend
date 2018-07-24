@@ -291,24 +291,22 @@ function ShortSearchQuery({
 }
 
 export default class Header extends Component {
-  state =
-    /* this.props.restoredState
+  state = this.props.restoredState
     ? this.props.restoredState
-    : */
-    {
-      origin: { city: "Москва", iataCode: "VKO" },
-      destination: { city: "Барселона", iataCode: "BCN" },
-      departureDate: null,
-      returnDate: null,
-      passengers: {
-        adults: 1,
-        kids: 0,
-        infants: 0
-      },
+    : {
+        origin: { city: "Москва", iataCode: "VKO" },
+        destination: { city: "Барселона", iataCode: "BCN" },
+        departureDate: null,
+        returnDate: null,
+        passengers: {
+          adults: 1,
+          kids: 0,
+          infants: 0
+        },
 
-      businessClass: false,
-      restoredState: this.props.restoredState
-    };
+        businessClass: false,
+        restoredState: this.props.restoredState
+      };
 
   updateOrigin = (city, iataCode) => {
     this.setState({
@@ -344,9 +342,9 @@ export default class Header extends Component {
     const {
       windowSize,
       searchPerformed,
-      searchString,
       setSearchStatus,
       restoredState,
+
       ...other
     } = this.props;
     const isSessionFromURL = searchPerformed
@@ -430,7 +428,6 @@ export default class Header extends Component {
                 {searchPerformed &&
                   windowSize < 992 && (
                     <FindTicketsButton
-                      searchString={searchString}
                       searchPerformed={searchPerformed}
                       setSearchStatus={setSearchStatus}
                       origin={this.state.origin}
@@ -448,7 +445,6 @@ export default class Header extends Component {
               windowSize > 992 && (
                 <div className="col-lg-2">
                   <FindTicketsButton
-                    searchString={searchString}
                     searchPerformed={searchPerformed}
                     setSearchStatus={setSearchStatus}
                     origin={this.state.origin}
@@ -466,7 +462,6 @@ export default class Header extends Component {
             <div className="row center-xs">
               <div className="col-xs-12 ">
                 <FindTicketsButton
-                  searchString={searchString}
                   searchPerformed={searchPerformed}
                   setSearchStatus={setSearchStatus}
                   origin={this.state.origin}
