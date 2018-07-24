@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { getDate, getMonth } from "date-fns";
+import qs from "qs";
 
 import findTicketsIcon from "./img/findTicketsIcon.svg";
 
@@ -91,45 +92,6 @@ const ButtonWraper = styled.div`
   }
 `;
 
-const addZeroToString = number => {
-  if (number.length === 1) {
-    return 0 + number;
-  }
-  return number;
-};
-
-const codeSateToURL = (
-  origin,
-  destination,
-  destinationDate,
-  returnDate,
-  passengers,
-  businessClass
-) => {
-  const departureDateString =
-    addZeroToString(getDate(destinationDate).toString()) +
-    addZeroToString((getMonth(destinationDate) + 1).toString());
-  const returnDateString =
-    addZeroToString(getDate(returnDate).toString()) +
-    addZeroToString((getMonth(returnDate) + 1).toString());
-  const passengersString =
-    (businessClass ? "b" : "") +
-    (passengers.adults ? passengers.adults.toString() : "") +
-    (passengers.kids
-      ? passengers.kids.toString()
-      : passengers.infants
-        ? "0"
-        : "") +
-    (passengers.infants ? passengers.infants.toString() : "");
-  return (
-    origin.iataCode +
-    departureDateString +
-    destination.iataCode +
-    returnDateString +
-    passengersString
-  );
-};
-
 export default function FindTicketsButton({
   searchPerformed,
   setSearchStatus,
@@ -142,18 +104,29 @@ export default function FindTicketsButton({
   className,
   departureDate
 }) {
+  const qString = qs.stringify({
+    origin,
+    destination,
+    departureDate,
+    returnDate,
+    passengers,
+    businessClass
+  });
+  const qObj = qs.parse(qString);
   return (
     <ButtonWraper searchPerformed={searchPerformed}>
       <RouterLink
-        to={`/search/${codeSateToURL(
+        to={`/search/${qs.stringify({
           origin,
           destination,
           departureDate,
           returnDate,
           passengers,
           businessClass
-        )}`}
-        onClick={() => setSearchStatus(true)}
+        })}`}
+        onClick={() =>
+          setSearchStatus(true) || console.log("qSrting", qString, "qObj", qObj)
+        }
       >
         <Button
           name="Find Tickets"

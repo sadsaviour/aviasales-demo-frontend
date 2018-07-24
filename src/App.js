@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import debounce from "lodash/debounce";
+import qs from "qs";
 
 import "./normalize.css";
 import "./flexboxgrid2.css";
@@ -58,60 +59,30 @@ export default class App extends Component {
   };
 
   restoreStateFromURL = props => {
-    /** Pattern is following:
-     * departure Iata, departure date (with 0), departure month (start from 1 and with 0),
-     * destination Iata, return date, return month,
-     * bussines b letter, adults (one digit), kids, adults   */
-    const urlPattern = /([A-Z]{3})(\d{2})(\d{2})([A-Z]{3})(\d{2})?(\d{2})?([b])?(\d)?(\d)?(\d)?/;
-    const restoredParams = {
-      originIataCode: urlPattern.exec(props.match.params.id)[1],
-      departureDate: urlPattern.exec(props.match.params.id)[2],
-      departureMonth: urlPattern.exec(props.match.params.id)[3],
-      destinationIataCode: urlPattern.exec(props.match.params.id)[4],
-      returnDate: urlPattern.exec(props.match.params.id)[5],
-      returnMonth: urlPattern.exec(props.match.params.id)[6],
-      businessClass: urlPattern.exec(props.match.params.id)[7],
-      adults: urlPattern.exec(props.match.params.id)[8],
-      kids: urlPattern.exec(props.match.params.id)[9],
-      infants: urlPattern.exec(props.match.params.id)[10]
-    };
+    const queryString = props.match.params.id;
+
+    const {
+      origin,
+      destination,
+      departureDate,
+      returnDate,
+      passengers,
+      businessClass
+    } = qs.parse(queryString);
 
     const restoredState = {
-      origin: {
-        iataCode: restoredParams.originIataCode,
-        city: airports.find(a => a.iataCode === restoredParams.originIataCode)
-          .name
-      },
-      destination: {
-        iataCode: restoredParams.destinationIataCode,
-        city: airports.find(
-          a => a.iataCode === restoredParams.destinationIataCode
-        ).name
-      },
-      departureDate: new Date(
-        2018,
-        restoredParams.departureMonth - 1,
-        restoredParams.departureDate,
-        12,
-        0,
-        0
-      ),
-      returnDate: new Date(
-        2018,
-        restoredParams.returnMonth - 1,
-        restoredParams.returnDate,
-        12,
-        0,
-        0
-      ),
-      businessClass: restoredParams.businessClass ? true : false,
+      origin,
+      destination,
+      departureDate:
+        departureDate === "" ? new Date() : new Date(departureDate),
+      returnDate: returnDate === "" ? new Date() : new Date(returnDate),
+      businessClass,
       passengers: {
-        adults: Number(restoredParams.adults),
-        kids: Number(restoredParams.kids ? restoredParams.kids : 0),
-        infants: Number(restoredParams.infants ? restoredParams.infants : 0)
+        adults: parseInt(passengers.adults),
+        kids: parseInt(passengers.kids),
+        infants: parseInt(passengers.infants)
       }
     };
-
     return restoredState;
   };
 
