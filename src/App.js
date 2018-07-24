@@ -127,7 +127,7 @@ export default class App extends Component {
             path="/"
             render={() => <Landing windowSize={this.state.windowSize} />}
           />
-          <Route path="/search" render={props => <SearchResults />} />
+          <Route path="/search" component={SearchResults} />
           <Footer windowSize={this.state.windowSize} />
         </div>
       </Router>
