@@ -112,7 +112,6 @@ export default function FindTicketsButton({
     passengers,
     businessClass
   });
-  const qObj = qs.parse(qString);
   return (
     <ButtonWraper searchPerformed={searchPerformed}>
       <RouterLink
@@ -124,9 +123,7 @@ export default function FindTicketsButton({
           passengers,
           businessClass
         })}`}
-        onClick={() =>
-          setSearchStatus(true) || console.log("qSrting", qString, "qObj", qObj)
-        }
+        onClick={() => setSearchStatus(true)}
       >
         <Button
           name="Find Tickets"
