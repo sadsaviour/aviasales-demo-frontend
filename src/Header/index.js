@@ -418,7 +418,7 @@ export default class Header extends Component {
                   updateReturnDate={this.updateReturnDate}
                 />
                 <PassangersNumberSelector
-                  searchPerformed={this.state.searchPerformed}
+                  searchPerformed={searchPerformed}
                   passengers={this.state.passengers}
                   businessClass={this.state.businessClass}
                   updateAppState={f => this.setState(f)}

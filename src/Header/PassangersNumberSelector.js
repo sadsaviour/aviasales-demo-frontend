@@ -12,7 +12,8 @@ const Container = styled.div`
 
   @media only screen and (min-width: 768px) {
     grid-column-start: 3;
-    grid-column-end: span ${props => (props.searchPerformed ? "1" : "2")};
+    grid-column-end: span
+      ${({ searchPerformed }) => (searchPerformed ? "1" : "2")};
   }
 
   @media only screen and (min-width: 992px) {

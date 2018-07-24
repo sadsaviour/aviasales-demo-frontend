@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { getDate, getMonth } from "date-fns";
 import qs from "qs";
 
 import findTicketsIcon from "./img/findTicketsIcon.svg";
 
 const Button = styled.button`
   width: 100%;
+
+  /* for safari */
+  padding-top: 0;
+  padding-bottom: 0;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
     padding-left: 18px;
@@ -19,11 +22,14 @@ const Button = styled.button`
   border-radius: 4px;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
-    border-bottom-left-radius: ${props => (props.searchPerformed ? 0 : "4px")};
-    border-top-left-radius: ${props => (props.searchPerformed ? 0 : "4px")};
-    border-top-right-radius: ${props => (props.searchPerformed ? 0 : "4px")};
-    border-bottom-right-radius: ${props =>
-      props.searchPerformed ? "5px" : "4px"};
+    border-bottom-left-radius: ${({ searchPerformed }) =>
+      searchPerformed ? 0 : "4px"};
+    border-top-left-radius: ${({ searchPerformed }) =>
+      searchPerformed ? 0 : "4px"};
+    border-top-right-radius: ${({ searchPerformed }) =>
+      searchPerformed ? 0 : "4px"};
+    border-bottom-right-radius: ${({ searchPerformed }) =>
+      searchPerformed ? "5px" : "4px"};
   }
 
   font-family: Roboto;
@@ -32,7 +38,8 @@ const Button = styled.button`
   line-height: 56px;
 
   @media only screen and (min-width: 768px) {
-    line-height: ${props => (props.searchPerformed ? "56px" : "64px")};
+    line-height: ${({ searchPerformed }) =>
+      searchPerformed ? "56px" : "64px"};
   }
 
   @media only screen and (min-width: 992px) {
@@ -80,15 +87,15 @@ const ButtonWraper = styled.div`
   width: 100%;
 
   @media only screen and (min-width: 768px) {
-    width: ${props => (props.searchPerformed ? "100%" : "308px")};
+    width: ${({ searchPerformed }) => (searchPerformed ? "100%" : "308px")};
   }
 
   margin-top: 16px;
   @media only screen and (min-width: 768px) {
-    margin-top: ${props => (props.searchPerformed ? "0" : "32px")};
+    margin-top: ${({ searchPerformed }) => (searchPerformed ? "0" : "32px")};
   }
   @media only screen and (min-width: 992px) {
-    margin-top: ${props => (props.searchPerformed ? "0" : "48px")};
+    margin-top: ${({ searchPerformed }) => (searchPerformed ? "0" : "48px")};
   }
 `;
 
@@ -104,14 +111,6 @@ export default function FindTicketsButton({
   className,
   departureDate
 }) {
-  const qString = qs.stringify({
-    origin,
-    destination,
-    departureDate,
-    returnDate,
-    passengers,
-    businessClass
-  });
   return (
     <ButtonWraper searchPerformed={searchPerformed}>
       <RouterLink
