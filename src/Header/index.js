@@ -56,7 +56,11 @@ const CurrencyButton = styled.div`
   width: 56px;
   height: 28px;
 
-  margin-right: 8px;
+  margin-right: 6px;
+
+  @media only screen and (min-width: 768px) {
+    margin-right: 0;
+  }
 
   @media only screen and (min-width: 768px) {
     width: 72px;
@@ -117,7 +121,7 @@ const TabletLogo = () => (
 
 const TabletLogoActive = () => (
   <BackLink to="/" onClick={() => this.props.setSearchStatus(false)}>
-    <FlexContainer style={{ marginLeft: "8px" }}>
+    <FlexContainer>
       <img src={logo} alt="Aviasales" />
       <LogoText>aviasales</LogoText>
     </FlexContainer>
