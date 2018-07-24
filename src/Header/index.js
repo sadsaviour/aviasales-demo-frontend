@@ -62,6 +62,10 @@ const CurrencyButton = styled.div`
     margin-right: 0;
   }
 
+  @media only screen and (min-width: 992px) {
+    margin-right: 8px;
+  }
+
   @media only screen and (min-width: 768px) {
     width: 72px;
     height: 36px;
