@@ -111,17 +111,19 @@ export default function FindTicketsButton({
   className,
   departureDate
 }) {
+  const queryString = qs.stringify({
+    origin,
+    destination,
+    departureDate,
+    returnDate,
+    passengers,
+    businessClass
+  });
+
   return (
     <ButtonWraper searchPerformed={searchPerformed}>
       <RouterLink
-        to={`/search/${qs.stringify({
-          origin,
-          destination,
-          departureDate,
-          returnDate,
-          passengers,
-          businessClass
-        })}`}
+        to={`/search/${queryString}`}
         onClick={() => setSearchStatus(true)}
       >
         <Button
