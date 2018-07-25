@@ -32,9 +32,9 @@ const ShowMoreButton = styled.div`
   box-sizing: border-box;
 
   width: 100%;
-  height: 55px;
 
   padding-top: 18px;
+  padding-bottom: 18px;
 
   font-family: Roboto;
   font-style: normal;
@@ -53,9 +53,9 @@ const TabletFiltersButton = styled.div`
   box-sizing: border-box;
 
   width: 66px;
-  height: 48px;
 
-  padding-top: 17px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 
   margin-bottom: 16px;
 
@@ -67,9 +67,9 @@ const MobileFiltersButton = styled.div`
   box-sizing: border-box;
 
   width: 150px;
-  height: 40px;
 
-  padding-top: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 
   margin-top: 4px;
   margin-bottom: 16px;

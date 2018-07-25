@@ -17,7 +17,6 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  height: 20px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -28,7 +27,7 @@ const Label = styled.div`
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 20px;
   font-size: 12px;
   text-transform: uppercase;
 

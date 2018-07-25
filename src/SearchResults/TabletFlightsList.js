@@ -46,8 +46,7 @@ const RightPanel = styled.div`
   border-bottom-right-radius: 5px;
 `;
 
-function CarrierLogo(props) {
-  const carrier = props.carrier;
+function CarrierLogo({ carrier }) {
   if (Array.isArray(carrier)) {
     return carrier.map(carrier => (
       <img
@@ -57,14 +56,13 @@ function CarrierLogo(props) {
         style={{ marginRight: "12px" }}
       />
     ));
-  } else {
+  } 
     return <img src={Logotypes[carrier].fullSize} alt={carrier} />;
-  }
+  
 }
 
 const StyledCharter = styled.div`
   width: 60px;
-  height: 26px;
 
   margin-right: 14px;
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { specialOffers } from "./bestPrices";
 
-const SpecialOffersListContainer = styled.div`
+const Container = styled.div`
   padding-top: 16px;
 
   padding-bottom: 24px;
@@ -11,7 +11,7 @@ const SpecialOffersListContainer = styled.div`
   background: linear-gradient(162.96deg, #00b0de 41.41%, #196ebd 141.41%);
 `;
 
-const SpecialOffersListHeader = styled.h2`
+const ListHeader = styled.h2`
   margin-top: 0;
 
   @media only screen and (min-width: 768px) {
@@ -27,9 +27,8 @@ const SpecialOffersListHeader = styled.h2`
   color: #ffffff;
 `;
 
-const SpecialOfferContainer = styled.div`
+const OfferContainer = styled.div`
   box-sizing: border-box;
-  height: 270px;
 
   margin-bottom: 12px;
 
@@ -46,7 +45,7 @@ const SpecialOfferContainer = styled.div`
   background: #ffffff;
 `;
 
-const SpecialOfferHeader = styled.div`
+const OfferHeader = styled.div`
   position: relative;
 
   display: flex;
@@ -59,7 +58,7 @@ const SpecialOfferHeader = styled.div`
   padding-bottom: 22px;
 `;
 
-const SpecialOfferHeaderText = styled.span`
+const OfferHeaderText = styled.span`
   width: 80%;
 
   font-family: Roboto;
@@ -75,21 +74,20 @@ const SpecialOfferHeaderText = styled.span`
   color: #ffffff;
 `;
 
-const SpecialOfferHeaderAllianceLogo = styled.img`
+const OfferHeaderAllianceLogo = styled.img`
   position: absolute
 
   top: 12px;
   right: 16px;
 `;
 
-const SpeciaOfferContent = styled.div`
-  height: 191px;
+const OfferContent = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: space-between;
 `;
 
-const SpecialOfferPrice = styled.div`
+const OfferPrice = styled.div`
   margin-top: 18px;
   margin-right: 16px;
 
@@ -107,13 +105,22 @@ const SpecialOfferPrice = styled.div`
   }
 `;
 
-const SpecialOfferLogoAndPriceRow = styled.div`
+const OfferLogoAndPriceRow = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
 `;
 
-const SpecialOfferShowMoreButton = styled.div`
+const OfferText = styled.div`
+  min-height: 48px;
+
+  margin-top: 16px;
+  margin-bottom: 28px;
+  margin-left: 8px;
+  margin-right: 8px;
+`;
+
+const OfferShowMoreButton = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
 
@@ -134,7 +141,7 @@ const SpecialOfferShowMoreButton = styled.div`
   color: #d93533;
 `;
 
-const SpecialOfferLogo = styled.img`
+const OfferLogo = styled.img`
   margin-top: 22px;
   margin-left: 8px;
 
@@ -147,7 +154,7 @@ const SpecialOfferLogo = styled.img`
   }
 `;
 
-const SpecialOffersListFooter = styled.div`
+const ListFooter = styled.div`
   margin-top: 24px;
 
   @media only screen and (min-width: 768px) {
@@ -168,7 +175,7 @@ const SpecialOffersListFooter = styled.div`
   color: #ffffff;
 `;
 
-const SpecialOffersListFooterDisclaimer = styled.div`
+const Disclaimer = styled.div`
   text-align: center;
 
   @media only screen and (min-width: 768px) {
@@ -176,61 +183,51 @@ const SpecialOffersListFooterDisclaimer = styled.div`
   }
 `;
 
-export const SpecialOffersList = () => {
-  return (
-    <SpecialOffersListContainer>
-      <div className="col-xs-12 col-lg-10 col-lg-offset-1">
-        <SpecialOffersListHeader>
-          Спецпредложения на авиабилеты
-        </SpecialOffersListHeader>
-        <div className="row">
-          {specialOffers.map(o => (
-            <div className="col-xs-12 col-md-4" key={o.offerHighlight}>
-              <SpecialOfferContainer>
-                <SpecialOfferHeader>
-                  <SpecialOfferHeaderText>
-                    {o.offerHighlight}
-                  </SpecialOfferHeaderText>
-                  {o.allianceLogo && (
-                    <SpecialOfferHeaderAllianceLogo
-                      src={o.allianceLogo}
-                      alt={"alliance"}
-                    />
-                  )}
-                </SpecialOfferHeader>
-                <SpeciaOfferContent>
-                  <SpecialOfferLogoAndPriceRow>
-                    <SpecialOfferLogo src={o.logo} alt={o.carrier} />
-                    <SpecialOfferPrice>
-                      от <strong>{o.price}</strong>
-                      <div style={{ color: "#D93633" }}>{o.expirationTime}</div>
-                    </SpecialOfferPrice>
-                  </SpecialOfferLogoAndPriceRow>
-                  <div style={{ marginLeft: "8px" }}>{o.offerText}</div>
-                  <SpecialOfferShowMoreButton>
-                    Узнать подробности
-                  </SpecialOfferShowMoreButton>
-                </SpeciaOfferContent>
-              </SpecialOfferContainer>
-            </div>
-          ))}
-        </div>
-        <SpecialOffersListFooter>
-          <div className="row between-xs">
-            <div className="col-xs-12 col-md-6">
-              <div style={{ textDecoration: "underline" }}>
-                {" "}
-                Смотреть все спецпредложения
-              </div>
-            </div>
-            <div className="col-xs-12 col-md-6">
-              <SpecialOffersListFooterDisclaimer>
-                * средняя цена по направлению
-              </SpecialOffersListFooterDisclaimer>
+export const SpecialOffersList = () => (
+  <Container>
+    <div className="col-xs-12 col-lg-10 col-lg-offset-1">
+      <ListHeader>Спецпредложения на авиабилеты</ListHeader>
+      <div className="row">
+        {specialOffers.map(o => (
+          <div className="col-xs-12 col-md-4" key={o.offerHighlight}>
+            <OfferContainer>
+              <OfferHeader>
+                <OfferHeaderText>{o.offerHighlight}</OfferHeaderText>
+                {o.allianceLogo && (
+                  <OfferHeaderAllianceLogo
+                    src={o.allianceLogo}
+                    alt="alliance"
+                  />
+                )}
+              </OfferHeader>
+              <OfferContent>
+                <OfferLogoAndPriceRow>
+                  <OfferLogo src={o.logo} alt={o.carrier} />
+                  <OfferPrice>
+                    от <strong>{o.price}</strong>
+                    <div style={{ color: "#D93633" }}>{o.expirationTime}</div>
+                  </OfferPrice>
+                </OfferLogoAndPriceRow>
+                <OfferText>{o.offerText}</OfferText>
+                <OfferShowMoreButton>Узнать подробности</OfferShowMoreButton>
+              </OfferContent>
+            </OfferContainer>
+          </div>
+        ))}
+      </div>
+      <ListFooter>
+        <div className="row between-xs">
+          <div className="col-xs-12 col-md-6">
+            <div style={{ textDecoration: "underline" }}>
+              {" "}
+              Смотреть все спецпредложения
             </div>
           </div>
-        </SpecialOffersListFooter>
-      </div>
-    </SpecialOffersListContainer>
-  );
-};
+          <div className="col-xs-12 col-md-6">
+            <Disclaimer>* средняя цена по направлению</Disclaimer>
+          </div>
+        </div>
+      </ListFooter>
+    </div>
+  </Container>
+);

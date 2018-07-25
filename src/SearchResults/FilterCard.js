@@ -18,7 +18,6 @@ export default function FilterCard({ title, body, optionsCount, expanded }) {
   `;
 
   const Header = styled.div`
-    height: 20px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;

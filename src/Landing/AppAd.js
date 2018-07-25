@@ -11,12 +11,6 @@ const AppAdContainer = styled.div`
   box-sizing: border-box;
   position: relative;
 
-  height: 348px;
-
-  @media only screen and (min-width: 758px) {
-    height: 281px;
-  }
-
   margin-top: 24px;
 
   @media only screen and (min-width: 768px) {
@@ -33,10 +27,10 @@ const AppAdContainer = styled.div`
   }
 
   width: 100%;
-  height: 348px;
+  min-height: 348px;
 
   @media only screen and (min-width: 768px) {
-    height: 281px;
+    min-height: 281px;
   }
 
   font-family: Roboto;

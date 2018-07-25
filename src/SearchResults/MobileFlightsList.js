@@ -42,7 +42,6 @@ const FlightLine = styled.div`
 
 const StyledBannerTitle = styled.div`
   box-sizing: border-box;
-  height: 32px;
   width: 100%;
 
   padding-left: 8px;

@@ -53,18 +53,12 @@ const DepartureDate = styled.div`
 const ReturnDate = styled.div`
   position: relative;
 
-  height: 56px;
   width: 50%;
 
   margin-left: 1px;
 
   padding-left: 16px;
   padding-right: 16px;
-
-  margin-bottom: 2px;
-  @media only screen and (min-width: 992px) {
-    margin-bottom: 0;
-  }
 
   display: flex;
   flex-flow: row nowrap;

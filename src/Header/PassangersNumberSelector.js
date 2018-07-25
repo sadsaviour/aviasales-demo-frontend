@@ -21,15 +21,7 @@ const Container = styled.div`
     grid-column-end: span 1;
   }
 
-  height: 56px;
-
-  padding-left: 16px;
-  padding-right: 16px;
-
-  margin-bottom: 16px;
-  @media only screen and (min-width: 768px) {
-    margin-bottom: 0;
-  }
+  padding: 18px 16px;
 
   display: flex;
   flex-flow: row nowrap;
@@ -63,6 +55,7 @@ const Container = styled.div`
 `;
 
 const PassangersNumberLabel = styled.div`
+  box-sizing: border-box;
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -97,11 +90,9 @@ const Dropdown = styled.div`
 `;
 
 const PassangerOptionsDelimener = styled.div`
-  height: 1px;
-
   margin-bottom: 16px;
 
-  background: #dbdbdb;
+  border-top: 1px solid #dbdbdb;
 `;
 
 const BussinesClassOption = styled(Checkbox)`

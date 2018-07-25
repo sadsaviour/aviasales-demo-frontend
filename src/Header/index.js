@@ -53,8 +53,11 @@ const LogoText = styled.p`
 
 const CurrencyButton = styled.div`
   box-sizing: border-box;
-  width: 56px;
-  height: 28px;
+
+  padding: 6px 12px 6px 12px;
+  @media only screen and (min-width: 768px) {
+    padding: 8px 20px 8px 20px;
+  }
 
   margin-right: 6px;
 
@@ -66,19 +69,9 @@ const CurrencyButton = styled.div`
     margin-right: 8px;
   }
 
-  @media only screen and (min-width: 768px) {
-    width: 72px;
-    height: 36px;
-  }
-
   background: rgba(0, 0, 0, 0.0001);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 100px;
-
-  padding-top: 6px;
-  @media only screen and (min-width: 768px) {
-    padding-top: 8px;
-  }
 
   font-family: Roboto;
   font-style: normal;

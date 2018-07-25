@@ -41,10 +41,7 @@ function CarryOnIcon(props) {
   );
 }
 
-function LuggageIcon(props) {
-  const limit = props.limit;
-  const include = props.include;
-
+function LuggageIcon({ limit, include }) {
   const Block = styled.div`
     position: relative;
     width: 19px;
@@ -78,9 +75,8 @@ function LuggageIcon(props) {
   );
 }
 
-export default function Luggage(props) {
-  const luggage = props.luggage;
-  const extraOption = luggage.extra ? true : false;
+export default function Luggage({ luggage }) {
+  const extraOption = !!luggage.extra;
 
   const BasicBlock = styled.div`
     box-sizing: border-box;

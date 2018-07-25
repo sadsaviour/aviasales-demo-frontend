@@ -47,7 +47,6 @@ const SocialIconsContainer = styled.div`
 `;
 
 const LeaveEmailContainer = styled.div`
-  height: 34px;
   width: 330px;
 
   margin-top: 12px;
@@ -104,8 +103,7 @@ const LeaveEmailSubmit = styled.button`
   border-radius: 2px;
 `;
 
-export const SubscribeBlock = () => {
-  return (
+export const SubscribeBlock = () => (
     <SubscribeBlockContainer>
       <div className="row ">
         <div className="col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-1">
@@ -146,4 +144,3 @@ export const SubscribeBlock = () => {
       </div>
     </SubscribeBlockContainer>
   );
-};
