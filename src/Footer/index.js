@@ -68,6 +68,11 @@ const services = [
 
 const Container = styled.div`
   padding-top: 32px;
+
+  @media only screen and (min-width: 992) {
+    padding-top: 58px;
+  }
+
   padding-bottom: 24px;
 `;
 
@@ -167,9 +172,17 @@ const HotelLookLink = styled.p`
 
 const AppLink = styled.img`
   margin-right: 10px;
+
+  :last-child {
+    margin-right: 8px;
+  }
 `;
 
 const Copyright = styled.p`
+  @media only screen and (min-width: 992px) {
+    margin-top: 32px;
+  }
+
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -272,7 +285,7 @@ export default function Footer({ windowSize }) {
           </Copyright>
         </div>
       ) : (
-        <div className="container" style={{ marginTop: "26px" }}>
+        <div className="container">
           <div className="row">
             <div className="col-lg-8">
               <nav>
@@ -309,16 +322,12 @@ export default function Footer({ windowSize }) {
               <HotelLookLink>Поиск и бронирование отелей</HotelLookLink>
             </div>
             <div className="col-lg-4">
-              <div className="row end-lg">
+              <div className="row nowrap end-lg">
                 <AppLink src={apple} alt="App Store" />
                 <AppLink src={google} alt="Google Play Store" />
-                <AppLink
-                  src={microsoft}
-                  alt="Windows Phone"
-                  style={{ marginRight: "8px" }}
-                />
+                <AppLink src={microsoft} alt="Windows Phone" />
               </div>
-              <Copyright className="end-lg" style={{ marginTop: "32px" }}>
+              <Copyright className="end-lg">
                 © 2007–2018, Aviasales — дешевые авиабилеты
               </Copyright>
             </div>

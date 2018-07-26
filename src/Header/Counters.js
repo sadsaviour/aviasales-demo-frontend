@@ -103,6 +103,11 @@ const CounterRow = styled.div`
   margin-bottom: 16px;
 `;
 
+const InfantsDisclaimer = styled.span`
+  fontsize: 12px;
+  color: #a0b0b9;
+`;
+
 export function AdultsCounter(props) {
   const handleIncrement = () => {
     props.changeCallback(incrementAdults);
@@ -154,8 +159,7 @@ export function InfantsCounter(props) {
   return (
     <CounterRow>
       <CounterLabel>
-        Дети до 2 лет <br />{" "}
-        <span style={{ fontSize: "12px", color: "#A0B0B9" }}>Без места</span>
+        Дети до 2 лет <br /> <InfantsDisclaimer>Без места</InfantsDisclaimer>
       </CounterLabel>
       <CounterControls>
         <CounterButton onClick={handleDecrement}>−</CounterButton>

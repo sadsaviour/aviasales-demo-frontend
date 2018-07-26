@@ -23,6 +23,9 @@ const MonthSelector = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+
+  padding-left: 8px;
+  padding-right: 8px;
 `;
 
 const MonthLabel = styled.div`
@@ -34,6 +37,10 @@ const MonthLabel = styled.div`
   text-transform: uppercase;
 
   color: #4a4a4a;
+`;
+
+const SwitchMonthIcon = styled.img`
+  cursor: pointer;
 `;
 
 const Month = styled.div`
@@ -311,17 +318,15 @@ export default class DateSelector extends Component {
     return (
       <div>
         <MonthSelector>
-          <img
+          <SwitchMonthIcon
             src={prevMonthIcon}
             alt="Previous month"
-            style={{ cursor: "pointer", marginLeft: "8px" }}
             onClick={this.showPrevMonth}
           />
           <MonthLabel>{this.state.refrenceMonthLabel}</MonthLabel>
-          <img
+          <SwitchMonthIcon
             src={nextMonthIcon}
             alt="Next month"
-            style={{ cursor: "pointer", marginRight: "8px" }}
             onClick={this.showNextMonth}
           />
         </MonthSelector>

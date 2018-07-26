@@ -11,9 +11,9 @@ import nightlifeIcon from "./Assets/destination__nightlife.svg";
 import shoppingIcon from "./Assets/destination__shopping.svg";
 import sunIcon from "./Assets/destination__sun.svg";
 
-const CompassIcon = ({ className }) => {
-  return <img className={className} src={compassIcon} alt={"compass"} />;
-};
+const CompassIcon = ({ className }) => (
+  <img className={className} src={compassIcon} alt="compass" />
+);
 
 const DestinationTypesListContiner = styled.div`
   padding-top: 40px;
@@ -35,12 +35,17 @@ const PopularDestinationsHeader = styled.div`
 
   font-family: Roboto;
   font-style: normal;
-  font-weight: 500;
+
   line-height: 24px;
   font-size: 18px;
   text-align: center;
 
   color: #4a4a4a;
+
+  strong {
+    font-weight: 500;
+    color: #00ace2;
+  }
 `;
 
 const EditCityIcon = styled.img`
@@ -97,30 +102,30 @@ const DestinationsTypesContainer = styled.div`
   justify-content: center;
 `;
 
-export const DestinationTypesList = () => {
-  return (
-    <DestinationTypesListContiner>
-      <div className="col-xs-12 col-md-10 col-md-offset-1 center-xs">
-        <div className="row center-xs">
-          <CompassIcon />
-        </div>
-        <PopularDestinationsHeader>
-          Популярные направления <br /> перелетов из города
-          <br />
-          <span style={{ color: "#00ACE2" }}>Москва</span>
-          <EditCityIcon src={editIcon} alt={"edit"} />
-        </PopularDestinationsHeader>
-        <DestinationsTypesContainer>
-          <div className="row center-xs">
-            {destinationsTypes.map(d => (
-              <DestinationType key={d.key}>
-                <DestinationIcon src={d.icon} alt={d.key} />
-                <DestinationTypeLabel>{d.label}</DestinationTypeLabel>
-              </DestinationType>
-            ))}
-          </div>
-        </DestinationsTypesContainer>
+const DestinationTypesList = () => (
+  <DestinationTypesListContiner>
+    <div className="col-xs-12 col-md-10 col-md-offset-1 center-xs">
+      <div className="row center-xs">
+        <CompassIcon />
       </div>
-    </DestinationTypesListContiner>
-  );
-};
+      <PopularDestinationsHeader>
+        Популярные направления <br /> перелетов из города
+        <br />
+        <strong>Москва</strong>
+        <EditCityIcon src={editIcon} alt="edit" />
+      </PopularDestinationsHeader>
+      <DestinationsTypesContainer>
+        <div className="row center-xs">
+          {destinationsTypes.map(d => (
+            <DestinationType key={d.key}>
+              <DestinationIcon src={d.icon} alt={d.key} />
+              <DestinationTypeLabel>{d.label}</DestinationTypeLabel>
+            </DestinationType>
+          ))}
+        </div>
+      </DestinationsTypesContainer>
+    </div>
+  </DestinationTypesListContiner>
+);
+
+export default DestinationTypesList;

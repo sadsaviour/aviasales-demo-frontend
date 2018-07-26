@@ -97,6 +97,10 @@ const BackLink = styled(Link)`
   text-decoration: none;
 `;
 
+const LogoLinkWrapper = styled.div`
+  margin-left: 6px;
+`;
+
 const MobileLogo = () => (
   <FlexContainer>
     <img src={logo} alt="Aviasales" />
@@ -212,15 +216,15 @@ const SearchContainer = styled.div`
 
 function Logo({ windowSize, setSearchStatus }) {
   return windowSize < 768 ? (
-    <div style={{ marginLeft: "6px" }}>
+    <LogoLinkWrapper>
       <Route exact path="/" component={MobileLogo} />
       <Route path="/search" render={MobileLogoActive} />
-    </div>
+    </LogoLinkWrapper>
   ) : (
-    <div style={{ marginLeft: "6px" }}>
+    <LogoLinkWrapper>
       <Route exact path="/" component={TabletLogo} />
       <Route path="/search" component={TabletLogoActive} />{" "}
-    </div>
+    </LogoLinkWrapper>
   );
 }
 
@@ -271,7 +275,7 @@ function ShortSearchQuery({
     color: #ffffff;
   `;
   return (
-    <div style={{ "flex-grow": "2" }}>
+    <div>
       <Cities>
         {origin.city}
         {" — "}

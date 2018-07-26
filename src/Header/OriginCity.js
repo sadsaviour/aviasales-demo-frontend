@@ -103,6 +103,8 @@ const Suggestion = styled.div`
   :hover {
     background: #f4f4f4;
   }
+
+  cursor: pointer;
 `;
 
 const SuggestionCity = styled.div`
@@ -183,11 +185,7 @@ class OriginCity extends Component {
 
   render() {
     const airportSuggestionsList = airports.map(a => (
-      <Suggestion
-        key={a.name}
-        style={{ cursor: "pointer" }}
-        onClick={() => this.handleClick(a)}
-      >
+      <Suggestion key={a.name} onClick={() => this.handleClick(a)}>
         <SuggestionCity>{a.name}, </SuggestionCity>
         <SuggestionCountry>{a.country}</SuggestionCountry>
         <SuggestionIATACode>{a.iataCode}</SuggestionIATACode>

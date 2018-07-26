@@ -183,7 +183,15 @@ const Disclaimer = styled.div`
   }
 `;
 
-export const SpecialOffersList = () => (
+const AllOffersLink = styled.div`
+  text-decoration: underline;
+`;
+
+const ExpirationTime = styled.div`
+  color: #d93633;
+`;
+
+const SpecialOffersList = () => (
   <Container>
     <div className="col-xs-12 col-lg-10 col-lg-offset-1">
       <ListHeader>Спецпредложения на авиабилеты</ListHeader>
@@ -205,7 +213,7 @@ export const SpecialOffersList = () => (
                   <OfferLogo src={o.logo} alt={o.carrier} />
                   <OfferPrice>
                     от <strong>{o.price}</strong>
-                    <div style={{ color: "#D93633" }}>{o.expirationTime}</div>
+                    <ExpirationTime>{o.expirationTime}</ExpirationTime>
                   </OfferPrice>
                 </OfferLogoAndPriceRow>
                 <OfferText>{o.offerText}</OfferText>
@@ -218,10 +226,7 @@ export const SpecialOffersList = () => (
       <ListFooter>
         <div className="row between-xs">
           <div className="col-xs-12 col-md-6">
-            <div style={{ textDecoration: "underline" }}>
-              {" "}
-              Смотреть все спецпредложения
-            </div>
+            <AllOffersLink>Смотреть все спецпредложения</AllOffersLink>
           </div>
           <div className="col-xs-12 col-md-6">
             <Disclaimer>* средняя цена по направлению</Disclaimer>
@@ -231,3 +236,5 @@ export const SpecialOffersList = () => (
     </div>
   </Container>
 );
+
+export default SpecialOffersList;

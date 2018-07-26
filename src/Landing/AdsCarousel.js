@@ -48,6 +48,7 @@ const AgencyLogo = styled.img`
 
   :first-child {
     margin-left: 0;
+    height: 37px;
   }
 
   :last-child {
@@ -77,7 +78,16 @@ const CarouselNavCurrent = styled.div`
   border-radius: 50px;
 `;
 
-export const AdsCarousel = () => {
+const CarouselButtonPrev = styled.img`
+  margin-top: 24px;
+`;
+
+const CarouselButtonNext = styled.img`
+  transform: rotate(-180deg);
+  margin-top: 24px;
+`;
+
+export default function AdsCarousel() {
   return (
     <AdsCarouselBlock>
       <div className="col-md-12 col-lg-10 col-lg-offset-1">
@@ -86,15 +96,11 @@ export const AdsCarousel = () => {
         </Header>
         <div className="row">
           <div className="col-md-1 start-md">
-            <img
-              src={carouselButton}
-              alt="Prev"
-              style={{ marginTop: "24px" }}
-            />
+            <CarouselButtonPrev src={carouselButton} alt="Prev" />
           </div>
           <div className="col-md-10">
             <div className="row center-md">
-              <AgencyLogo src={logo4} alt="" style={{ height: "37px" }} />
+              <AgencyLogo src={logo4} alt="" />
               <AgencyLogo src={logo3} alt="" />
               <AgencyLogo src={logo2} alt="" />
               <AgencyLogo src={logo1} alt="" />
@@ -107,14 +113,10 @@ export const AdsCarousel = () => {
             </div>
           </div>
           <div className="col-md-1 end-md">
-            <img
-              src={carouselButton}
-              alt="Next"
-              style={{ transform: "rotate(-180deg)", marginTop: "24px" }}
-            />
+            <CarouselButtonNext src={carouselButton} alt="Next" />
           </div>
         </div>
       </div>
     </AdsCarouselBlock>
   );
-};
+}
