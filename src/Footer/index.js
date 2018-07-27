@@ -11,60 +11,60 @@ import apple from "./img/apple-store.svg";
 import google from "./img/google-store.svg";
 import microsoft from "./img/windows-store.svg";
 
-const states = [
-  "Россия",
-  "Таиланд",
-  "Черногория",
-  "Кипр",
-  "Болгария",
-  "Грузия"
-];
+const states = {
+  ru: "Россия",
+  th: "Таиланд",
+  me: "Черногория",
+  cy: "Кипр",
+  bg: "Болгария",
+  ge: "Грузия"
+};
 
-const cities = [
-  "Москва",
-  "Санкт-Петербург",
-  "Симферополь",
-  "Адлер",
-  "Екатеринбург",
-  "Лондон"
-];
+const cities = {
+  moscow: "Москва",
+  saintPetersburg: "Санкт-Петербург",
+  sympheropol: "Симферополь",
+  adler: "Адлер",
+  ekaterinburg: "Екатеринбург",
+  london: "Лондон"
+};
 
-const carriers = [
-  "Air Berlin",
-  "Air France",
-  "Alitalia",
-  "Air Baltic",
-  "Emirates",
-  "KLM"
-];
+const carriers = {
+  AirBerlin: "Air Berlin",
+  AirFrance: "Air France",
+  Alitalia: "Alitalia",
+  AirBaltic: "Air Baltic",
+  Emirates: "Emirates",
+  KLM: "KLM"
+};
 
-const airports = [
-  "Шереметьево",
-  "Курумоч",
-  "Домодедово",
-  "Толмачево",
-  "Владивосток",
-  "Гамбург"
-];
+const airports = {
+  SVO: "Шереметьево",
+  KUF: "Курумоч",
+  DMO: "Домодедово",
+  OVB: "Толмачево",
+  VVO: "Владивосток",
+  HAM: "Гамбург"
+};
 
-const destinations = [
-  "MOW – SIP",
-  "MOW – AER",
-  "MOW – TIV",
-  "MOW – MRV",
-  "LED – MOW",
-  "MOW – BKK"
-];
+const destinations = {
+  MOWSIP: "MOW – SIP",
+  MOWAER: "MOW – AER",
+  MOWTIV: "MOW – TIV",
+  MOWMRV: "MOW – MRV",
+  LEDMOW: "LED – MOW",
+  MOWBKK: "MOW – BKK"
+};
 
-const services = [
-  "Горящие авиабилеты",
-  "Календарь низких цен",
-  "Карта низких цен",
-  "Спецпредложения",
-  "Таблица цен",
-  "Блог",
-  "Помощь"
-];
+const services = {
+  hotTickets: "Горящие авиабилеты",
+  pricesCal: "Календарь низких цен",
+  pricesMap: "Карта низких цен",
+  specialOffers: "Спецпредложения",
+  pricesTable: "Таблица цен",
+  blog: "Блог",
+  help: "Помощь"
+};
 
 const Container = styled.div`
   padding-top: 32px;
@@ -192,8 +192,8 @@ const Copyright = styled.p`
   color: #5b5b5c;
 `;
 
-function List(props) {
-  return props.list.map(i => <BlockItems key={i}>{i}</BlockItems>);
+function List({ list }) {
+  return Object.keys(list).map(i => <BlockItems key={i}>{list[i]}</BlockItems>);
 }
 
 export default function Footer({ windowSize }) {
