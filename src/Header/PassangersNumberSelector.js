@@ -10,17 +10,6 @@ import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
 const Container = styled.div`
   position: relative;
 
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 3;
-    grid-column-end: span
-      ${({ searchPerformed }) => (searchPerformed ? "1" : "2")};
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 4;
-    grid-column-end: span 1;
-  }
-
   padding: 18px 16px;
 
   display: flex;
@@ -32,19 +21,6 @@ const Container = styled.div`
 
   background-color: #fff;
 
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-
-  @media only screen and (min-width: 768px) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: ${props =>
-      props.searchPerformed ? "0" : "5px"};
-  }
-  @media only screen and (min-width: 992px) {
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -52,9 +28,18 @@ const Container = styled.div`
   font-size: 16px;
 
   color: #4a4a4a;
+
+  border-radius: inherit;
 `;
 
 const PassangersNumberLabel = styled.div`
+  flex-shrink: 20;
+
+  @media only screen and (min-width: 768px) {
+    flex-grow: 1;
+    flex-basis: 70%;
+  }
+
   box-sizing: border-box;
   display: block;
   white-space: nowrap;
@@ -68,6 +53,7 @@ const BusinessClassLabel = styled.span`
 
 const DropdownIcon = styled.img`
   margin-left: 10px;
+  flex-shrink: 0;
 `;
 
 const Dropdown = styled.div`
@@ -147,12 +133,11 @@ class PassengersNumberSelector extends Component {
         searchPerformed={this.props.searchPerformed}
       >
         <PassangersNumberLabel>
-          {totalPassangers} пассажир,{" "}
+          {totalPassangers} пассажир,
           <BusinessClassLabel>
-            {this.props.businessClass ? "бизнес" : "эконом"}
+             {this.props.businessClass ? "бизнес" : "эконом"}
           </BusinessClassLabel>
         </PassangersNumberLabel>
-
         <DropdownIcon src={dropdown_icon} alt="dropdown-arrow" />
         <Dropdown show={this.state.dropdown}>
           <AdultsCounter

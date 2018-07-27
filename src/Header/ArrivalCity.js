@@ -7,28 +7,17 @@ const Container = styled.div`
 
   box-sizing: border-box;
 
-  padding-left: 16px;
-  padding-top: 18px;
-
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 3;
-    grid-column-end: span 2;
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 2;
-    grid-column-end: span 1;
-  }
+  padding: 18px 16px;
 
   background-color: #fff;
 
-  @media only screen and (min-width: 768px) and (max-width: 992px) {
-    border-top-right-radius: 5px;
-  }
+  border-radius: inherit;
 `;
 
 const CityInput = styled.input`
   width: 70%;
+
+  padding: 0;
 
   font-family: Roboto;
   font-style: normal;
@@ -122,6 +111,8 @@ const IATACode = styled.div`
   flex-basis: 23px;
   font-weight: normal;
   color: #a0b0b9;
+
+  line-height: 20px;
 `;
 
 const airports = [

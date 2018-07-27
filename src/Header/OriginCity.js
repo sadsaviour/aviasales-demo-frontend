@@ -8,34 +8,17 @@ const Container = styled.div`
   position: relative;
   box-sizing: border-box;
 
-  padding-left: 16px;
-  padding-top: 18px;
-
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 1;
-    grid-column-end: span 1;
-  }
+  padding: 18px 16px;
 
   background-color: #fff;
 
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-
-  @media only screen and (min-width: 768px) {
-    border-top-right-radius: 0;
-  }
-  @media only screen and (min-width: 992px) {
-    border-bottom-left-radius: 5px;
-  }
+  border-radius: inherit;
 `;
 
 const CityInput = styled.input`
   width: 50%;
+
+  padding: 0;
 
   font-family: Roboto;
   font-style: normal;

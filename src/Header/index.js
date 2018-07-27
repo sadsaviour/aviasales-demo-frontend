@@ -190,7 +190,7 @@ const LandingSubHeader = styled.h2`
   color: #ffffff;
 `;
 
-const SearchContainer = styled.div`
+const Search = styled.div`
   display: grid;
   grid-template-columns: none;
   grid-template-rows: 56px 56px 56px 56px;
@@ -212,6 +212,157 @@ const SearchContainer = styled.div`
   }
 
   width: 100%;
+`;
+
+const SearchRow = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+
+  @media only screen and (min-width: 992px) {
+    flex-flow: row nowrap;
+  }
+`;
+
+const SearchFieledWrapper = styled.div`
+  flex-basis: 100%;
+  box-sizing: border-box;
+
+  @media only screen and (min-width: 768px) {
+    flex-basis: 50%;
+
+    /* search button and passengers selectors needs special treatment*/
+    :nth-last-child(-n + 2) {
+      flex-basis: ${({ searchPerformed }) => (searchPerformed ? "25%" : "50%")};
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    flex-basis: 21%;
+
+    /* flight dates are special*/
+    :nth-child(3) {
+      flex-basis: 37%;
+    }
+  }
+
+  :nth-child(-n + 3) {
+    padding-bottom: 1px;
+    padding-top: 1px;
+  }
+
+  :nth-last-child(-n + 3) {
+    padding-top: 1px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    /* need to null previous paddings*/
+    :nth-child(n) {
+      padding: 0;
+    }
+
+    :nth-child(-n + 2) {
+      padding-bottom: 1px;
+    }
+
+    :nth-last-child(-n + 2) {
+      padding-top: 1px;
+    }
+
+    :nth-child(2n + 1) {
+      padding-right: 1px;
+    }
+
+    :nth-child(2n) {
+      padding-left: 1px;
+    }
+
+    ${({ searchPerformed }) =>
+      searchPerformed &&
+      `
+      :nth-child(n) { padding: 0;}
+      :nth-last-child(-n+3){ padding-top: 1px; }
+      :nth-last-child(-n+4){padding-left: 1px;}
+      :nth-child(-n+2){ padding-bottom: 1px}
+      :nth-child(-n+4){ padding-right: 1px;   }
+      :nth-child(3){padding-left: 0;}
+
+      :nth-last-child(-n+2){ max-width: 183px}
+      `};
+  }
+
+  @media only screen and (min-width: 992px) {
+    /* need to null previous paddings*/
+    :nth-child(n) {
+      padding: 0;
+    }
+
+    :nth-last-child(-n + 2) {
+      max-width: none;
+    }
+
+    :last-child {
+      max-width: 183px;
+    }
+
+    :nth-child(-n + 3) {
+      padding-bottom: 0;
+      padding-right: 1px;
+    }
+
+    :nth-last-child(-n + 3) {
+      padding-top: 0;
+      padding-left: 1px;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    :last-child {
+      max-width: none;
+    }
+  }
+
+  :first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    @media only screen and (min-width: 768px) {
+      border-top-right-radius: 0;
+    }
+    @media only screen and (min-width: 992px) {
+      border-bottom-left-radius: 5px;
+    }
+  }
+
+  :nth-child(2) {
+    @media only screen and (min-width: 768px) and (max-width: 992px) {
+      border-top-right-radius: 5px;
+    }
+  }
+
+  :nth-last-child(-n + 2) {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    @media only screen and (min-width: 768px) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  :last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    @media only screen and (min-width: 768px) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: ${props =>
+        props.searchPerformed ? "0" : "5px"};
+    }
+    @media only screen and (min-width: 992px) {
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+  }
 `;
 
 function Logo({ windowSize, setSearchStatus }) {
@@ -404,43 +555,54 @@ export default class Header extends Component {
                   : "col-xs-12 col-lg-10 col-lg-offset-1"
               }
             >
-              <SearchContainer>
-                <OriginCity
-                  origin={this.state.origin}
-                  updateOrigin={this.updateOrigin}
-                  swapCitiesCallback={this.swapCitiesCallback}
-                />
-                <ArrivalCity
-                  destination={this.state.destination}
-                  updateDestination={this.updateDestination}
-                />
-                <FlightDates
-                  departureDate={this.state.departureDate}
-                  returnDate={this.state.returnDate}
-                  updateDepartureDate={this.updateDepartureDate}
-                  updateReturnDate={this.updateReturnDate}
-                />
-                <PassangersNumberSelector
-                  searchPerformed={searchPerformed}
-                  passengers={this.state.passengers}
-                  businessClass={this.state.businessClass}
-                  updateAppState={f => this.setState(f)}
-                />
+              <SearchRow>
+                <SearchFieledWrapper searchPerformed={searchPerformed}>
+                  <OriginCity
+                    origin={this.state.origin}
+                    updateOrigin={this.updateOrigin}
+                    swapCitiesCallback={this.swapCitiesCallback}
+                  />
+                </SearchFieledWrapper>
+                <SearchFieledWrapper searchPerformed={searchPerformed}>
+                  {" "}
+                  <ArrivalCity
+                    destination={this.state.destination}
+                    updateDestination={this.updateDestination}
+                  />
+                </SearchFieledWrapper>
+                <SearchFieledWrapper searchPerformed={searchPerformed}>
+                  <FlightDates
+                    departureDate={this.state.departureDate}
+                    returnDate={this.state.returnDate}
+                    updateDepartureDate={this.updateDepartureDate}
+                    updateReturnDate={this.updateReturnDate}
+                  />
+                </SearchFieledWrapper>
+                <SearchFieledWrapper searchPerformed={searchPerformed}>
+                  <PassangersNumberSelector
+                    searchPerformed={searchPerformed}
+                    passengers={this.state.passengers}
+                    businessClass={this.state.businessClass}
+                    updateAppState={f => this.setState(f)}
+                  />
+                </SearchFieledWrapper>
                 {searchPerformed &&
                   windowSize < 992 && (
-                    <FindTicketsButton
-                      searchPerformed={searchPerformed}
-                      setSearchStatus={setSearchStatus}
-                      origin={this.state.origin}
-                      destination={this.state.destination}
-                      departureDate={this.state.departureDate}
-                      returnDate={this.state.returnDate}
-                      passengers={this.state.passengers}
-                      businessClass={this.state.businessClass}
-                      updateAppState={f => this.setState(f)}
-                    />
+                    <SearchFieledWrapper searchPerformed={searchPerformed}>
+                      <FindTicketsButton
+                        searchPerformed={searchPerformed}
+                        setSearchStatus={setSearchStatus}
+                        origin={this.state.origin}
+                        destination={this.state.destination}
+                        departureDate={this.state.departureDate}
+                        returnDate={this.state.returnDate}
+                        passengers={this.state.passengers}
+                        businessClass={this.state.businessClass}
+                        updateAppState={f => this.setState(f)}
+                      />
+                    </SearchFieledWrapper>
                   )}
-              </SearchContainer>
+              </SearchRow>
             </div>
             {searchPerformed &&
               windowSize > 992 && (

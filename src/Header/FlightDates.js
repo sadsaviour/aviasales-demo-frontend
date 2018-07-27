@@ -9,16 +9,6 @@ import CalendarIcon from "./img/calendar.svg";
 const FlightDates = styled.div`
   display: flex;
   flex-flow: row nowrap;
-
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 3;
-    grid-column-end: span 1;
-  }
 `;
 
 const DepartureDate = styled.div`
@@ -28,8 +18,7 @@ const DepartureDate = styled.div`
 
   margin-right: 1px;
 
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 18px 16px;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
     border-bottom-left-radius: 5px;
@@ -57,8 +46,7 @@ const ReturnDate = styled.div`
 
   margin-left: 1px;
 
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 18px 16px;
 
   display: flex;
   flex-flow: row nowrap;
@@ -66,17 +54,19 @@ const ReturnDate = styled.div`
   justify-content: space-between;
 
   background-color: #fff;
+`;
 
+const Placeholder = styled.div`
+  color: #a0b0b9;
+`;
+
+const DateLabel = styled.div`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   line-height: 20px;
   font-size: 16px;
   color: #4a4a4a;
-`;
-
-const Placeholder = styled.p`
-  color: #a0b0b9;
 `;
 
 const Dropdown = styled.div`
@@ -237,9 +227,9 @@ class FlightDatesSelector extends Component {
       <FlightDates>
         <DepartureDate>
           {this.props.departureDate ? (
-            <p onClick={this.showDepartureDropdown}>
+            <DateLabel onClick={this.showDepartureDropdown}>
               {dateLabel(this.props.departureDate)}
-            </p>
+            </DateLabel>
           ) : (
             <Placeholder onClick={this.showDepartureDropdown}>Туда</Placeholder>
           )}
@@ -269,9 +259,9 @@ class FlightDatesSelector extends Component {
         </DepartureDate>
         <ReturnDate>
           {this.props.returnDate ? (
-            <p onClick={this.showReturnDropdown}>
+            <DateLabel onClick={this.showReturnDropdown}>
               {dateLabel(this.props.returnDate)}
-            </p>
+            </DateLabel>
           ) : (
             <Placeholder onClick={this.showReturnDropdown}>Обратно</Placeholder>
           )}
