@@ -239,6 +239,10 @@ const SearchFieledWrapper = styled.div`
   @media only screen and (min-width: 992px) {
     flex-basis: 21%;
 
+    :nth-last-child(-n + 2) {
+      flex-basis: 21%;
+    }
+
     /* flight dates are special*/
     :nth-child(3) {
       flex-basis: 37%;

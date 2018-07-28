@@ -44,12 +44,9 @@ const SwitchMonthIcon = styled.img`
 `;
 
 const Month = styled.div`
-  display: grid;
-
-  grid-template-columns: 46px 46px 46px 46px 46px 46px 46px;
-  grid-auto-rows: 46px;
-
-  justify-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 
   box-sizing: border-box;
 
@@ -58,11 +55,24 @@ const Month = styled.div`
 `;
 
 const SingleDate = styled.div`
-  grid-column-start: ${props => props.day}
-  
   position: relative;
 
-  width: 100%;
+  flex-basis: 14.29%;
+
+  margin-left: ${({ date, day }) => (date === 1 ? (day - 1) * 46 + "px" : "0")}
+
+  padding-top: 9px;
+  padding-bottom: 21px;
+
+  color: ${props => (props.past ? "rgba(74, 74, 74, 0.1)" : "#4A4A4A")};
+
+  background: ${props => (props.inDatesRange ? "#F4F4F4" : "none")};
+
+  cursor: ${props => (props.past ? "auto" : "pointer")};
+`;
+
+const SingleDateLabel = styled.div`
+  position: relative;
 
   font-family: Roboto;
   font-style: normal;
@@ -72,21 +82,7 @@ const SingleDate = styled.div`
   text-align: center;
   text-transform: uppercase;
 
-  color: ${props => (props.past ? "rgba(74, 74, 74, 0.1)" : "#4A4A4A")};
-
-  background: ${props => (props.inDatesRange ? "#F4F4F4" : "none")};
-
-  cursor: ${props => (props.past ? "auto" : "pointer")}
-  
-`;
-
-const SingleDateLabel = styled.div`
-  position: absolute;
-
-  top: 8px;
-  width: 100%;
-
-  z-index: 10;
+  z-index: 100;
 `;
 
 const DepartureDateCursor = styled.img`
@@ -295,6 +291,7 @@ export default class DateSelector extends Component {
       return Object.keys(props.month).map(date => (
         <SingleDate
           key={date}
+          date={parseInt(date)}
           day={props.month[date].day}
           past={props.month[date].past}
           inDatesRange={props.month[date].inDatesRange}

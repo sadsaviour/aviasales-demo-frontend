@@ -67,6 +67,11 @@ const DateLabel = styled.div`
   line-height: 20px;
   font-size: 16px;
   color: #4a4a4a;
+
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Dropdown = styled.div`
@@ -80,7 +85,7 @@ const Dropdown = styled.div`
 
 
 
-  z-index: 20;
+  z-index: 30;
 
   width: 370px;
 
