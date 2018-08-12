@@ -62,9 +62,9 @@ export default class App extends Component {
       returnDate: returnDate === "" ? new Date() : new Date(returnDate),
       businessClass,
       passengers: {
-        adults: parseInt(passengers.adults),
-        kids: parseInt(passengers.kids),
-        infants: parseInt(passengers.infants)
+        adults: parseInt(passengers.adults, 10),
+        kids: parseInt(passengers.kids, 10),
+        infants: parseInt(passengers.infants, 10)
       }
     };
     return restoredState;

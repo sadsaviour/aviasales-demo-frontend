@@ -190,30 +190,6 @@ const LandingSubHeader = styled.h2`
   color: #ffffff;
 `;
 
-const Search = styled.div`
-  display: grid;
-  grid-template-columns: none;
-  grid-template-rows: 56px 56px 56px 56px;
-
-  grid-row-gap: 2px;
-
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 56px 56px;
-
-    grid-column-gap: 2px;
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-template-columns: auto auto 360px auto;
-    grid-template-rows: 56px;
-
-    grid-column-gap: 2px;
-  }
-
-  width: 100%;
-`;
-
 const SearchRow = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -499,9 +475,7 @@ export default class Header extends Component {
       windowSize,
       searchPerformed,
       setSearchStatus,
-      restoredState,
-
-      ...other
+      restoredState
     } = this.props;
     const isSessionFromURL = searchPerformed
       ? false

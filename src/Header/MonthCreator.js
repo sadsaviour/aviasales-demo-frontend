@@ -291,7 +291,7 @@ export default class DateSelector extends Component {
       return Object.keys(props.month).map(date => (
         <SingleDate
           key={date}
-          date={parseInt(date)}
+          date={parseInt(date, 10)}
           day={props.month[date].day}
           past={props.month[date].past}
           inDatesRange={props.month[date].inDatesRange}
