@@ -12,22 +12,6 @@ import Landing from "./Landing";
 import Footer from "./Footer";
 import SearchResults from "./SearchResults";
 
-const airports = [
-  { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
-  { name: "Барселона", country: "Испания", iataCode: "BCN" },
-  { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
-  { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
-  { name: "Батуми", country: "Грузия", iataCode: "CMB" },
-  { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
-  { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
-  { name: "Манила", country: "Филипинны", iataCode: "MNL" },
-  { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
-  { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
-  { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
-  { name: "Мальта", country: "Мальта", iataCode: "MLA" },
-  { name: "Москва", country: "Россия", iataCode: "VKO" }
-];
-
 export default class App extends Component {
   state = {
     searchPerformed: false,
