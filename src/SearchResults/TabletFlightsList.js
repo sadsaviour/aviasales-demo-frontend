@@ -46,25 +46,35 @@ const RightPanel = styled.div`
   border-bottom-right-radius: 5px;
 `;
 
-function CarrierLogo(props) {
-  const carrier = props.carrier;
+const SmallCarrierLogo = styled.img`
+  margin-right: 12px;
+`;
+
+const PriceAndCarrierRow = styled.div`
+  padding-top: 12px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+`;
+
+const FlexSpacer = styled.div`
+  flex-grow: 2;
+`;
+
+function CarrierLogo({ carrier }) {
   if (Array.isArray(carrier)) {
     return carrier.map(carrier => (
-      <img
+      <SmallCarrierLogo
         key={carrier}
         src={Logotypes[carrier].small}
         alt={carrier}
-        style={{ marginRight: "12px" }}
       />
     ));
-  } else {
-    return <img src={Logotypes[carrier].fullSize} alt={carrier} />;
   }
+  return <img src={Logotypes[carrier].fullSize} alt={carrier} />;
 }
 
 const StyledCharter = styled.div`
   width: 60px;
-  height: 26px;
 
   margin-right: 14px;
 
@@ -134,19 +144,14 @@ export default function TabletFlightsList(props) {
             )}
           </LeftPanel>
           <RightPanel className="col-md-7">
-            <div
-              className="row end-md middle-md"
-              style={{
-                paddingTop: "12px",
-                paddingBottom: "10px",
-                paddingRight: "10px"
-              }}
-            >
-              <CarrierLogo carrier={f.carrier} />
-              <div style={{ flexGrow: "2" }} />
-              {f.charter && <StyledCharter>ЧАРТЕР</StyledCharter>}
-              <img src={shareIcon} alt="share" />
-            </div>
+            <PriceAndCarrierRow>
+              <div className="row end-md middle-md">
+                <CarrierLogo carrier={f.carrier} />
+                <FlexSpacer />
+                {f.charter && <StyledCharter>ЧАРТЕР</StyledCharter>}
+                <img src={shareIcon} alt="share" />
+              </div>
+            </PriceAndCarrierRow>
 
             <FlightRow flight={f.directFlight} />
             <DotedDelimener />

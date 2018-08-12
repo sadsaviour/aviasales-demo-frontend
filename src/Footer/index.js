@@ -11,67 +11,72 @@ import apple from "./img/apple-store.svg";
 import google from "./img/google-store.svg";
 import microsoft from "./img/windows-store.svg";
 
-const States = [
-  "Россия",
-  "Таиланд",
-  "Черногория",
-  "Кипр",
-  "Болгария",
-  "Грузия"
-];
+const states = {
+  ru: "Россия",
+  th: "Таиланд",
+  me: "Черногория",
+  cy: "Кипр",
+  bg: "Болгария",
+  ge: "Грузия"
+};
 
-const Cities = [
-  "Москва",
-  "Санкт-Петербург",
-  "Симферополь",
-  "Адлер",
-  "Екатеринбург",
-  "Лондон"
-];
+const cities = {
+  moscow: "Москва",
+  saintPetersburg: "Санкт-Петербург",
+  sympheropol: "Симферополь",
+  adler: "Адлер",
+  ekaterinburg: "Екатеринбург",
+  london: "Лондон"
+};
 
-const Carriers = [
-  "Air Berlin",
-  "Air France",
-  "Alitalia",
-  "Air Baltic",
-  "Emirates",
-  "KLM"
-];
+const carriers = {
+  AirBerlin: "Air Berlin",
+  AirFrance: "Air France",
+  Alitalia: "Alitalia",
+  AirBaltic: "Air Baltic",
+  Emirates: "Emirates",
+  KLM: "KLM"
+};
 
-const Airports = [
-  "Шереметьево",
-  "Курумоч",
-  "Домодедово",
-  "Толмачево",
-  "Владивосток",
-  "Гамбург"
-];
+const airports = {
+  SVO: "Шереметьево",
+  KUF: "Курумоч",
+  DMO: "Домодедово",
+  OVB: "Толмачево",
+  VVO: "Владивосток",
+  HAM: "Гамбург"
+};
 
-const Destinations = [
-  "MOW – SIP",
-  "MOW – AER",
-  "MOW – TIV",
-  "MOW – MRV",
-  "LED – MOW",
-  "MOW – BKK"
-];
+const destinations = {
+  MOWSIP: "MOW – SIP",
+  MOWAER: "MOW – AER",
+  MOWTIV: "MOW – TIV",
+  MOWMRV: "MOW – MRV",
+  LEDMOW: "LED – MOW",
+  MOWBKK: "MOW – BKK"
+};
 
-const Services = [
-  "Горящие авиабилеты",
-  "Календарь низких цен",
-  "Карта низких цен",
-  "Спецпредложения",
-  "Таблица цен",
-  "Блог",
-  "Помощь"
-];
+const services = {
+  hotTickets: "Горящие авиабилеты",
+  pricesCal: "Календарь низких цен",
+  pricesMap: "Карта низких цен",
+  specialOffers: "Спецпредложения",
+  pricesTable: "Таблица цен",
+  blog: "Блог",
+  help: "Помощь"
+};
 
 const Container = styled.div`
   padding-top: 32px;
+
+  @media only screen and (min-width: 992) {
+    padding-top: 58px;
+  }
+
   padding-bottom: 24px;
 `;
 
-const FooterBlockHeader = styled.h2`
+const BlockHeader = styled.h2`
   margin-bottom: 16px;
 
   font-family: Roboto;
@@ -83,7 +88,7 @@ const FooterBlockHeader = styled.h2`
   color: #4a4a4a;
 `;
 
-const FooterBlockItems = styled.p`
+const BlockItems = styled.p`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -93,7 +98,7 @@ const FooterBlockItems = styled.p`
   color: #5b5b5c;
 `;
 
-const FooterBlockAll = styled.p`
+const BlockAll = styled.p`
   margin-top: 16px;
   margin-bottom: 31px;
 
@@ -167,9 +172,17 @@ const HotelLookLink = styled.p`
 
 const AppLink = styled.img`
   margin-right: 10px;
+
+  :last-child {
+    margin-right: 8px;
+  }
 `;
 
 const Copyright = styled.p`
+  @media only screen and (min-width: 992px) {
+    margin-top: 32px;
+  }
+
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -179,8 +192,8 @@ const Copyright = styled.p`
   color: #5b5b5c;
 `;
 
-function List(props) {
-  return props.list.map(i => <FooterBlockItems key={i}>{i}</FooterBlockItems>);
+function List({ list }) {
+  return Object.keys(list).map(i => <BlockItems key={i}>{list[i]}</BlockItems>);
 }
 
 export default function Footer({ windowSize }) {
@@ -190,33 +203,33 @@ export default function Footer({ windowSize }) {
         <div className="row">
           <div className="col-xs-6 col-md-3 col-lg-2">
             <nav>
-              <FooterBlockHeader>СТРАНЫ</FooterBlockHeader>
-              <List list={States} />
-              <FooterBlockAll>Все страны →</FooterBlockAll>
+              <BlockHeader>СТРАНЫ</BlockHeader>
+              <List list={states} />
+              <BlockAll>Все страны →</BlockAll>
             </nav>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>ГОРОДА</FooterBlockHeader>
-            <List list={Cities} />
-            <FooterBlockAll>Все аэропорты →</FooterBlockAll>
+            <BlockHeader>ГОРОДА</BlockHeader>
+            <List list={cities} />
+            <BlockAll>Все аэропорты →</BlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>АВИАКОМПАНИИ</FooterBlockHeader>
-            <List list={Carriers} />
-            <FooterBlockAll>Все авиакомпании →</FooterBlockAll>
+            <BlockHeader>АВИАКОМПАНИИ</BlockHeader>
+            <List list={carriers} />
+            <BlockAll>Все авиакомпании →</BlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>АЭРОПОРТЫ</FooterBlockHeader>
-            <List list={Airports} />
-            <FooterBlockAll>Все аэропорты →</FooterBlockAll>
+            <BlockHeader>АЭРОПОРТЫ</BlockHeader>
+            <List list={airports} />
+            <BlockAll>Все аэропорты →</BlockAll>
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>НАПРАВЛЕНИЯ</FooterBlockHeader>
-            <List list={Destinations} />
+            <BlockHeader>НАПРАВЛЕНИЯ</BlockHeader>
+            <List list={destinations} />
           </div>
           <div className="col-xs-6 col-md-3 col-lg-2">
-            <FooterBlockHeader>СЕРВИСЫ</FooterBlockHeader>
-            <List list={Services} />
+            <BlockHeader>СЕРВИСЫ</BlockHeader>
+            <List list={services} />
           </div>
         </div>
       </div>
@@ -272,7 +285,7 @@ export default function Footer({ windowSize }) {
           </Copyright>
         </div>
       ) : (
-        <div className="container" style={{ marginTop: "26px" }}>
+        <div className="container">
           <div className="row">
             <div className="col-lg-8">
               <nav>
@@ -309,16 +322,12 @@ export default function Footer({ windowSize }) {
               <HotelLookLink>Поиск и бронирование отелей</HotelLookLink>
             </div>
             <div className="col-lg-4">
-              <div className="row end-lg">
+              <div className="row nowrap end-lg">
                 <AppLink src={apple} alt="App Store" />
                 <AppLink src={google} alt="Google Play Store" />
-                <AppLink
-                  src={microsoft}
-                  alt="Windows Phone"
-                  style={{ marginRight: "8px" }}
-                />
+                <AppLink src={microsoft} alt="Windows Phone" />
               </div>
-              <Copyright className="end-lg" style={{ marginTop: "32px" }}>
+              <Copyright className="end-lg">
                 © 2007–2018, Aviasales — дешевые авиабилеты
               </Copyright>
             </div>

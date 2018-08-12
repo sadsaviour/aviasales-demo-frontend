@@ -33,13 +33,10 @@ export const PriceSource = styled.div`
   color: #a0b0b9;
 `;
 
-export function Price(props) {
-  const price = props.bestOffer;
-
+export function Price({ bestOffer }) {
   const StyledPrice = styled.div`
     box-sizing: border-box;
     width: 162px;
-    height: 48px;
 
     margin-left: auto;
     margin-right: auto;
@@ -47,6 +44,7 @@ export function Price(props) {
     margin-top: 10px;
 
     padding-top: 6px;
+    padding-bottom: 6px;
 
     font-family: Roboto;
     font-style: normal;
@@ -67,7 +65,7 @@ export function Price(props) {
 
   return (
     <StyledPrice>
-      <span>Купить</span> <br /> за {price}
+      <span>Купить</span> <br /> за {bestOffer}
     </StyledPrice>
   );
 }

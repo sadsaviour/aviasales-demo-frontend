@@ -2,31 +2,38 @@ import React from "react";
 import styled from "styled-components";
 
 function incrementAdults(state) {
-  console.log(JSON.stringify(state));
-  if (state.adults < 7) return { adults: state.adults + 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (adults < 7) return { passengers: { adults: adults + 1, kids, infants } };
 }
 
 function decrementAdults(state) {
-  if (state.adults > 1)
-    if (state.adults - 1 < state.infants)
-      return { adults: state.adults - 1, infants: state.infants - 1 };
-    else return { adults: state.adults - 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (adults > 1)
+    if (adults - 1 < infants)
+      return { passengers: { adults: adults - 1, infants: infants - 1, kids } };
+    else return { passengers: { adults: adults - 1, kids, infants } };
 }
 
 function incrementKids(state) {
-  if (state.kids < 7) return { kids: state.kids + 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (kids < 7) return { passengers: { kids: kids + 1, adults, infants } };
 }
 
 function decrementKids(state) {
-  if (state.kids > 0) return { kids: state.kids - 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (kids > 0) return { passengers: { kids: kids - 1, adults, infants } };
 }
 
 function incrementInfants(state) {
-  if (state.infants < state.adults) return { infants: state.infants + 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (infants < adults)
+    return { passengers: { infants: infants + 1, kids, adults } };
 }
 
 function decrementInfants(state) {
-  if (state.infants > 0) return { infants: state.infants - 1 };
+  const { adults, kids, infants } = this.state.passengers;
+  if (infants > 0)
+    return { passengers: { infants: infants - 1, kids, adults } };
 }
 
 const CounterLabel = styled.div`
@@ -96,6 +103,11 @@ const CounterRow = styled.div`
   margin-bottom: 16px;
 `;
 
+const InfantsDisclaimer = styled.span`
+  fontsize: 12px;
+  color: #a0b0b9;
+`;
+
 export function AdultsCounter(props) {
   const handleIncrement = () => {
     props.changeCallback(incrementAdults);
@@ -147,8 +159,7 @@ export function InfantsCounter(props) {
   return (
     <CounterRow>
       <CounterLabel>
-        Дети до 2 лет <br />{" "}
-        <span style={{ fontSize: "12px", color: "#A0B0B9" }}>Без места</span>
+        Дети до 2 лет <br /> <InfantsDisclaimer>Без места</InfantsDisclaimer>
       </CounterLabel>
       <CounterControls>
         <CounterButton onClick={handleDecrement}>−</CounterButton>

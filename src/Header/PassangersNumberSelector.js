@@ -3,32 +3,14 @@ import styled from "styled-components";
 import onClickOutside from "react-onclickoutside";
 
 import dropdown_icon from "./img/dropdown-arrow.svg";
+import Checkbox from "../assets/Checkbox";
 
 import { AdultsCounter, KidsCounter, InfantsCounter } from "./Counters";
-import Logotypes from "../SearchResults/Logotypes/logos";
 
 const Container = styled.div`
   position: relative;
 
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 3;
-    grid-column-end: span ${props => (props.searchPerformed ? "1" : "2")};
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 4;
-    grid-column-end: span 1;
-  }
-
-  height: 56px;
-
-  padding-left: 16px;
-  padding-right: 16px;
-
-  margin-bottom: 16px;
-  @media only screen and (min-width: 768px) {
-    margin-bottom: 0;
-  }
+  padding: 18px 16px;
 
   display: flex;
   flex-flow: row nowrap;
@@ -39,19 +21,6 @@ const Container = styled.div`
 
   background-color: #fff;
 
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-
-  @media only screen and (min-width: 768px) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: ${props =>
-      props.searchPerformed ? "0" : "5px"};
-  }
-  @media only screen and (min-width: 992px) {
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -59,9 +28,19 @@ const Container = styled.div`
   font-size: 16px;
 
   color: #4a4a4a;
+
+  border-radius: inherit;
 `;
 
 const PassangersNumberLabel = styled.div`
+  flex-shrink: 20;
+
+  @media only screen and (min-width: 768px) {
+    flex-grow: 1;
+    flex-basis: 70%;
+  }
+
+  box-sizing: border-box;
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -74,6 +53,7 @@ const BusinessClassLabel = styled.span`
 
 const DropdownIcon = styled.img`
   margin-left: 10px;
+  flex-shrink: 0;
 `;
 
 const Dropdown = styled.div`
@@ -96,14 +76,12 @@ const Dropdown = styled.div`
 `;
 
 const PassangerOptionsDelimener = styled.div`
-  height: 1px;
-
   margin-bottom: 16px;
 
-  background: #dbdbdb;
+  border-top: 1px solid #dbdbdb;
 `;
 
-const BussinesClassOption = styled.label`
+const BussinesClassOption = styled(Checkbox)`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -114,17 +92,9 @@ const BussinesClassOption = styled.label`
 `;
 
 class PassengersNumberSelector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      adults: 1,
-      kids: 0,
-      infants: 0,
-      dropdown: false
-    };
-
-    this.handleClick = this.handleClick.bind(this);
-  }
+  state = {
+    dropdown: false
+  };
 
   showDropdown() {
     this.setState({ dropdown: true });
@@ -134,11 +104,11 @@ class PassengersNumberSelector extends Component {
     this.setState({ dropdown: false });
   }
 
-  handleClick() {
+  handleClick = () => {
     if (!this.dropdown) {
       this.showDropdown();
     }
-  }
+  };
 
   handleClickOutside(evt) {
     this.hideDropdown();
@@ -154,42 +124,40 @@ class PassengersNumberSelector extends Component {
 
   render() {
     const totalPassangers =
-      this.props.adults + this.props.kids + this.props.infants;
+      this.props.passengers.adults +
+      this.props.passengers.kids +
+      this.props.passengers.infants;
     return (
       <Container
         onClick={this.handleClick}
         searchPerformed={this.props.searchPerformed}
       >
         <PassangersNumberLabel>
-          {totalPassangers} пассажир,{" "}
+          {totalPassangers} пассажир,
           <BusinessClassLabel>
-            {this.state.businessClass ? "бизнес" : "эконом"}
+             {this.props.businessClass ? "бизнес" : "эконом"}
           </BusinessClassLabel>
         </PassangersNumberLabel>
-
         <DropdownIcon src={dropdown_icon} alt="dropdown-arrow" />
         <Dropdown show={this.state.dropdown}>
           <AdultsCounter
-            adults={this.props.adults}
-            changeCallback={f => this.changeState(f)}
+            adults={this.props.passengers.adults}
+            changeCallback={f => this.props.updateAppState(f)}
           />
           <KidsCounter
-            kids={this.props.kids}
-            changeCallback={f => this.changeState(f)}
+            kids={this.props.passengers.kids}
+            changeCallback={f => this.props.updateAppState(f)}
           />
           <InfantsCounter
-            infants={this.props.infants}
-            changeCallback={f => this.changeState(f)}
+            infants={this.props.passengers.infants}
+            changeCallback={f => this.props.updateAppState(f)}
           />
           <PassangerOptionsDelimener />
-          <BussinesClassOption className="styledCheckbox">
+          <BussinesClassOption
+            onChange={this.handleBusinessClassCheckboxChange}
+            checked={this.props.businessClass}
+          >
             Бизнес-класс
-            <input
-              type="checkbox"
-              onChange={this.handleBusinessClassCheckboxChange}
-              checked={this.props.businessClass}
-            />
-            <span className="checkmark" />
           </BussinesClassOption>
         </Dropdown>
       </Container>

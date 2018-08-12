@@ -42,7 +42,6 @@ const FlightLine = styled.div`
 
 const StyledBannerTitle = styled.div`
   box-sizing: border-box;
-  height: 32px;
   width: 100%;
 
   padding-left: 8px;
@@ -54,13 +53,39 @@ const StyledBannerTitle = styled.div`
   font-size: 14px;
 
   color: #ffffff;
+
+  background: ${({ type }) => {
+    switch (type) {
+      case "chipest":
+        return "#83D40B";
+      case "fastest":
+        return "#AF7542";
+      case "best":
+        return "#C279D1";
+      default:
+        return null;
+    }
+  }};
+`;
+
+const SmallCarrierLogo = styled.img`
+  margin-left: 12px;
+`;
+
+const PlaneIcon = styled.img`
+  margin-right: 8px;
+`;
+
+const PriceAndCarrierRow = styled.div`
+  padding-top: 12px;
+  padding-bottom: 10px;
 `;
 
 function SpecialMarkBanner({ specialMark }) {
   switch (specialMark) {
     case "Chipest":
       return (
-        <StyledBannerTitle style={{ background: "#83D40B" }}>
+        <StyledBannerTitle type="chipest">
           Самый дешевый
           {"  "}
           <span role="img" aria-label="money-mouth face">
@@ -70,7 +95,7 @@ function SpecialMarkBanner({ specialMark }) {
       );
     case "Fastest":
       return (
-        <StyledBannerTitle style={{ background: "#AF7542" }}>
+        <StyledBannerTitle type="fastest">
           Самый быстрый
           {"  "}
           <span role="img" aria-label="high voltage">
@@ -80,7 +105,7 @@ function SpecialMarkBanner({ specialMark }) {
       );
     case "TheBest":
       return (
-        <StyledBannerTitle style={{ background: "#C279D1" }}>
+        <StyledBannerTitle type="best">
           Лучший билет
           {"  "}
           <span role="img" aria-label="smiling face with heart-shaped eyes">
@@ -96,12 +121,7 @@ function SpecialMarkBanner({ specialMark }) {
 function CarrierLogo({ carrier }) {
   if (Array.isArray(carrier)) {
     return carrier.map(c => (
-      <img
-        key={c}
-        src={Logotypes[c].small}
-        alt={c}
-        style={{ marginLeft: "12px" }}
-      />
+      <SmallCarrierLogo key={c} src={Logotypes[c].small} alt={c} />
     ));
   }
   return <img src={Logotypes[carrier].fullSize} alt={carrier} />;
@@ -115,27 +135,22 @@ export default function MobileFlightsList({ flights }) {
         specialMark={f.specialMark}
       />
       <div className="container">
-        <div
-          className="row between-xs middle-xs"
-          style={{ paddingTop: "12px", paddingBottom: "10px" }}
-        >
-          <div className="col-xs-6 start-xs middle-xs">
-            <StyledPrice>{f.offers.best.price}</StyledPrice>
+        <PriceAndCarrierRow>
+          <div className="row between-xs middle-xs">
+            <div className="col-xs-6 start-xs middle-xs">
+              <StyledPrice>{f.offers.best.price}</StyledPrice>
+            </div>
+            <div className="col-xs-6 end-xs middle-xs">
+              <CarrierLogo carrier={f.carrier} />
+            </div>
           </div>
-          <div className="col-xs-6 end-xs middle-xs">
-            <CarrierLogo carrier={f.carrier} />
-          </div>
-        </div>
+        </PriceAndCarrierRow>
 
         <div className="row between-xs">
           <div className="col-xs-5">
             <div className="container">
               <FlightLine className="row">
-                <img
-                  src={arrivalIcon}
-                  alt="Arrival icon"
-                  style={{ marginRight: "8px" }}
-                />
+                <PlaneIcon src={arrivalIcon} alt="Arrival icon" />
                 <div>
                   {f.directFlight.departure.time} —
                   {f.directFlight.arrival.time}
@@ -145,11 +160,7 @@ export default function MobileFlightsList({ flights }) {
           </div>
           <div className="col-xs-4">
             <FlightLine className="row">
-              <img
-                src={durationIcon}
-                alt="Duration icon"
-                style={{ marginRight: "8px" }}
-              />
+              <PlaneIcon src={durationIcon} alt="Duration icon" />
               <div>{f.directFlight.flightDuration}</div>
             </FlightLine>
           </div>
@@ -159,11 +170,7 @@ export default function MobileFlightsList({ flights }) {
           <div className="col-xs-5">
             <div className="container">
               <div className="row">
-                <img
-                  src={departureIcon}
-                  alt="Arrival icon"
-                  style={{ marginRight: "8px" }}
-                />
+                <PlaneIcon src={departureIcon} alt="Arrival icon" />
                 <div>
                   {f.backFlight.departure.time} —
                   {f.backFlight.arrival.time}
@@ -173,11 +180,7 @@ export default function MobileFlightsList({ flights }) {
           </div>
           <div className="col-xs-4">
             <div className="row">
-              <img
-                src={durationIcon}
-                alt="Duration icon"
-                style={{ marginRight: "8px" }}
-              />
+              <PlaneIcon src={durationIcon} alt="Duration icon" />
               <div>{f.backFlight.flightDuration}</div>
             </div>
           </div>

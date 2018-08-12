@@ -13,9 +13,9 @@ import pobeda from "./Assets/pobeda.png";
 import lufthansa from "./Assets/lufthansa.png";
 import star from "./Assets/starAlliance.png";
 
-import eTicketIcon from "./Assets/tips__eticket.svg";
-import cheapIcon from "./Assets/tips__cheap-flights.svg";
-import adviceIcon from "./Assets/tips__advice.svg";
+import eTicketIcon from "./Assets/tips__eticket.png";
+import cheapIcon from "./Assets/tips__cheap-flights.png";
+import adviceIcon from "./Assets/tips__advice.png";
 
 export const topDestinations = [
   {

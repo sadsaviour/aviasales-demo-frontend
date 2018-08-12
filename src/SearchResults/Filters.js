@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import FilterCard from "./FilterCard";
 import ResetButton from "./ResetButton";
+import Checkbox from "../assets/Checkbox";
 
 import planeIcon from "./img/filter-plane.svg";
 
@@ -10,7 +11,7 @@ const Container = styled.div`
   background-color: #ffffff;
 `;
 
-const OptionLabel = styled.label`
+const OptionLabel = styled(Checkbox)`
   flex-grow: 1;
 
   font-family: Roboto;
@@ -102,6 +103,12 @@ const Axis = styled.div`
   border-radius: 2px;
 `;
 
+const PlaneIcon = styled.img`
+  vertical-align: middle;
+  margin-left: 5px;
+  margin-right: 5px;
+`;
+
 export default function Filters({
   filters: { changes, departureTime, carriers },
   multyCarriersFilter,
@@ -109,11 +116,7 @@ export default function Filters({
 }) {
   const ChangesList = changes.map(f => (
     <div className="row between-lg middle-lg" key={f.option}>
-      <OptionLabel className="styledCheckbox">
-        {f.option}
-        <input type="checkbox" />
-        <span className="checkmark" />
-      </OptionLabel>
+      <OptionLabel>{f.option}</OptionLabel>
       <OptionPrice>{f.price}</OptionPrice>
     </div>
   ));
@@ -121,17 +124,7 @@ export default function Filters({
   const DirectDepartureTime = (
     <div className="column">
       <FlightDirectionLabel className="row">
-        Москва{" "}
-        <img
-          src={planeIcon}
-          alt="plane icon"
-          style={{
-            verticalAlign: "middle",
-            marginLeft: "5px",
-            marginRight: "5px"
-          }}
-        />{" "}
-        Барселона
+        Москва <PlaneIcon src={planeIcon} alt="plane icon" /> Барселона
       </FlightDirectionLabel>
 
       <DirectionsLabel className="row">Вылет из Москвы:</DirectionsLabel>
@@ -167,17 +160,7 @@ export default function Filters({
       </RangeSelector>
 
       <FlightDirectionLabel className="row">
-        Барселона{"  "}
-        <img
-          src={planeIcon}
-          alt="plane icon"
-          style={{
-            verticalAlign: "middle",
-            marginLeft: "5px",
-            marginRight: "5px"
-          }}
-        />{" "}
-        Москва
+        Барселона <PlaneIcon src={planeIcon} alt="plane icon" /> Москва
       </FlightDirectionLabel>
 
       <DirectionsLabel className="row">Вылет из Барселоны:</DirectionsLabel>
@@ -213,17 +196,7 @@ export default function Filters({
   const FlightDuration = (
     <div className="column">
       <FlightDirectionLabel className="row">
-        Москва{" "}
-        <img
-          src={planeIcon}
-          alt="plane icon"
-          style={{
-            verticalAlign: "middle",
-            marginLeft: "5px",
-            marginRight: "5px"
-          }}
-        />{" "}
-        Барселона
+        Москва <PlaneIcon src={planeIcon} alt="plane icon" /> Барселона
       </FlightDirectionLabel>
       <div className="row between-lg">
         <DirectionsLabel>от 04ч 20м</DirectionsLabel>
@@ -235,17 +208,7 @@ export default function Filters({
         <Slider />
       </RangeSelector>
       <FlightDirectionLabel className="row">
-        Барселона{" "}
-        <img
-          src={planeIcon}
-          alt="plane icon"
-          style={{
-            verticalAlign: "middle",
-            marginLeft: "5px",
-            marginRight: "5px"
-          }}
-        />{" "}
-        Москва
+        Барселона <PlaneIcon src={planeIcon} alt="plane icon" /> Москва
       </FlightDirectionLabel>
       <div className="row between-lg">
         <DirectionsLabel>от 04ч 10м</DirectionsLabel>
@@ -261,22 +224,14 @@ export default function Filters({
 
   const AlliansesList = carriers.alliances.map(a => (
     <div className="row between-lg middle-lg " key={a.name}>
-      <OptionLabel className="styledCheckbox">
-        {a.name}
-        <input type="checkbox" defaultChecked />
-        <span className="checkmark" />
-      </OptionLabel>
+      <OptionLabel defaultChecked>{a.name}</OptionLabel>
       <OptionPrice>{a.price}</OptionPrice>
     </div>
   ));
 
   const IndividualCarriersList = carriers.carriers.map(c => (
     <div className="row between-lg middle-lg" key={c.name}>
-      <OptionLabel className="styledCheckbox">
-        {c.name}
-        <input type="checkbox" defaultChecked />
-        <span className="checkmark" />
-      </OptionLabel>
+      <OptionLabel defaultChecked>{c.name}</OptionLabel>
       <OptionPrice>{c.price}</OptionPrice>
     </div>
   ));
@@ -284,13 +239,11 @@ export default function Filters({
   const CarriersList = (
     <div>
       <div className="row between-lg middle-lg">
-        <OptionLabel className="styledCheckbox">
+        <OptionLabel
+          checked={multyCarriersFilter}
+          onChange={handleCarriersFilterChange}
+        >
           Несколько авиакомпаний
-          <input
-            type="checkbox"
-            checked={multyCarriersFilter}
-            onChange={handleCarriersFilterChange}
-          />
           <span className="checkmark" />
         </OptionLabel>
         <OptionExtraInfo>

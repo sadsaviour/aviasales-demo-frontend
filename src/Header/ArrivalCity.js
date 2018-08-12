@@ -7,28 +7,17 @@ const Container = styled.div`
 
   box-sizing: border-box;
 
-  padding-left: 16px;
-  padding-top: 18px;
-
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 3;
-    grid-column-end: span 2;
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 2;
-    grid-column-end: span 1;
-  }
+  padding: 18px 16px;
 
   background-color: #fff;
 
-  @media only screen and (min-width: 768px) and (max-width: 992px) {
-    border-top-right-radius: 5px;
-  }
+  border-radius: inherit;
 `;
 
 const CityInput = styled.input`
   width: 70%;
+
+  padding: 0;
 
   font-family: Roboto;
   font-style: normal;
@@ -96,6 +85,8 @@ const Suggestion = styled.div`
   :hover {
     background: #f4f4f4;
   }
+
+  cursor: pointer;
 `;
 
 const City = styled.div`
@@ -120,60 +111,51 @@ const IATACode = styled.div`
   flex-basis: 23px;
   font-weight: normal;
   color: #a0b0b9;
+
+  line-height: 20px;
 `;
 
+const airports = [
+  { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
+  { name: "Барселона", country: "Испания", iataCode: "BCN" },
+  { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
+  { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
+  { name: "Батуми", country: "Грузия", iataCode: "CMB" },
+  { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
+  { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
+  { name: "Манила", country: "Филипинны", iataCode: "MNL" },
+  { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
+  { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
+  { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
+  { name: "Мальта", country: "Мальта", iataCode: "MLA" },
+  { name: "Москва", country: "Россия", iataCode: "VKO" }
+];
+
 class ArrivalCity extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropdownVisible: false,
+  state = {
+    dropdownVisible: false
+  };
 
-      airports: [
-        { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
-        { name: "Барселона", country: "Испания", iataCode: "BCN" },
-        { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
-        { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
-        { name: "Батуми", country: "Грузия", iataCode: "CMB" },
-        { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
-        { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
-        { name: "Манила", country: "Филипинны", iataCode: "MNL" },
-        { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
-        { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
-        { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
-        { name: "Мальта", country: "Мальта", iataCode: "MLA" },
-        { name: "Москва", country: "Россия", iataCode: "VKO" }
-      ]
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleFocus(event) {
+  handleFocus = event => {
     this.setState({ dropdownVisible: true });
-  }
+  };
 
-  handleChange(event) {
+  handleChange = event => {
     this.props.updateDestination(event.target.value);
-  }
+  };
 
-  handleClick(event) {
+  handleClick = event => {
     this.props.updateDestination(event.name, event.iataCode);
     this.setState({ dropdownVisible: false });
-  }
+  };
 
-  handleClickOutside = evt => {
+  handleClickOutside = event => {
     this.setState({ dropdownVisible: false });
   };
 
   render() {
-    const airportSuggestionsList = this.state.airports.map(a => (
-      <Suggestion
-        key={a.name}
-        style={{ cursor: "pointer" }}
-        onClick={() => this.handleClick(a)}
-      >
+    const airportSuggestionsList = airports.map(a => (
+      <Suggestion key={a.name} onClick={() => this.handleClick(a)}>
         <City>{a.name}, </City>
         <Country>{a.country}</Country>
         <IATACode>{a.iataCode}</IATACode>

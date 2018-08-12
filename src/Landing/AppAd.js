@@ -7,15 +7,9 @@ import apple from "./Assets/apple.svg";
 import android from "./Assets/android.svg";
 import wf from "./Assets/wf.svg";
 
-const AppAdContainer = styled.div`
+const Container = styled.div`
   box-sizing: border-box;
   position: relative;
-
-  height: 348px;
-
-  @media only screen and (min-width: 758px) {
-    height: 281px;
-  }
 
   margin-top: 24px;
 
@@ -33,10 +27,10 @@ const AppAdContainer = styled.div`
   }
 
   width: 100%;
-  height: 348px;
+  min-height: 348px;
 
   @media only screen and (min-width: 768px) {
-    height: 281px;
+    min-height: 281px;
   }
 
   font-family: Roboto;
@@ -50,7 +44,7 @@ const AppAdContainer = styled.div`
   background: linear-gradient(137.4deg, #00b0de 4.18%, #196ebd 104.18%);
 `;
 
-const AppAdHeader = styled.h2`
+const Header = styled.h2`
   margin-top: 0;
   margin-bottom: 19px;
 
@@ -75,7 +69,7 @@ const AppAdHeader = styled.h2`
   color: #ffffff;
 `;
 
-const AppAdRatingContainer = styled.div`
+const RatingContainer = styled.div`
   text-align: center;
 
   @media only screen and (min-width: 768px) {
@@ -83,23 +77,43 @@ const AppAdRatingContainer = styled.div`
   }
 `;
 
-const AppAdLinksContainer = styled.div`
+const RatingStars = styled.img`
+  display: inline-block;
+  margin-right: 12px;
+`;
+
+const LinksContainer = styled.div`
   position: absolute;
   bottom: 20px;
   vertical-align: top;
+
+  display: flex;
+  flex-flow: row wrap;
 
   @media only screen and (min-width: 768px) {
     text-align: left;
   }
 
   @media only screen and (min-width: 768px) {
-    .firstInLine {
+    text-align: left;
+  }
+`;
+
+const AdLink = styled.div`
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+  text-align: left;
+
+  :first-child {
+    @media only screen and (min-width: 768px) {
       margin-left: 0;
     }
   }
 
-  @media only screen and (min-width: 768px) {
-    .middleInLine {
+  :nth-child(2) {
+    @media only screen and (min-width: 768px) {
       margin-left: 0;
       margin-right: 0;
 
@@ -112,22 +126,7 @@ const AppAdLinksContainer = styled.div`
   }
 `;
 
-const AppAdLink = styled.div`
-  margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-
-  text-align: left;
-
-  @media only screen and (min-width: 768px) {
-    display: inline-block;
-    .firstInLine {
-      margin-left: 0;
-    }
-  }
-`;
-
-const AppAdImage = styled.img`
+const Figure = styled.img`
   position: absolute;
 
   width: 162px;
@@ -154,40 +153,38 @@ const AppAdStoreIcon = styled.img`
   vertical-align: top;
 `;
 
-export const AppAd = () => (
-  <AppAdContainer>
+const AppAd = () => (
+  <Container>
     <div className="col-xs-12 col-lg-10 col-lg-offset-1">
       <div className="col-xs-0 col-md-4">
-        <AppAdImage src={appDemo} alt="app screenshot" />
+        <Figure src={appDemo} alt="app screenshot" />
       </div>
 
       <div className="col-xs-12 col-md-8 col-md-offset-4">
-        <AppAdHeader>Скачай мобильное приложение Aviasales.ru</AppAdHeader>
-        <AppAdRatingContainer>
-          <img
-            src={rating}
-            alt="rating"
-            style={{ display: "inline-block", marginRight: "12px" }}
-          />
+        <Header>Скачай мобильное приложение Aviasales.ru</Header>
+        <RatingContainer>
+          <RatingStars src={rating} alt="rating" />
           <span>Более 103 000 оценок</span>
-        </AppAdRatingContainer>
+        </RatingContainer>
       </div>
       <div className="row">
         <div className="col-xs-offset-6 col-xs-6 col-md-8 col-md-offset-4">
-          <AppAdLinksContainer>
-            <AppAdLink className="firstInLine">
+          <LinksContainer>
+            <AdLink>
               <AppAdStoreIcon src={apple} alt="App Store" />
               iPhone или iPad
-            </AppAdLink>
-            <AppAdLink className="middleInLine">
+            </AdLink>
+            <AdLink>
               <AppAdStoreIcon src={android} alt="Google Play Store" />Android
-            </AppAdLink>
-            <AppAdLink>
+            </AdLink>
+            <AdLink>
               <AppAdStoreIcon src={wf} alt="Windows Phone" />Windows Phone
-            </AppAdLink>
-          </AppAdLinksContainer>
+            </AdLink>
+          </LinksContainer>
         </div>
       </div>
     </div>
-  </AppAdContainer>
+  </Container>
 );
+
+export default AppAd;

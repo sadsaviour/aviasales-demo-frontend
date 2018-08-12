@@ -1,17 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { getDate, getMonth } from "date-fns";
+import qs from "qs";
 
 import findTicketsIcon from "./img/findTicketsIcon.svg";
 
 const Button = styled.button`
-  height: 56px;
-  @media only screen and (min-width: 992px) {
-    height: 58px;
-  }
-
   width: 100%;
+
+  /* for safari */
+  padding-top: 0;
+  padding-bottom: 0;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
     padding-left: 18px;
@@ -23,16 +22,30 @@ const Button = styled.button`
   border-radius: 4px;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: ${({ searchPerformed }) =>
+      searchPerformed ? 0 : "4px"};
+    border-top-left-radius: ${({ searchPerformed }) =>
+      searchPerformed ? 0 : "4px"};
+    border-top-right-radius: ${({ searchPerformed }) =>
+      searchPerformed ? 0 : "4px"};
+    border-bottom-right-radius: ${({ searchPerformed }) =>
+      searchPerformed ? "5px" : "4px"};
   }
 
   font-family: Roboto;
   font-style: normal;
   font-weight: 900;
-  line-height: normal;
+  line-height: 56px;
+
+  @media only screen and (min-width: 768px) {
+    line-height: ${({ searchPerformed }) =>
+      searchPerformed ? "56px" : "64px"};
+  }
+
+  @media only screen and (min-width: 992px) {
+    line-height: 58px;
+  }
+
   font-size: 20px;
 
   @media only screen and (min-width: 992px) and (max-width: 1260px) {
@@ -40,36 +53,7 @@ const Button = styled.button`
   }
 
   text-align: center;
-
-  color: #ffffff;
-
-  cursor: pointer;
-`;
-
-const LandingButton = styled.button`
-  height: 56px;
-
-  @media only screen and (min-width: 768px) {
-    height: 64px;
-  }
-
-  width: 100%;
-
-  background: #ff9241;
-  border: 0;
-  border-radius: 4px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
-  font-size: 24px;
-
-  @media only screen and min-width: 768px {
-    font-size: 28px;
-  }
-
-  text-align: center;
+  vertical-align: middle;
 
   color: #ffffff;
 
@@ -103,87 +87,56 @@ const ButtonWraper = styled.div`
   width: 100%;
 
   @media only screen and (min-width: 768px) {
-    width: ${props => (props.searchPerformed ? "100%" : "308px")};
+    width: ${({ searchPerformed }) => (searchPerformed ? "100%" : "308px")};
   }
 
   margin-top: 16px;
   @media only screen and (min-width: 768px) {
-    margin-top: ${props => (props.searchPerformed ? "0" : "32px")};
+    margin-top: ${({ searchPerformed }) => (searchPerformed ? "0" : "32px")};
   }
   @media only screen and (min-width: 992px) {
-    margin-top: ${props => (props.searchPerformed ? "0" : "48px")};
+    margin-top: ${({ searchPerformed }) => (searchPerformed ? "0" : "48px")};
   }
 `;
 
-const addZeroToString = number => {
-  if (number.length === 1) {
-    return 0 + number;
-  }
-  return number;
-};
-
-const MakeQueryString = (
+export default function FindTicketsButton({
+  searchPerformed,
+  setSearchStatus,
   origin,
   destination,
   destinationDate,
   returnDate,
-  adults,
-  kids,
-  infants,
-  businessClass
-) => {
-  const departureDateString =
-    addZeroToString(getDate(destinationDate).toString()) +
-    addZeroToString((getMonth(destinationDate) + 1).toString());
-  const returnDateString =
-    addZeroToString(getDate(returnDate).toString()) +
-    addZeroToString((getMonth(returnDate) + 1).toString());
-  const passengers =
-    (businessClass ? "b" : "") +
-    (adults ? adults.toString() : "") +
-    (kids ? kids.toString() : infants ? "0" : "") +
-    (infants ? infants.toString() : "");
-  return (
-    origin.iataCode +
-    departureDateString +
-    destination.iataCode +
-    returnDateString +
-    passengers
-  );
-};
+  passengers,
+  businessClass,
+  className,
+  departureDate
+}) {
+  const queryString = qs.stringify({
+    origin,
+    destination,
+    departureDate,
+    returnDate,
+    passengers,
+    businessClass
+  });
 
-export default function FindTicketsButton(props) {
   return (
-    <ButtonWraper searchPerformed={props.searchPerformed}>
+    <ButtonWraper searchPerformed={searchPerformed}>
       <RouterLink
-        to={`/search/${MakeQueryString(
-          props.origin,
-          props.destination,
-          props.departureDate,
-          props.returnDate,
-          props.adults,
-          props.kids,
-          props.infants,
-          props.businessClass
-        )}`}
-        onClick={() =>
-          props.updateAppState({ searchPerformed: true, stateIsDefault: false })
-        }
+        to={`/search/${queryString}`}
+        onClick={() => setSearchStatus(true)}
       >
-        {props.searchPerformed ? (
-          <Button name="Find Tickets" type="submit" className={props.className}>
-            Найти билеты
-          </Button>
-        ) : (
-          <LandingButton
-            name="Find Tickets"
-            type="submit"
-            className={props.className}
-          >
-            Найти билеты
+        <Button
+          name="Find Tickets"
+          type="submit"
+          className={className}
+          searchPerformed={searchPerformed}
+        >
+          Найти билеты
+          {!searchPerformed && (
             <IconWraper src={findTicketsIcon} alt="Find Tickets" />
-          </LandingButton>
-        )}
+          )}
+        </Button>
       </RouterLink>
     </ButtonWraper>
   );

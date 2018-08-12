@@ -9,16 +9,6 @@ import CalendarIcon from "./img/calendar.svg";
 const FlightDates = styled.div`
   display: flex;
   flex-flow: row nowrap;
-
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 3;
-    grid-column-end: span 1;
-  }
 `;
 
 const DepartureDate = styled.div`
@@ -28,8 +18,7 @@ const DepartureDate = styled.div`
 
   margin-right: 1px;
 
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 18px 16px;
 
   @media only screen and (min-width: 768px) and (max-width: 992px) {
     border-bottom-left-radius: 5px;
@@ -53,18 +42,11 @@ const DepartureDate = styled.div`
 const ReturnDate = styled.div`
   position: relative;
 
-  height: 56px;
   width: 50%;
 
   margin-left: 1px;
 
-  padding-left: 16px;
-  padding-right: 16px;
-
-  margin-bottom: 2px;
-  @media only screen and (min-width: 992px) {
-    margin-bottom: 0;
-  }
+  padding: 18px 16px;
 
   display: flex;
   flex-flow: row nowrap;
@@ -72,17 +54,24 @@ const ReturnDate = styled.div`
   justify-content: space-between;
 
   background-color: #fff;
+`;
 
+const Placeholder = styled.div`
+  color: #a0b0b9;
+`;
+
+const DateLabel = styled.div`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   line-height: 20px;
   font-size: 16px;
   color: #4a4a4a;
-`;
 
-const Placeholder = styled.p`
-  color: #a0b0b9;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Dropdown = styled.div`
@@ -96,7 +85,7 @@ const Dropdown = styled.div`
 
 
 
-  z-index: 20;
+  z-index: 30;
 
   width: 370px;
 
@@ -197,21 +186,10 @@ const OneWayPricesToggle = styled.input`
 `;
 
 class FlightDatesSelector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      departureDropdownVisible: false,
-      returnDropdownVisible: false,
-
-      departureDate: null,
-      returnDate: null,
-
-      departureDateLabel: null,
-      returnDateLabel: null,
-
-      month: null
-    };
-  }
+  state = {
+    departureDropdownVisible: false,
+    returnDropdownVisible: false
+  };
 
   showDepartureDropdown = () => {
     this.setState({
@@ -227,15 +205,15 @@ class FlightDatesSelector extends Component {
     });
   };
 
-  setDepartureDate = (date, dateLabel) => {
-    this.props.updateDepartureDate(date);
+  setDepartureDate = date => {
     this.setState({
       departureDropdownVisible: false,
       returnDropdownVisible: true
     });
+    this.props.updateDepartureDate(date);
   };
 
-  setReturnDate = (date, dateLabel) => {
+  setReturnDate = date => {
     this.props.updateReturnDate(date);
     this.setState({
       returnDropdownVisible: false
@@ -252,11 +230,13 @@ class FlightDatesSelector extends Component {
   render() {
     return (
       <FlightDates>
-        <DepartureDate onClick={this.showDepartureDropdown}>
+        <DepartureDate>
           {this.props.departureDate ? (
-            <p>{dateLabel(this.props.departureDate)}</p>
+            <DateLabel onClick={this.showDepartureDropdown}>
+              {dateLabel(this.props.departureDate)}
+            </DateLabel>
           ) : (
-            <Placeholder>Туда</Placeholder>
+            <Placeholder onClick={this.showDepartureDropdown}>Туда</Placeholder>
           )}
           <img
             src={CalendarIcon}
@@ -270,9 +250,7 @@ class FlightDatesSelector extends Component {
                 selectedDate={this.props.departureDate}
                 departureDate={this.props.departureDate}
                 returnDate={this.props.returnDate}
-                setCallback={(date, dateLabel) =>
-                  this.setDepartureDate(date, dateLabel)
-                }
+                setCallback={this.setDepartureDate}
               />
               <OneWayPricesOption>
                 <label className="iosStyleCheckbox">
@@ -284,11 +262,13 @@ class FlightDatesSelector extends Component {
             </Dropdown>
           )}
         </DepartureDate>
-        <ReturnDate onClick={this.showReturnDropdown}>
+        <ReturnDate>
           {this.props.returnDate ? (
-            <p>{dateLabel(this.props.returnDate)}</p>
+            <DateLabel onClick={this.showReturnDropdown}>
+              {dateLabel(this.props.returnDate)}
+            </DateLabel>
           ) : (
-            <Placeholder>Обратно</Placeholder>
+            <Placeholder onClick={this.showReturnDropdown}>Обратно</Placeholder>
           )}
           <img
             src={CalendarIcon}

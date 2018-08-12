@@ -47,7 +47,6 @@ const SocialIconsContainer = styled.div`
 `;
 
 const LeaveEmailContainer = styled.div`
-  height: 34px;
   width: 330px;
 
   margin-top: 12px;
@@ -104,46 +103,42 @@ const LeaveEmailSubmit = styled.button`
   border-radius: 2px;
 `;
 
-export const SubscribeBlock = () => {
-  return (
-    <SubscribeBlockContainer>
-      <div className="row ">
-        <div className="col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-1">
-          <div className="row center-md start-xl">
-            <SubscribeBlockHeader>
-              Хотите знать всё о скидках на авиабилеты?
-            </SubscribeBlockHeader>
-          </div>
-          <div className="row center-md start-xl">
-            <SubscribeBlockSubHeader>
-              Вы можете подписаться на нашу рассылку через соцсети или по
-              электронной почте.
-            </SubscribeBlockSubHeader>
-          </div>
+const SocialNetworkIcon = styled.img`
+  margin-right: 6px;
+`;
+
+const SubscribeBlock = () => (
+  <SubscribeBlockContainer>
+    <div className="row ">
+      <div className="col-md-6 col-md-offset-3 col-xl-4 col-xl-offset-1">
+        <div className="row center-md start-xl">
+          <SubscribeBlockHeader>
+            Хотите знать всё о скидках на авиабилеты?
+          </SubscribeBlockHeader>
         </div>
-        <div className="col-md-6 col-md-offset-3 col-xl-5 col-xl-offset-1">
-          <div className="row center-md">
-            <SocialIconsContainer>
-              <img src={vkIcon} alt="vk" style={{ marginRight: "6px" }} />
-              <img
-                src={facebookIcon}
-                alt="facebook"
-                style={{ marginRight: "6px" }}
-              />
-              <img
-                src={twitterIcon}
-                alt="twitter"
-                style={{ marginRight: "6px" }}
-              />
-              <img src={RSSIcon} alt="RSS" />
-            </SocialIconsContainer>
-            <LeaveEmailContainer>
-              <LeaveEmailInput type="email" placeholder="Ваш email" />
-              <LeaveEmailSubmit>Подписаться</LeaveEmailSubmit>
-            </LeaveEmailContainer>
-          </div>
+        <div className="row center-md start-xl">
+          <SubscribeBlockSubHeader>
+            Вы можете подписаться на нашу рассылку через соцсети или по
+            электронной почте.
+          </SubscribeBlockSubHeader>
         </div>
       </div>
-    </SubscribeBlockContainer>
-  );
-};
+      <div className="col-md-6 col-md-offset-3 col-xl-5 col-xl-offset-1">
+        <div className="row center-md">
+          <SocialIconsContainer>
+            <SocialNetworkIcon src={vkIcon} alt="vk" />
+            <SocialNetworkIcon src={facebookIcon} alt="facebook" />
+            <SocialNetworkIcon src={twitterIcon} alt="twitter" />
+            <img src={RSSIcon} alt="RSS" />
+          </SocialIconsContainer>
+          <LeaveEmailContainer>
+            <LeaveEmailInput type="email" placeholder="Ваш email" />
+            <LeaveEmailSubmit>Подписаться</LeaveEmailSubmit>
+          </LeaveEmailContainer>
+        </div>
+      </div>
+    </div>
+  </SubscribeBlockContainer>
+);
+
+export default SubscribeBlock;

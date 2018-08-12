@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"javascript.format.enable": false,
+		"javascript.validate.enable": false,
+		"files.associations": {
+			"*.jsx": "javascriptreact",
+			"*.js": "javascriptreact"
+		},
+		"emmet.syntaxProfiles": {
+			"javascript": "jsx"
+		},
+		"git.ignoreLimitWarning": true
+	}
+}

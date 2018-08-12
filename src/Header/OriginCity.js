@@ -8,34 +8,17 @@ const Container = styled.div`
   position: relative;
   box-sizing: border-box;
 
-  padding-left: 16px;
-  padding-top: 18px;
-
-  @media only screen and (min-width: 768px) {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-column-start: 1;
-    grid-column-end: span 1;
-  }
+  padding: 18px 16px;
 
   background-color: #fff;
 
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-
-  @media only screen and (min-width: 768px) {
-    border-top-right-radius: 0;
-  }
-  @media only screen and (min-width: 992px) {
-    border-bottom-left-radius: 5px;
-  }
+  border-radius: inherit;
 `;
 
 const CityInput = styled.input`
   width: 50%;
+
+  padding: 0;
 
   font-family: Roboto;
   font-style: normal;
@@ -103,6 +86,8 @@ const Suggestion = styled.div`
   :hover {
     background: #f4f4f4;
   }
+
+  cursor: pointer;
 `;
 
 const SuggestionCity = styled.div`
@@ -143,58 +128,47 @@ const SwapCitiesButton = styled.button`
   cursor: pointer;
 `;
 
+const airports = [
+  { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
+  { name: "Барселона", country: "Испания", iataCode: "BCN" },
+  { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
+  { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
+  { name: "Батуми", country: "Грузия", iataCode: "CMB" },
+  { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
+  { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
+  { name: "Манила", country: "Филипинны", iataCode: "MNL" },
+  { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
+  { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
+  { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
+  { name: "Мальта", country: "Мальта", iataCode: "MLA" },
+  { name: "Москва", country: "Россия", iataCode: "VKO" }
+];
+
 class OriginCity extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropdownVisible: false,
+  state = {
+    dropdownVisible: false
+  };
 
-      airports: [
-        { name: "Бангкок", country: "Таиланд", iataCode: "BKK" },
-        { name: "Барселона", country: "Испания", iataCode: "BCN" },
-        { name: "Баландино", country: "Челябинск", iataCode: "CEK" },
-        { name: "Бандаранаике", country: "Коломбо", iataCode: "CMB" },
-        { name: "Батуми", country: "Грузия", iataCode: "CMB" },
-        { name: "Денпасар Бали", country: "Индонезия", iataCode: "DPS" },
-        { name: "Франкфурт-на-Майне", country: "Германия", iataCode: "FRA" },
-        { name: "Манила", country: "Филипинны", iataCode: "MNL" },
-        { name: "Мале", country: "Мальдивы", iataCode: "MLE" },
-        { name: "Мюнхен", country: "Германия", iataCode: "MUC" },
-        { name: "Минеральные Воды", country: "Россия", iataCode: "MRV" },
-        { name: "Мальта", country: "Мальта", iataCode: "MLA" },
-        { name: "Москва", country: "Россия", iataCode: "VKO" }
-      ]
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = event => {
     this.props.updateOrigin(event.target.value);
-  }
+  };
 
-  handleFocus(event) {
+  handleFocus = event => {
     this.setState({ dropdownVisible: true });
-  }
+  };
 
-  handleClick(event) {
+  handleClick = event => {
     this.props.updateOrigin(event.name, event.iataCode);
     this.setState({ dropdownVisible: false });
-  }
+  };
 
   handleClickOutside = evt => {
     this.setState({ dropdownVisible: false });
   };
 
   render() {
-    const airportSuggestionsList = this.state.airports.map(a => (
-      <Suggestion
-        key={a.name}
-        style={{ cursor: "pointer" }}
-        onClick={() => this.handleClick(a)}
-      >
+    const airportSuggestionsList = airports.map(a => (
+      <Suggestion key={a.name} onClick={() => this.handleClick(a)}>
         <SuggestionCity>{a.name}, </SuggestionCity>
         <SuggestionCountry>{a.country}</SuggestionCountry>
         <SuggestionIATACode>{a.iataCode}</SuggestionIATACode>
